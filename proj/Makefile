@@ -10,10 +10,12 @@ SRCS   := $(shell ls $(SRCDIR)/*.cpp | sort -f)
 OBJS   := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 CXX      := g++
-CXXFLAGS := -std=c++03 -Wall -Wextra -pedantic -g -I$(INCDIR)
+CXXFLAGS := -std=c++03 -Wall -Wextra -pedantic -g -MMD -I$(INCDIR)
 LDFLAGS  := -lGL -lGLU -lglut
 
-$(shell mkdir -p $(OBJDIR))
+$(shell mkdir -p $(OUTDIR) $(OBJDIR))
+
+-include $(wildcard $(OBJDIR)/*.d)
 
 default: $(BIN)
 
@@ -21,9 +23,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -x c++ -c $< -o $@
 
 $(BIN): $(OBJS)
-	-mkdir -p $(OUTDIR)
 	$(CXX) $(LDFLAGS) $(OBJS) -o $(OUTDIR)/$(BIN)
 
 clean:
-	-rm -f $(OBJS) $(OUTDIR)/$(BIN)
+	-rm -f $(OBJDIR)/* $(OUTDIR)/$(BIN)
+
 

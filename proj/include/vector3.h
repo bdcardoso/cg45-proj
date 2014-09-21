@@ -1,24 +1,27 @@
 #pragma once
+#include <GL/gl.h>
 
 class vector3 {
-    double _x, _y, _z;
+    // [0] -> x, [1] -> y, [2] -> z
+    GLdouble _coords[3];
 
 public:
     vector3();
-    vector3(double x, double y, double z);
+    vector3(GLdouble x, GLdouble y, GLdouble z);
 
-    double x() const;
-    double y() const;
-    double z() const;
+    GLdouble x() const;
+    GLdouble y() const;
+    GLdouble z() const;
 
-    void x(double newx);
-    void y(double newy);
-    void z(double newz);
+    void x(GLdouble newx);
+    void y(GLdouble newy);
+    void z(GLdouble newz);
 
-    void set(double x, double y, double z);
+    const GLdouble *get() const;
+    void set(GLdouble x, GLdouble y, GLdouble z);
     
     vector3 operator+(const vector3 &rhs);
     vector3 operator-(const vector3 &rhs);
-    vector3 operator*(double scalar);
+    vector3 operator*(GLdouble scalar);
 };
 
