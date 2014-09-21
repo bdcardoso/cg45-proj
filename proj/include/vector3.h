@@ -7,9 +7,9 @@ public:
     vector3();
     vector3(double x, double y, double z);
 
-    double x();
-    double y();
-    double z();
+    double x() const;
+    double y() const;
+    double z() const;
 
     void x(double newx);
     void y(double newy);
@@ -17,8 +17,8 @@ public:
 
     void set(double x, double y, double z);
     
-    vector3 &operator+(const vector3 &rhs);
-    vector3 &operator-(const vector3 &rhs);
-    vector3 &operator*(double scalar);
+    vector3 operator+(const vector3 &rhs);
+    vector3 operator-(const vector3 &rhs);
+    vector3 operator*(double scalar);
 };
 
