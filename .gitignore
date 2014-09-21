@@ -27,6 +27,9 @@
 *.out
 *.app
 
+# YCM
+.ycm_extra_conf.pyc
+
 # CMake build folder
 build/*
 
