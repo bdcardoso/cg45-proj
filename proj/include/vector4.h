@@ -25,9 +25,7 @@ public:
     void set(GLdouble x, GLdouble y, GLdouble z, GLdouble w);
     
     vector4 &operator+(const vector4 &rhs);
-    vector4 &operator+(const vector3 &rhs);
     vector4 &operator-(const vector4 &rhs);
-    vector4 &operator-(const vector3 &rhs);
     vector4 &operator*(GLdouble scalar);
 };
 
