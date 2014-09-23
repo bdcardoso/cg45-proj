@@ -13,7 +13,8 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
     src/main.cpp
-    src/vector3.cpp)
+    src/vector3.cpp
+    src/vector4.cpp)
 
 add_executable(cg45-proj ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(cg45-proj ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
