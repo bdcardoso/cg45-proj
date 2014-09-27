@@ -28,3 +28,4 @@ GLdouble vector4::z() {
 GLdouble vector4::w() {
     return _coords[3];
 }
+

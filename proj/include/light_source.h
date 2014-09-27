@@ -8,7 +8,7 @@
 class light_source {
     vector4 _ambient, _diffuse, _specular, _position;
     vector3 _direction;
-    double _cutoff, _exponent;
+    GLdouble _cutoff, _exponent;
     GLenum _num;
     bool _state;
 
@@ -25,8 +25,8 @@ public:
     void position(const vector4 &pos);
     void specular(const vector4 &spec);
     void direction(const vector3 &dir);
-    void cutoff(double cutoff);
-    void exponent(double exp);
+    void cutoff(GLdouble cutoff);
+    void exponent(GLdouble exp);
 
     void draw();    
 };

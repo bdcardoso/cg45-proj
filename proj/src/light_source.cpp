@@ -4,45 +4,39 @@ light_source::light_source(GLenum number) {
     _num = number;
 }
 
-~void LightSource::~LightSource();
-
-bool getState::getState(){
+bool light_source::state() {
     return _state;
 }
 
-bool setState(bool state){
-
-    _state=state;
-    return _state;
+void light_source::state(bool state){
+    _state = state;
 }
 
-GLenum getNum(){
+GLenum light_source::num() {
     return _num;
 }
 
-setPosition(const Vector4 & position){
+void light_source::position(const vector4 &position) {
     _position = position;
 }
 
-setDirection(const Vector3 & direction){
+void light_source::direction(const vector3 &direction) {
     _direction = direction;
 }
 
-setCutOff(double cut_off){
-    _cut_off = cut_off;
+void light_source::cutoff(GLdouble cutoff) {
+    _cutoff = cutoff;
 }
 
-setExponent(double exponent){
+void light_source::exponent(GLdouble exponent) {
     _exponent = exponent;
 }
 
-setDiffuse(const Vector4 diffuse){
+void light_source::diffuse(const vector4 &diffuse) {
     _diffuse = diffuse;
 }
 
-setSpecular(const Vector4 specular){
+void light_source::specular(const vector4 &specular) {
     _specular = specular;
 }
-
-draw();
 
