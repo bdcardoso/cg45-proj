@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/gl.h>
+#include "opengl.h"
 
 class vector3 {
     // [0] -> x, [1] -> y, [2] -> z

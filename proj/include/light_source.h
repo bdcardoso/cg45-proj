@@ -1,9 +1,9 @@
 #pragma once
 
+#include "opengl.h"
 #include "vector3.h"
 #include "vector4.h"
 
-#include <GL/gl.h>
 
 class light_source {
     vector4 _ambient, _diffuse, _specular, _position;

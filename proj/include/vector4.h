@@ -1,6 +1,6 @@
 #pragma once
 #include "vector3.h"
-#include <GL/gl.h>
+#include "opengl.h"
 
 class vector4 {
     // [0] -> x, [1] -> y, [2] -> z, [3] -> w

@@ -8,6 +8,7 @@ find_package(GLUT REQUIRED)
 
 set(HEADER_FILES
     include/light_source.h
+    include/opengl.h
     include/vector3.h
     include/vector4.h)
 
