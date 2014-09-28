@@ -25,7 +25,9 @@ set(HEADER_FILES
     include/roadside.h
     include/static_object.h
     include/timberlog.h
-    include/turtle.h)
+    include/turtle.h
+    include/orthogonal_camera.h
+    include/perspective_camera.h)
 
 set(SOURCE_FILES
     src/main.cpp
@@ -34,7 +36,9 @@ set(SOURCE_FILES
     src/vector4.cpp
     src/dynamic_object.cpp
     src/entity.cpp
-    src/camera.cpp)
+    src/camera.cpp
+    src/orthogonal_camera.cpp
+    src/perspective_camera.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pedantic")
 

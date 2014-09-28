@@ -7,6 +7,7 @@ class bus {
 
 public:
     bus();
+
     draw();
 
 

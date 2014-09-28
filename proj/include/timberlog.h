@@ -7,6 +7,7 @@ class timberlog {
 
 public:
     timberlog();
+
     draw();
 
 

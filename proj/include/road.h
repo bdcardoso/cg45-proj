@@ -7,6 +7,7 @@ class road {
 
 public:
     road();
+
     draw();
 
 

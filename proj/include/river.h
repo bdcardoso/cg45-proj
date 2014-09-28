@@ -7,6 +7,7 @@ class river {
 
 public:
     riverside();
+
     draw();
 
 

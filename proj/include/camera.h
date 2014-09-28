@@ -15,6 +15,8 @@ public:
     camera(GLdouble near, GLdouble far);
 
     void update();
+
     void compute_projection_matrix();
+
     void computevisualizationmatrix();
 };

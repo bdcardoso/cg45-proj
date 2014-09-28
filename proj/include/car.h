@@ -7,6 +7,7 @@ class car {
 
 public:
     car();
+
     draw();
 
 

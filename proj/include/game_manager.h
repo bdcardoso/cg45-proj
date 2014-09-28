@@ -12,14 +12,20 @@ private:
     Camera _cameras;
 
 public:
-    Game_Manager();
+    game_manager();
 
     void display();
+
     void reshape(GLsizei w, GLsizei h);
+
     void keypressed();
+
     void ontimer();
+
     void idle();
+
     void update();
+
     void init();
 
 };
