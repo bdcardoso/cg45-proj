@@ -6,8 +6,7 @@ class vector3 {
     GLdouble _coords[3];
 
 public:
-    vector3();
-    vector3(GLdouble x, GLdouble y, GLdouble z);
+    vector3(GLdouble x = 0, GLdouble y = 0, GLdouble z = 0);
 
     GLdouble x() const;
     GLdouble y() const;
@@ -18,10 +17,10 @@ public:
     void z(GLdouble newz);
 
     const GLdouble *get() const;
-    void set(GLdouble x, GLdouble y, GLdouble z);
+    void set(GLdouble x, GLdouble y, GLdouble z = 0);
     
-    vector3 operator+(const vector3 &rhs);
-    vector3 operator-(const vector3 &rhs);
-    vector3 operator*(GLdouble scalar);
+    vector3 operator+(const vector3 &rhs) const;
+    vector3 operator-(const vector3 &rhs) const;
+    vector3 operator*(GLdouble scalar) const;
 };
 

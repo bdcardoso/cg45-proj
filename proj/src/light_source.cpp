@@ -4,16 +4,20 @@ light_source::light_source(GLenum number) {
     _num = number;
 }
 
-bool light_source::state() {
+bool light_source::state() const {
     return _state;
 }
 
-void light_source::state(bool state){
+void light_source::state(bool state) {
     _state = state;
 }
 
-GLenum light_source::num() {
+GLenum light_source::num() const {
     return _num;
+}
+
+void light_source::ambient(const vector4 &amb) {
+    _ambient = amb;
 }
 
 void light_source::position(const vector4 &position) {

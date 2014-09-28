@@ -15,10 +15,10 @@ class light_source {
 public:
     light_source(GLenum number);
     
-    bool state();
+    bool state() const;
     void state(bool newstate);
 
-    GLenum num();
+    GLenum num() const;
 
     void ambient(const vector4 &amb);
     void diffuse(const vector4 &dif);

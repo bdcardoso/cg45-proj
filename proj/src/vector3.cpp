@@ -1,9 +1,5 @@
 #include "vector3.h"
 
-vector3::vector3() {
-    _coords[0] = _coords[1] = _coords[2] = 0.0;
-}
-
 vector3::vector3(GLdouble x, GLdouble y, GLdouble z) {
     _coords[0] = x;
     _coords[1] = y;
@@ -44,15 +40,15 @@ const GLdouble *vector3::get() const {
     return _coords;
 }
 
-vector3 vector3::operator+(const vector3 &rhs) {
-    return vector3(_coords[0] + rhs._coords[0], _coords[1] + rhs._coords[1], _coords[2] + rhs._coords[2]);
+vector3 vector3::operator+(const vector3 &rhs) const {
+    return vector3(x() + rhs.x(), y() + rhs.y(), z() + rhs.z());
 }
 
-vector3 vector3::operator-(const vector3 &rhs) {
-    return vector3(_coords[0] - rhs._coords[0], _coords[1] - rhs._coords[1], _coords[2] - rhs._coords[2]);
+vector3 vector3::operator-(const vector3 &rhs) const {
+    return vector3(x() - rhs.x(), y() - rhs.y(), z() - rhs.z());
 }
 
-vector3 vector3::operator*(GLdouble scalar) {
-    return vector3(_coords[0] * scalar, _coords[1] * scalar, _coords[2] * scalar);
+vector3 vector3::operator*(GLdouble scalar) const {
+    return vector3(x() * scalar, y() * scalar, z() * scalar);
 }
 
