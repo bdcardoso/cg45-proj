@@ -14,7 +14,7 @@ public:
 
     vector3 position()const;
     void position(GLdouble x, GLdouble y, GLdouble z);
-    void position(const Vector3 &p);
+    void position(const vector3 &p);
 
 
 
