@@ -7,5 +7,6 @@ public:
     river();
 
     void draw();
+    void update(GLdouble dt);
 };
 

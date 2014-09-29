@@ -33,11 +33,13 @@ set(SOURCE_FILES
   src/dynamic_object.cpp
   src/entity.cpp
   src/game_manager.cpp
+  src/game_object.cpp
   src/light_source.cpp
   src/main.cpp
   src/orthogonal_camera.cpp
   src/perspective_camera.cpp
   src/river.cpp
+  src/static_object.cpp
   src/vector3.cpp
   src/vector4.cpp)
 
