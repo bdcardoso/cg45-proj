@@ -1,19 +1,11 @@
 #pragma once
-
+#include "entity.h"
 #include "opengl.h"
 
-
-
-class game_object {
-
+class game_object : public entity {
 public:
-
     game_object();
 
-    void draw();
-    void update(GLdouble delta_t){
-
-    _delta_t = delta_t;
-    }
-
-}
+    virtual void draw() = 0;
+    virtual void update(GLdouble dt) = 0;
+};

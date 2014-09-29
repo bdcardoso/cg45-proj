@@ -1,14 +1,11 @@
 #pragma once
-
+#include "static_object.h"
 #include "opengl.h"
 
-
-class river {
-
+class river : public static_object {
 public:
-    riverside();
+    river();
 
-    draw();
-
-
+    void draw();
 };
+

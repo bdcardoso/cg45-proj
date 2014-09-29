@@ -7,38 +7,39 @@ find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 
 set(HEADER_FILES
-    include/light_source.h
-    include/opengl.h
-    include/vector3.h
-    include/vector4.h
-    include/bus.h
-    include/camera.h
-    include/car.h
-    include/dynamic_object.h
-    include/entity.h
-    include/frog.h
-    include/game_manager.h
-    include/game_object.h
-    include/opengl.h
-    include/river.h
-    include/road.h
-    include/roadside.h
-    include/static_object.h
-    include/timberlog.h
-    include/turtle.h
-    include/orthogonal_camera.h
-    include/perspective_camera.h)
+  include/bus.h
+  include/camera.h
+  include/car.h
+  include/dynamic_object.h
+  include/entity.h
+  include/frog.h
+  include/game_manager.h
+  include/game_object.h
+  include/light_source.h
+  include/opengl.h
+  include/orthogonal_camera.h
+  include/perspective_camera.h
+  include/river.h
+  include/road.h
+  include/roadside.h
+  include/static_object.h
+  include/timberlog.h
+  include/turtle.h
+  include/vector3.h
+  include/vector4.h)
 
 set(SOURCE_FILES
-    src/main.cpp
-    src/light_source.cpp
-    src/vector3.cpp
-    src/vector4.cpp
-    src/dynamic_object.cpp
-    src/entity.cpp
-    src/camera.cpp
-    src/orthogonal_camera.cpp
-    src/perspective_camera.cpp)
+  src/camera.cpp
+  src/dynamic_object.cpp
+  src/entity.cpp
+  src/game_manager.cpp
+  src/light_source.cpp
+  src/main.cpp
+  src/orthogonal_camera.cpp
+  src/perspective_camera.cpp
+  src/river.cpp
+  src/vector3.cpp
+  src/vector4.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pedantic")
 

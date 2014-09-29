@@ -1,31 +1,23 @@
 #pragma once
+#include "game_object.h"
+#include "light_source.h"
+#include "camera.h"
+#include <memory>
+#include <vector>
 
-#include "opengl.h"
-#include "vector3.h"
-
-
-class camera {
-private:
-
-    GameObject _game_objects;
-    LightSource _light_sources;
-    Camera _cameras;
+class game_manager {
+  std::vector<std::shared_ptr<game_object>> _game_objects;
+  std::vector<std::shared_ptr<light_source>> _light_sources;
+  std::vector<std::shared_ptr<camera>> _cameras;
 
 public:
-    game_manager();
+  game_manager();
 
-    void display();
-
-    void reshape(GLsizei w, GLsizei h);
-
-    void keypressed();
-
-    void ontimer();
-
-    void idle();
-
-    void update();
-
-    void init();
-
+  void display();
+  void reshape(int w, int h);
+  void keypress();
+  void timer();
+  void idle();
+  void update();
+  void init();
 };

@@ -1,28 +1,38 @@
-#include "vector3.h"
-#include <iostream>
+#include "game_manager.h"
+#include "opengl.h"
 
-#define print_vector3(v) do { std::cout << #v << ": " << (v).x() << " " << (v).y() << " " << (v).z() << "\n"; } while (0)
+game_manager *manager = nullptr;
 
-#if 0
-void print_vector3(const std::string &name, const vector3 &v) {
-    std::cout << name << ": " << v.x() << " " << v.y() << " " << v.z() << std::endl;
+void display() {
+  glClearColor(0.f, 0.f, 0.f, 0.f);
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  manager->display();
+
+  glFlush();
+  glutSwapBuffers();
 }
-#endif
 
-int main() {
-    vector3 v1, v2, v3(1.0, 2.0, 3.0);
+void reshape(int w, int h) {
+  manager->reshape(w, h);
+}
 
-    v1.x(3.0);
-    v1.y(2.0);
-    v1.z(1.0);
-    print_vector3(v1);
-    print_vector3(v2);
-    print_vector3(v3);
+int main(int argc, char *argv[]) {
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+  glutInitWindowPosition(-1, -1);
+  glutInitWindowSize(640, 480);
+  glutCreateWindow("CG45 - Lab 1 - Tarefa 3");
 
-    print_vector3(v1 + v2);
-    print_vector3(v1 * 3);
-    print_vector3(v3 - v1);
+  manager = new game_manager;
 
-    return 0;
+  glutDisplayFunc(display);
+  glutReshapeFunc(reshape);
+
+  glutMainLoop();
+
+  delete manager;
+
+  return 0;
 }
 
