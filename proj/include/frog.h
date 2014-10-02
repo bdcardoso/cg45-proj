@@ -1,14 +1,21 @@
 #pragma once
+#include "dynamic_object.h"
 
-#include "opengl.h"
+class frog : public dynamic_object {
+    // The frog's legs
+    class leg : public dynamic_object {
+    public:
+        void draw();
+        void update(glut_time_t dt);
+    };
 
-
-class frog {
+private:
+    float _angle;
+    leg _leftleg, _rightleg;
 
 public:
     frog();
 
-    draw();
-
-
+    void draw();
+    void update(glut_time_t dt);
 };

@@ -1,49 +1,71 @@
 #include "game_manager.h"
-#include "river.h"
+#include "frog.h"
 
-game_manager::game_manager() {
-  _game_objects.push_back(std::make_shared<river>());
+game_manager::game_manager() : _angle(0.0) {
+    _game_objects.push_back(std::make_shared<frog>());
+
+    _lastTime = glutGet(GLUT_ELAPSED_TIME);
+}
+
+void game_manager::timer() {
+    update();
 }
 
 void game_manager::display() {
-  glColor3f(0.4, 0.0, 0.0);
-  glBegin(GL_POLYGON);
-    glVertex3f(0.25, 0.25, 0.0);
-    glVertex3f(0.50, 0.25, 0.0);
-    glVertex3f(0.50, 0.75, 0.0);
-    glVertex3f(0.25, 0.75, 0.0);
-  glEnd();
+    glPushMatrix();
+    glRotatef(30, 1.0, 0.0, 0.0);
+    glRotatef(_angle, 0.0, 1.0, 0.0);
 
-  for (auto obj : _game_objects) {
-    obj->draw();
-  }
+    // Axis helpers
+    glLineWidth(1.0);
+    glColor3ub(255, 0, 0);
+    glBegin(GL_LINES);
+        glVertex3f(0, 0, 0);
+        glVertex3f(100, 0, 0);
+    glEnd();
+    glColor3ub(0, 255, 0);
+    glBegin(GL_LINES);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 100, 0);
+    glEnd();
+    glColor3ub(0, 0, 255);
+    glBegin(GL_LINES);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 0, 100);
+    glEnd();
 
-#if 0
-  glColor3f(1.0, 0.25, 0.25);
-  glBegin(GL_POLYGON);
-    glVertex3f(0.50, 0.25, 0.0);
-    glVertex3f(0.75, 0.25, 0.0);
-    glVertex3f(0.75, 0.75, 0.0);
-    glVertex3f(0.50, 0.75, 0.0);
-  glEnd();
-#endif
+    for (auto obj : _game_objects) {
+        obj->draw();
+    }
+
+    glPopMatrix();
 }
 
 void game_manager::update() {
-  for (auto obj : _game_objects) {
-    // FIXME TODO XXX
-    obj->update(0.0);
-  }
+    auto currentTime = glutGet(GLUT_ELAPSED_TIME);
+    auto dt = currentTime - _lastTime;
+
+    for (auto obj : _game_objects) {
+        obj->update(dt);
+    }
+    
+    _lastTime = currentTime;
+    _angle += 90.0 / (1000.0 / dt);
+
+    glutPostRedisplay();
 }
 
 void game_manager::reshape(int w, int h) {
-  glViewport(0, 0, w, h);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  glMatrixMode(GL_VIEWPORT);
-  glLoadIdentity();
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode(GL_VIEWPORT);
+    glLoadIdentity();
 
-  glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    // TODO: extract
+    float gameSize = 10.f;
+    float ySize = h / float(w) * gameSize;
+    glOrtho(-gameSize, gameSize, -ySize, ySize, -gameSize, gameSize);
 }
 
 

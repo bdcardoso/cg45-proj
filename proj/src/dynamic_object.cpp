@@ -2,16 +2,15 @@
 #include "vector3.h"
 #include "opengl.h"
 
-//STILL MISSING FIRST FUNCTION
+dynamic_object::dynamic_object() {}
 
-void dynamic_object::update(GLdouble delta_t){
-//TODO
-
+// By default we just advance the position
+void dynamic_object::update(GLdouble dt) {
+    _position += _speed * dt;
 }
 
 void dynamic_object::speed(GLdouble x, GLdouble y, GLdouble z) {
-    speed(vector3(x, y, z));
-
+    _speed.set(x, y, z);
 }
 
 void dynamic_object::speed(const vector3 &s) {

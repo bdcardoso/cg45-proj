@@ -2,10 +2,13 @@
 #include "opengl.h"
 
 game_manager *manager = nullptr;
+constexpr int FPS = 30;
+
+void init(void);
 
 void display() {
   glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   manager->display();
 
@@ -17,22 +20,34 @@ void reshape(int w, int h) {
   manager->reshape(w, h);
 }
 
+void timer(int value) {
+    manager->timer();
+
+    (void)value;
+
+    glutTimerFunc(1000 / FPS, timer, 0);
+}
+
 int main(int argc, char *argv[]) {
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-  glutInitWindowPosition(-1, -1);
-  glutInitWindowSize(640, 480);
-  glutCreateWindow("CG45 - Lab 1 - Tarefa 3");
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
+    glutInitWindowPosition(-1, -1);
+    glutInitWindowSize(640, 480);
+    glutCreateWindow("CG45 - Lab 1 - Tarefa 3");
 
-  manager = new game_manager;
+    glEnable(GL_DEPTH_TEST);
 
-  glutDisplayFunc(display);
-  glutReshapeFunc(reshape);
+    manager = new game_manager;
 
-  glutMainLoop();
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
 
-  delete manager;
+    glutTimerFunc(1000 / FPS, timer, 0);
 
-  return 0;
+    glutMainLoop();
+
+    delete manager;
+
+    return 0;
 }
 

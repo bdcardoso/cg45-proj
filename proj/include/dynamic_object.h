@@ -1,11 +1,7 @@
 #pragma once
+#include "game_object.h"
 
-#include "opengl.h"
-#include "vector3.h"
-
-
-class dynamic_object {
-
+class dynamic_object : public game_object {
 protected:
     vector3 _speed;
 
@@ -14,11 +10,8 @@ public:
 
     void update(double delta_t);
 
-    void speed(const vector3 &speed);
-
-    void speed(GLdouble x, GLdouble y, GLdouble z);
-
     vector3 speed() const;
-
+    void speed(const vector3 &speed);
+    void speed(GLdouble x, GLdouble y, GLdouble z);
 
 };

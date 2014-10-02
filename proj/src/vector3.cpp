@@ -44,6 +44,13 @@ vector3 vector3::operator+(const vector3 &rhs) const {
     return vector3(x() + rhs.x(), y() + rhs.y(), z() + rhs.z());
 }
 
+vector3 &vector3::operator+=(const vector3 &rhs) {
+    x(x() + rhs.x());
+    y(y() + rhs.y());
+    z(z() + rhs.z());
+    return *this;
+}
+
 vector3 vector3::operator-(const vector3 &rhs) const {
     return vector3(x() - rhs.x(), y() - rhs.y(), z() - rhs.z());
 }
