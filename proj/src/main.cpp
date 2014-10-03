@@ -8,27 +8,21 @@ void init(void) {
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_COLOR_MATERIAL);
-    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
+
     glShadeModel(GL_SMOOTH);
-
-    GLfloat global_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
-
-    GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat shininess[] = { 1.0 };
-    GLfloat light_pos[]  = { 0.0, 25.0, 0.0, 0.0 };
-
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-    glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
-
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 void display() {
   glClearColor(0.f, 0.f, 0.f, 0.f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  glPushMatrix();
+
   manager->display();
+
+  glPopMatrix();
 
   glFlush();
   glutSwapBuffers();

@@ -8,7 +8,7 @@ game_manager::game_manager() : _angle(0.0) {
     auto _frog = std::make_shared<frog>();
     _frog->position(vector3(5.0, 0.0, 0.0));
     auto _car = std::make_shared<car>();
-    _car->position(vector3(0.0, 5.0, 0.0));
+    _car->position(vector3(0.0, 0.0, 5.0));
 
     _game_objects.push_back(_frog);
     _game_objects.push_back(_car);
@@ -67,16 +67,33 @@ void game_manager::update() {
 }
 
 void game_manager::reshape(int w, int h) {
+    GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat shininess[] = { 1.0 };
+    GLfloat light_pos[]  = { 100.0, 100.0, 100.0, 0.0 };
+    GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+
     glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+    glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+
+
     glMatrixMode(GL_VIEWPORT);
+    glLoadIdentity();
+
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
     // TODO: extract
     float gameSize = 10.f;
     float ySize = h / float(w) * gameSize;
     glOrtho(-gameSize, gameSize, -ySize, ySize, -gameSize*5, gameSize*5);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 }
 
 
