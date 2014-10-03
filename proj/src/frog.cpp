@@ -2,18 +2,24 @@
 #include <cassert>
 
 void frog::leg::draw() {
-    glRotatef(20, 0.0, 0.0, 1.0);
+    glPushMatrix();
+    glRotatef(25, 0.0, 0.0, 1.0);
     glRotatef(20, 0.0, 1.0, 0.0);
-    glScalef(0.95, 0.3, -0.3);
+    glScalef(1.35, 0.35, 0.35);
     glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.50, 0.0, 2.15);
+    glRotatef(80, 0.0, 0.0, 1.0);
+    glRotatef(-20, 0.0, 1.0, 0.0);
+    glScalef(0.75, -0.25, 0.25);
+    glutSolidCube(1.0);
+    glPopMatrix();
 }
 
 void frog::leg::update(glut_time_t dt) {
     (void)dt;
-}
-
-frog::frog() : _angle(0) {
-
 }
 
 void frog::draw() {
@@ -28,8 +34,8 @@ void frog::draw() {
     // Head
     glPushMatrix();
     glColor3ub(255, 0, 0);
-    glTranslatef(1.1, 0.45, 0);
-    glScalef(1.0, 0.3, 1.0);
+    glTranslatef(1.1, 0.55, 0);
+    glScalef(1.0, 0.5, 1.0);
     glutSolidCube(1.0);
     glPopMatrix();
 
@@ -37,14 +43,14 @@ void frog::draw() {
 
     // Left leg
     glPushMatrix();
-    glTranslatef(-0.2, 0.0, -1.0); 
+    glTranslatef(-0.3, 0.0, -1.0); 
     glScalef(1.0, 1.0,  1.0); // For symmetry
     _leftleg.draw();
     glPopMatrix();
 
     // Right leg
     glPushMatrix();
-    glTranslatef(-0.2, 0.0,  1.0); 
+    glTranslatef(-0.3, 0.0,  1.0); 
     glScalef(1.0, 1.0, -1.0);
     _rightleg.draw();
     glPopMatrix();

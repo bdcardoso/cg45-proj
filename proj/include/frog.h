@@ -10,12 +10,10 @@ class frog : public dynamic_object {
     };
 
 private:
-    float _angle;
     leg _leftleg, _rightleg;
 
 public:
-    frog();
-
     void draw();
     void update(glut_time_t dt);
 };
+

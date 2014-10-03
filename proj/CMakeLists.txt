@@ -31,6 +31,7 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
   src/camera.cpp
+  src/car.cpp
   src/dynamic_object.cpp
   src/entity.cpp
   src/frog.cpp
