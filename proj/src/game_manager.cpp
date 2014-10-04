@@ -1,6 +1,7 @@
 #include "game_manager.h"
 #include "car.h"
 #include "frog.h"
+#include "river.h"
 
 game_manager::game_manager() : _angle(0.0) {
     _lastTime = glutGet(GLUT_ELAPSED_TIME);
@@ -9,9 +10,12 @@ game_manager::game_manager() : _angle(0.0) {
     _frog->position(vector3(5.0, 0.0, 0.0));
     auto _car = std::make_shared<car>();
     _car->position(vector3(0.0, 0.0, 5.0));
+    auto _river = std::make_shared<river>();
+    _river->position(vector3(-5.0, 0.0, 0.0));
 
     _game_objects.push_back(_frog);
     _game_objects.push_back(_car);
+    _game_objects.push_back(_river);
 }
 
 void game_manager::timer() {

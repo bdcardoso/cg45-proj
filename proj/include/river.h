@@ -7,6 +7,6 @@ public:
     river();
 
     void draw();
-    void update(GLdouble dt);
+    void update(glut_time_t dt) override;
 };
 

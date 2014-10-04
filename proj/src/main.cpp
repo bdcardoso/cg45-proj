@@ -47,8 +47,6 @@ int main(int argc, char *argv[]) {
     glutInitWindowSize(640, 480);
     glutCreateWindow("Projeto CGra45 grupo 42");
 
-    glEnable(GL_DEPTH_TEST);
-
     init();
 
     manager = new game_manager;
