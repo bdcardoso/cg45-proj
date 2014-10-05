@@ -22,7 +22,6 @@ set(HEADER_FILES
   include/perspective_camera.h
   include/river.h
   include/road.h
-  include/roadside.h
   include/static_object.h
   include/timberlog.h
   include/turtle.h
