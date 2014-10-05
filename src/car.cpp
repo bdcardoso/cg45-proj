@@ -1,63 +1,68 @@
 #include "car.h"
 
+#define CAR_COORD                0.0f, 0.0f, 0.0f
+#define CAR_SIZE                 1.0f, 1.0f, 1.0f
+
+#define BODY_COLOR               150 ,  150 ,  150
+#define BODY_COORD_LOWER         0.0f,  1.0f,  0.0f
+#define BODY_SIZE_LOWER          6.0f,  1.0f,  3.0f
+#define BODY_COORD_UPPER        -0.2f,  2.0f,  0.0f
+#define BODY_SIZE_UPPER          2.5f,  1.0f,  3.0f
+
+#define WHEEL_COLOR              50  ,  50  ,  50
+#define WHEEL_SIZE               0.3 ,  0.5 ,  15  , 15
+#define WHEEL_COORD_FRONT_LEFT   1.5f,  0.5f, -1.5f
+#define WHEEL_COORD_FRONT_RIGHT  1.5f,  0.5f,  1.5f
+#define WHEEL_COORD_BACK_LEFT   -1.5f,  0.5f, -1.5f
+#define WHEEL_COORD_BACK_RIGHT  -1.5f,  0.5f,  1.5f
+
+
 void car::draw() {
-    //Lower Body
-    glPushMatrix();
-    glTranslatef(0.0f, -0.08f, 0.0f);
-    glScalef(0.78125f, 0.16f, 0.0f);
-    glPushMatrix();
-    glColor3ub(0, 0, 255);
-    glTranslatef(1.0f, 1.0f, 0.0f);
-    glutSolidCube(1);
-    glPopMatrix();
-    glPopMatrix();
+		//Car
+		glPushMatrix();
+			glTranslatef(CAR_COORD);
+			glScalef(CAR_SIZE);
 
-    //Upper Body
-    glPushMatrix();
-    glTranslatef(0.0625f, 0.24f, 0.0f);
-    glScalef(0.3125f, 0.16f, 0.0f);
-    glPushMatrix();
-    glColor3ub(0, 0, 255);
-    glTranslatef(1.0f, 1.0f, 0.0f);
-    glutSolidCube(1);
-    glPopMatrix();
-    glPopMatrix();
+			glColor3ub(BODY_COLOR);
+			//Lower Body
+			glPushMatrix();	
+				glTranslatef(BODY_COORD_LOWER);
+				glPushMatrix();
+					glScalef(BODY_SIZE_LOWER);
+					glutSolidCube(1);
+				glPopMatrix();
+			glPopMatrix();
+			//Upper Body
+			glPushMatrix();	
+				glTranslatef(BODY_COORD_UPPER);
+				glPushMatrix();
+					glScalef(BODY_SIZE_UPPER);
+					glutSolidCube(1);
+				glPopMatrix();
+			glPopMatrix();
 
-    //Left Triangle
-    glPushMatrix();
-    glTranslatef(0.75f, 1.08f, 0.0f);
-    glBegin(GL_TRIANGLES);
-    glColor3ub(0, 0, 255);
-    glVertex3f(0, 0, 0);
-    glVertex3f(-0.125f, 0, 0);
-    glVertex3f(0, 0.16f, 0);
-    glEnd();
-    glPopMatrix();
-
-    //Right Triangle
-    glPushMatrix();
-    glTranslatef(1.375f, 1.08f, 0.0f);
-    glBegin(GL_TRIANGLES);
-    glColor3ub(0, 0, 255);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0.0625f, 0, 0);
-    glVertex3f(0, 0.16f, 0);
-    glEnd();
-    glPopMatrix();
-
-    //Left Wheel
-    glPushMatrix();
-    glColor3ub(0, 255, 0);
-    glTranslatef(0.625f, 0.72f, 0.0f);
-    glutSolidTorus(0.02, 0.0625, 20, 20);
-    glPopMatrix();
-
-    //Right Wheel
-    glPushMatrix();
-    glColor3ub(0, 255, 0);
-    glTranslatef(1.375f, 0.72f, 0.0f);
-    glutSolidTorus(0.02, 0.0625, 20, 20);
-    glPopMatrix();
+			glColor3ub(WHEEL_COLOR);
+			//Front-Left Wheel
+			glPushMatrix();	
+				glTranslatef(WHEEL_COORD_FRONT_LEFT);
+				glutSolidTorus(WHEEL_SIZE);
+			glPopMatrix();
+			//Front-Right Wheel
+			glPushMatrix();	
+				glTranslatef(WHEEL_COORD_FRONT_RIGHT);
+				glutSolidTorus(WHEEL_SIZE);
+			glPopMatrix();
+			//Back-Left Wheel
+			glPushMatrix();	
+				glTranslatef(WHEEL_COORD_BACK_LEFT);
+				glutSolidTorus(WHEEL_SIZE);
+			glPopMatrix();
+			//Back-Right Wheel
+			glPushMatrix();	
+				glTranslatef(WHEEL_COORD_BACK_RIGHT);
+				glutSolidTorus(WHEEL_SIZE);
+			glPopMatrix();
+		glPopMatrix();
 }
 
 void car::update(glut_time_t dt) {
