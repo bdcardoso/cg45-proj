@@ -40,54 +40,54 @@ constexpr auto BODY_SIZE_LOWER_Y =          6.0f,
 
 
 void car::draw() {
-	glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
+    glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
 
-	//Lower Body
-	glPushMatrix();	
-	glTranslatef(BODY_COORD_LOWER_Y, BODY_COORD_LOWER_Z, BODY_COORD_LOWER_X);
-	glPushMatrix();
-	glScalef(BODY_SIZE_LOWER_Y, BODY_SIZE_LOWER_Z, BODY_SIZE_LOWER_X);
-	glutSolidCube(1);
-	glPopMatrix();
-	glPopMatrix();
+    //Lower Body
+    glPushMatrix();	
+        glTranslatef(BODY_COORD_LOWER_Y, BODY_COORD_LOWER_Z, BODY_COORD_LOWER_X);
+        glPushMatrix();
+            glScalef(BODY_SIZE_LOWER_Y, BODY_SIZE_LOWER_Z, BODY_SIZE_LOWER_X);
+            glutSolidCube(1);
+        glPopMatrix();
+    glPopMatrix();
 
-	//Upper Body
-	glPushMatrix();	
-	glTranslatef(BODY_COORD_UPPER_Y, BODY_COORD_UPPER_Z, BODY_COORD_UPPER_X);
-	glPushMatrix();
-	glScalef(BODY_SIZE_UPPER_Y, BODY_SIZE_UPPER_Z, BODY_SIZE_UPPER_X);
-	glutSolidCube(1);
-	glPopMatrix();
-	glPopMatrix();
+    //Upper Body
+    glPushMatrix();	
+        glTranslatef(BODY_COORD_UPPER_Y, BODY_COORD_UPPER_Z, BODY_COORD_UPPER_X);
+        glPushMatrix();
+            glScalef(BODY_SIZE_UPPER_Y, BODY_SIZE_UPPER_Z, BODY_SIZE_UPPER_X);
+            glutSolidCube(1);
+        glPopMatrix();
+    glPopMatrix();
 
-	glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
+    glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
 
-	//Front-Left Wheel
-	glPushMatrix();	
-	glTranslatef(WHEEL_COORD_FRONT_LEFT_Y, WHEEL_COORD_FRONT_LEFT_Z, WHEEL_COORD_FRONT_LEFT_X);
-	glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
-	glPopMatrix();
+    //Front-Left Wheel
+    glPushMatrix();	
+        glTranslatef(WHEEL_COORD_FRONT_LEFT_Y, WHEEL_COORD_FRONT_LEFT_Z, WHEEL_COORD_FRONT_LEFT_X);
+        glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
+    glPopMatrix();
 
-	//Front-Right Wheel
-	glPushMatrix();	
-	glTranslatef(WHEEL_COORD_FRONT_RIGHT_Y, WHEEL_COORD_FRONT_RIGHT_Z, WHEEL_COORD_FRONT_RIGHT_X);
-	glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
-	glPopMatrix();
+    //Front-Right Wheel
+    glPushMatrix();	
+        glTranslatef(WHEEL_COORD_FRONT_RIGHT_Y, WHEEL_COORD_FRONT_RIGHT_Z, WHEEL_COORD_FRONT_RIGHT_X);
+        glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
+    glPopMatrix();
 
-	//Back-Left Wheel
-	glPushMatrix();	
-	glTranslatef(WHEEL_COORD_BACK_LEFT_Y, WHEEL_COORD_BACK_LEFT_Z, WHEEL_COORD_BACK_LEFT_X);
-	glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
-	glPopMatrix();
+    //Back-Left Wheel
+    glPushMatrix();	
+        glTranslatef(WHEEL_COORD_BACK_LEFT_Y, WHEEL_COORD_BACK_LEFT_Z, WHEEL_COORD_BACK_LEFT_X);
+        glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
+    glPopMatrix();
 
-	//Back-Right Wheel
-	glPushMatrix();	
-	glTranslatef(WHEEL_COORD_BACK_RIGHT_Y, WHEEL_COORD_BACK_RIGHT_Z, WHEEL_COORD_BACK_RIGHT_X);
-	glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
-	glPopMatrix();
+    //Back-Right Wheel
+    glPushMatrix();	
+        glTranslatef(WHEEL_COORD_BACK_RIGHT_Y, WHEEL_COORD_BACK_RIGHT_Z, WHEEL_COORD_BACK_RIGHT_X);
+        glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS, WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
+    glPopMatrix();
 }
 
 void car::update(glut_time_t dt) {
-  (void)dt;
+    (void)dt;
 }
 
