@@ -45,19 +45,31 @@ void car::draw() {
     //Lower Body
     glPushMatrix();	
         glTranslatef(BODY_COORD_LOWER_X, BODY_COORD_LOWER_Y, BODY_COORD_LOWER_Z);
-        glPushMatrix();
-            glScalef(BODY_SIZE_LOWER_X, BODY_SIZE_LOWER_Y, BODY_SIZE_LOWER_Z);
-            glutSolidCube(1);
-        glPopMatrix();
+        glScalef(BODY_SIZE_LOWER_X, BODY_SIZE_LOWER_Y, BODY_SIZE_LOWER_Z);
+        glutSolidCube(1);
     glPopMatrix();
 
     //Upper Body
     glPushMatrix();	
         glTranslatef(BODY_COORD_UPPER_X, BODY_COORD_UPPER_Y, BODY_COORD_UPPER_Z);
-        glPushMatrix();
-            glScalef(BODY_SIZE_UPPER_X, BODY_SIZE_UPPER_Y, BODY_SIZE_UPPER_Z);
-            glutSolidCube(1);
-        glPopMatrix();
+        glScalef(BODY_SIZE_UPPER_X, BODY_SIZE_UPPER_Y, BODY_SIZE_UPPER_Z);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    //Front Triangle
+    glPushMatrix();	
+        glTranslatef(1.62f, 1.72f, 0.0f);
+				glRotatef(-45.0f, 0.0f, 0.0f, 1.0f);
+        glScalef(1.5f, 0.75f, 3.0f);
+        glutSolidCube(1);
+    glPopMatrix();
+
+    //Back Triangle
+    glPushMatrix();	
+        glTranslatef(-1.85f, 1.72f, 0.0f);
+				glRotatef(60.0f, 0.0f, 0.0f, 1.0f);
+        glScalef(1.5f, 0.55f, 3.0f);
+        glutSolidCube(1);
     glPopMatrix();
 
     glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
