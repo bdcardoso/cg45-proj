@@ -1,12 +1,12 @@
 #include "car.h"
 
-constexpr auto BODY_COLOR_RED =             150,
-               BODY_COLOR_GREEN =           150,
-               BODY_COLOR_BLUE =            150,
+constexpr auto BODY_COLOR_RED =             50,
+               BODY_COLOR_GREEN =           50,
+               BODY_COLOR_BLUE =            50,
                // ----
-               WHEEL_COLOR_RED =            50,
-               WHEEL_COLOR_GREEN =          50,
-               WHEEL_COLOR_BLUE =           50,
+               WHEEL_COLOR_RED =            10,
+               WHEEL_COLOR_GREEN =          10,
+               WHEEL_COLOR_BLUE =           10,
                WHEEL_SIZE_N_SIDES =         15,
                WHEEL_SIZE_RINGS =           15;
 
