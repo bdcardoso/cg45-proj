@@ -1,14 +1,9 @@
 #pragma once
+#include "dynamic_object.h"
 
-#include "opengl.h"
-
-
-class turtle {
+class turtle : public dynamic_object{
 
 public:
-    turtle();
-
-    draw();
-
+    void draw();
 
 };

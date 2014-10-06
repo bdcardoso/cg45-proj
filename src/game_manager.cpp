@@ -1,26 +1,37 @@
 #include "game_manager.h"
 #include "car.h"
+#include "bus.h"
 #include "frog.h"
+#include "turtle.h"
 #include "river.h"
 #include "road.h"
+#include "timberlog.h"
 
 game_manager::game_manager() : _angle(0.0) {
     _lastTime = glutGet(GLUT_ELAPSED_TIME);
     
     auto _frog = std::make_shared<frog>();
     _frog->position(vector3(5.0, 0.0, 0.0));
+    auto _turtle = std::make_shared<turtle>();
+    _turtle->position(vector3(10.0, 0.0, 0.0));
     auto _car = std::make_shared<car>();
     _car->position(vector3(0.0, 0.0, 5.0));
+    auto _bus = std::make_shared<bus>();
+    _bus->position(vector3(0.0, 0.0, 10.0));
     auto _river = std::make_shared<river>();
-    _river->position(vector3(-5.0, 0.0, 0.0));
+    _river->position(vector3(0.0, 0.0, -10.0));
     auto _road = std::make_shared<road>();
     _road->position(vector3(0.0, 0.0, -5.0));
+    auto _timberlog = std::make_shared<timberlog>();
+    _timberlog->position(vector3(-5.0, 0.0, 0.0));
 
     _game_objects.push_back(_frog);
+    _game_objects.push_back(_turtle);
     _game_objects.push_back(_car);
+    _game_objects.push_back(_bus);
     _game_objects.push_back(_river);
     _game_objects.push_back(_road);
-
+    _game_objects.push_back(_timberlog);
 }
 
 void game_manager::timer() {

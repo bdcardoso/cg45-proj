@@ -1,14 +1,9 @@
 #pragma once
+#include "dynamic_object.h"
 
-#include "opengl.h"
-
-
-class timberlog {
+class timberlog : public dynamic_object{
 
 public:
-    timberlog();
-
-    draw();
-
+    void draw() override;
 
 };
