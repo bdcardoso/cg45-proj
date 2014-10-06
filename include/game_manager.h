@@ -18,7 +18,8 @@ public:
 
     void display();
     void reshape(int w, int h);
-    void keyboard(unsigned char key, int x, int y);
+    void keyboard(unsigned char key, int x, int y);    
+    void keyboardUp(unsigned char key, int x, int y);
     void timer();
     void idle();
     void update();

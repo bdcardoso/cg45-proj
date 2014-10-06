@@ -6,8 +6,6 @@ class frog : public dynamic_object {
     class leg : public dynamic_object {
     public:
         void draw() override;
-        void keypress(unsigned char key) override;
-        void update(glut_time_t dt) override;
     };
 
 private:
@@ -16,7 +14,8 @@ private:
 public:
 
     void draw() override;
-    void keypress(unsigned char key) override;
+    void keydown(unsigned char key) override;
+    void keyup(unsigned char key) override;
     void update(glut_time_t dt) override;
 };
 

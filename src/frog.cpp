@@ -49,10 +49,6 @@ void frog::leg::draw() {
 
 }
 
-void frog::leg::update(glut_time_t dt) {
-    (void)dt;
-}
-
 void frog::draw() {
     glColor3ub(5, 55, 5);
 
@@ -89,15 +85,9 @@ void frog::draw() {
 void frog::update(glut_time_t dt) {
     assert(dt != 0);
     dynamic_object::update(dt);
-    
-    speed(0, 0, 0);
 }
 
-void frog::leg::keypress(unsigned char key) {
-	(void)key;
-}
-
-void frog::keypress(unsigned char key) {
+void frog::keydown(unsigned char key) {
 	static const vector3 FROG_SPEED(5.0, 0.0, 0.0);
 	
 	// FIXME
@@ -108,6 +98,12 @@ void frog::keypress(unsigned char key) {
 	case 'd':
 		speed(FROG_SPEED);
 		break;
+	default:
+		break;
 	}
+}
+
+void frog::keyup(unsigned char key) {
+	speed(0, 0, 0);
 }
 

@@ -43,6 +43,10 @@ void timer(int value) {
 void keyboard(unsigned char key, int x, int y) {
 	manager->keyboard(key, x, y);
 }
+
+void keyboardUp(unsigned char key, int x, int y) {
+	manager->keyboardUp(key, x, y);
+}
                                    
 int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
@@ -57,6 +61,7 @@ int main(int argc, char *argv[]) {
 
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
+    glutKeyboardUpFunc(keyboardUp);
     glutReshapeFunc(reshape);
 
     glutTimerFunc(1000 / FPS, timer, 0);

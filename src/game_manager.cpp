@@ -102,6 +102,12 @@ void game_manager::reshape(int w, int h) {
 
 void game_manager::keyboard(unsigned char key, int x, int y) {
 	for (auto obj : _game_objects) {
-		obj->keypress(key);
+		obj->keydown(key);
+	}	
+}
+
+void game_manager::keyboardUp(unsigned char key, int x, int y) {
+	for (auto obj : _game_objects) {
+		obj->keyup(key);
 	}	
 }

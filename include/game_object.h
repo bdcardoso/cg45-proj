@@ -6,7 +6,8 @@ public:
     game_object();
 
     virtual void draw() {};
-    virtual void keypress(unsigned char key) {};
+    virtual void keydown(unsigned char key) {};
+    virtual void keyup(unsigned char key) {};
     virtual void update(glut_time_t dt) {};
 };
 
