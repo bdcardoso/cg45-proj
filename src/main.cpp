@@ -40,6 +40,10 @@ void timer(int value) {
     glutTimerFunc(1000 / FPS, timer, 0);
 }
 
+void keyboard(unsigned char key, int x, int y) {
+	manager->keyboard(key, x, y);
+}
+                                   
 int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
@@ -52,6 +56,7 @@ int main(int argc, char *argv[]) {
     manager = new game_manager;
 
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
     glutReshapeFunc(reshape);
 
     glutTimerFunc(1000 / FPS, timer, 0);

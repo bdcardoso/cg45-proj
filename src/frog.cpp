@@ -1,9 +1,10 @@
 #include "frog.h"
 #include <cassert>
+#include <cstdio>
 
 void frog::leg::draw() {
     glPushMatrix();
-		glTranslatef(-0.15, 0.35, 0.2);
+    glTranslatef(-0.15, 0.35, 0.2);
     glRotatef(10, 0.0, 0.0, 1.0);
     glRotatef(40, 0.0, 1.0, 0.0);
     glScalef(1.0, 0.45, 0.45);
@@ -25,7 +26,7 @@ void frog::leg::draw() {
     glPopMatrix();
 
     glPushMatrix();
-		glTranslatef(0.9, 0.65, 0.2);
+    glTranslatef(0.9, 0.65, 0.2);
     glRotatef(-30, 0.0, 0.0, 1.0);
     glRotatef(-40, 0.0, 1.0, 0.0);
     glScalef(0.65, 0.3, 0.30);
@@ -53,11 +54,11 @@ void frog::leg::update(glut_time_t dt) {
 }
 
 void frog::draw() {
-		glColor3ub(5, 55, 5);
+    glColor3ub(5, 55, 5);
 
     // Body
     glPushMatrix();
-		glTranslatef(0.0, 0.55, 0.0);
+    glTranslatef(0.0, 0.55, 0.0);
     glRotatef(10, 0.0, 0.0, 1.0);
     glScalef(2.0, 0.75, 1.5);
     glutSolidCube(1.0);
@@ -87,6 +88,26 @@ void frog::draw() {
 
 void frog::update(glut_time_t dt) {
     assert(dt != 0);
+    dynamic_object::update(dt);
+    
+    speed(0, 0, 0);
 }
 
+void frog::leg::keypress(unsigned char key) {
+	(void)key;
+}
+
+void frog::keypress(unsigned char key) {
+	static const vector3 FROG_SPEED(5.0, 0.0, 0.0);
+	
+	// FIXME
+	switch (key) {
+	case 'a':
+		speed(FROG_SPEED * -1);
+		break;
+	case 'd':
+		speed(FROG_SPEED);
+		break;
+	}
+}
 

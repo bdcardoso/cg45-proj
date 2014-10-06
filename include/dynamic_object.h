@@ -8,7 +8,7 @@ protected:
 public:
     dynamic_object();
 
-    void update(double delta_t);
+    void update(glut_time_t dt);
 
     vector3 speed() const;
     void speed(const vector3 &speed);

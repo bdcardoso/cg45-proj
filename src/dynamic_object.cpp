@@ -5,8 +5,8 @@
 dynamic_object::dynamic_object() {}
 
 // By default we just advance the position
-void dynamic_object::update(GLdouble dt) {
-    _position += _speed * dt;
+void dynamic_object::update(glut_time_t dt) {
+    _position += _speed * (dt / 1000.0);
 }
 
 void dynamic_object::speed(GLdouble x, GLdouble y, GLdouble z) {

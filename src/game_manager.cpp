@@ -65,7 +65,7 @@ void game_manager::update() {
     }
     
     _lastTime = currentTime;
-    _angle += 90.0 / (1000.0 / dt);
+    _angle += 5.0 / (1000.0 / dt);
 
     glutPostRedisplay();
 }
@@ -100,4 +100,8 @@ void game_manager::reshape(int w, int h) {
     glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 }
 
-
+void game_manager::keyboard(unsigned char key, int x, int y) {
+	for (auto obj : _game_objects) {
+		obj->keypress(key);
+	}	
+}
