@@ -29,6 +29,7 @@ set(HEADER_FILES
   include/vector4.h)
 
 set(SOURCE_FILES
+  src/bus.cpp
   src/camera.cpp
   src/car.cpp
   src/dynamic_object.cpp
@@ -41,7 +42,10 @@ set(SOURCE_FILES
   src/orthogonal_camera.cpp
   src/perspective_camera.cpp
   src/river.cpp
+  src/road.cpp
   src/static_object.cpp
+  src/timberlog.cpp
+  src/turtle.cpp
   src/vector3.cpp
   src/vector4.cpp)
 
