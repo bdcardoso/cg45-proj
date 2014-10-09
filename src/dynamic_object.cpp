@@ -9,6 +9,10 @@ void dynamic_object::update(glut_time_t dt) {
     _position += _speed * (dt / 1000.0);
 }
 
+vector3 dynamic_object::speed() const {
+    return _speed;
+}
+
 void dynamic_object::speed(GLdouble x, GLdouble y, GLdouble z) {
     _speed.set(x, y, z);
 }
@@ -16,3 +20,4 @@ void dynamic_object::speed(GLdouble x, GLdouble y, GLdouble z) {
 void dynamic_object::speed(const vector3 &s) {
     _speed = s;
 }
+

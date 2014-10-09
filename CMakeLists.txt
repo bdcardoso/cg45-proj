@@ -35,6 +35,7 @@ set(SOURCE_FILES
   src/dynamic_object.cpp
   src/entity.cpp
   src/frog.cpp
+  src/frog_leg.cpp
   src/game_manager.cpp
   src/game_object.cpp
   src/light_source.cpp

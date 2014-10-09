@@ -7,9 +7,9 @@
 #include "road.h"
 #include "timberlog.h"
 
-game_manager::game_manager() : _angle(0.0) {
+game_manager::game_manager() : _spin(0.0), _tilt(90.0), _spin_speed(0.0), _tilt_speed(0.0) {
     _lastTime = glutGet(GLUT_ELAPSED_TIME);
-    
+
     auto _frog = std::make_shared<frog>();
     _frog->position(vector3(5.0, 0.0, 0.0));
     auto _turtle = std::make_shared<turtle>();
@@ -40,8 +40,8 @@ void game_manager::timer() {
 
 void game_manager::display() {
     glPushMatrix();
-        glRotatef(30, 1.0, 0.0, 0.0);
-        glRotatef(_angle, 0.0, 1.0, 0.0);
+        glRotatef(_tilt, 1.0, 0.0, 0.0);
+        glRotatef(_spin, 0.0, 1.0, 0.0);
 
         // Axis helpers
         glLineWidth(1.0);
@@ -61,13 +61,13 @@ void game_manager::display() {
             glVertex3f(0, 0, 100);
         glEnd();
 
-    for (auto obj : _game_objects) {
-        glPushMatrix();
-            auto pos = obj->position();
-            glTranslatef(pos.x(), pos.y(), pos.z());
-            obj->draw();
-        glPopMatrix();
-    }
+        for (auto obj : _game_objects) {
+            glPushMatrix();
+                auto pos = obj->position();
+                glTranslatef(pos.x(), pos.y(), pos.z());
+                obj->draw();
+            glPopMatrix();
+        }
 
     glPopMatrix();
 }
@@ -79,9 +79,10 @@ void game_manager::update() {
     for (auto obj : _game_objects) {
         obj->update(dt);
     }
-    
+
     _lastTime = currentTime;
-    _angle += 5.0 / (1000.0 / dt);
+    _spin += _spin_speed / (1000.0 / dt);
+    _tilt += _tilt_speed / (1000.0 / dt);
 
     glutPostRedisplay();
 }
@@ -117,13 +118,74 @@ void game_manager::reshape(int w, int h) {
 }
 
 void game_manager::keyboard(unsigned char key, int x, int y) {
-	for (auto obj : _game_objects) {
-		obj->keydown(key);
-	}	
+    (void)x, (void)y;
+
+    for (auto obj : _game_objects) {
+	obj->keydown(key);
+    }	
 }
 
 void game_manager::keyboardUp(unsigned char key, int x, int y) {
-	for (auto obj : _game_objects) {
-		obj->keyup(key);
-	}	
+    (void)x, (void)y;
+    
+    for (auto obj : _game_objects) {
+	obj->keyup(key);
+    }	
 }
+
+void game_manager::special(int key, int x, int y) {
+    (void)x, (void)y;
+
+    switch (key) {
+        case GLUT_KEY_DOWN:
+            _tilt_speed = -30.0;
+            break;
+        case GLUT_KEY_UP:
+            _tilt_speed = 30.0;
+            break;
+        case GLUT_KEY_LEFT:
+            _spin_speed = -30.0;
+            break;
+        case GLUT_KEY_RIGHT:
+            _spin_speed =  30.0;
+            break;
+        default:
+            break;
+    }
+
+    for (auto obj : _game_objects) {
+	obj->specialdown(key);
+    }	
+}
+
+void game_manager::specialUp(int key, int x, int y) {
+    (void)x, (void)y;
+    
+    switch (key) {
+        case GLUT_KEY_HOME: {
+            _tilt = 90.0;
+            _spin = 0;
+            break;
+        }
+        case GLUT_KEY_DOWN:
+            _tilt_speed = 0.0;
+            break;
+        case GLUT_KEY_UP:
+            _tilt_speed = 0.0;
+            break;
+        case GLUT_KEY_LEFT:
+            _spin_speed = 0.0;
+            break;
+        case GLUT_KEY_RIGHT:
+            _spin_speed = 0.0;
+            break;
+        default:
+            break;
+    }
+
+    for (auto obj : _game_objects) {
+	obj->specialup(key);
+    }
+
+}
+

@@ -11,7 +11,7 @@ private:
     std::vector<std::shared_ptr<light_source>> _light_sources;
     std::vector<std::shared_ptr<camera>> _cameras;
     glut_time_t _lastTime;
-    GLdouble _angle;
+    GLdouble _spin, _tilt, _spin_speed, _tilt_speed;
 
 public:
     game_manager();
@@ -20,6 +20,8 @@ public:
     void reshape(int w, int h);
     void keyboard(unsigned char key, int x, int y);    
     void keyboardUp(unsigned char key, int x, int y);
+    void special(int key, int x, int y);    
+    void specialUp(int key, int x, int y);
     void timer();
     void idle();
     void update();
