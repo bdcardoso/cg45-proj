@@ -13,14 +13,22 @@ game_manager::game_manager() : _spin(0.0), _tilt(90.0), _spin_speed(0.0), _tilt_
 
     auto _frog = std::make_shared<frog>();
     _frog->position(vector3( 0.0, 1.0, -1.0));
+    _frog->scale(0.3);
+
+    auto _car = std::make_shared<car>();
+    _car->position(vector3( 0.0, 1.0,  1.0));
+    _car->scale(0.3);
+
     auto _river = std::make_shared<river>();
     _river->position(vector3(0.0, 0.0, -1.0));
+
     auto _road = std::make_shared<road>();
     _road->position(vector3( 0.0, 0.0,  1.0));
 
     _game_objects.push_back(_frog);
     _game_objects.push_back(_river);
     _game_objects.push_back(_road);
+    _game_objects.push_back(_car);
 }
 
 void game_manager::timer() {
@@ -52,10 +60,10 @@ void game_manager::display() {
 
         for (auto obj : _game_objects) {
             glPushMatrix();
-                auto scl = obj->scale();
-                glScalef(scl.x(), scl.y(), scl.z());
                 auto pos = obj->position();
                 glTranslatef(pos.x(), pos.y(), pos.z());
+                auto scl = obj->scale();
+                glScalef(scl.x(), scl.y(), scl.z());
 
                 obj->draw();
             glPopMatrix();
