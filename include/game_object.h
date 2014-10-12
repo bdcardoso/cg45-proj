@@ -2,8 +2,14 @@
 #include "entity.h"
 
 class game_object : public entity {
+    vector3 _scale;
+
 public:
     game_object();
+
+    const vector3 &scale() const;
+    void scale(const vector3 &s);
+    void scale(GLdouble factor);
 
     virtual void draw() {};
     virtual void keydown(unsigned char key) { (void)key; };

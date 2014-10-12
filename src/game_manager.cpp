@@ -1,37 +1,26 @@
 #include "game_manager.h"
-#include "car.h"
 #include "bus.h"
+#include "car.h"
 #include "frog.h"
-#include "turtle.h"
+#include "orthogonal_camera.h"
 #include "river.h"
 #include "road.h"
 #include "timberlog.h"
+#include "turtle.h"
 
-game_manager::game_manager() : _spin(0.0), _tilt(90.0), _spin_speed(0.0), _tilt_speed(0.0) {
+game_manager::game_manager() : _spin(0.0), _tilt(90.0), _spin_speed(0.0), _tilt_speed(0.0), GAME_SIZE(2.5) {
     _lastTime = glutGet(GLUT_ELAPSED_TIME);
 
     auto _frog = std::make_shared<frog>();
-    _frog->position(vector3(5.0, 0.0, 0.0));
-    auto _turtle = std::make_shared<turtle>();
-    _turtle->position(vector3(10.0, 0.0, 0.0));
-    auto _car = std::make_shared<car>();
-    _car->position(vector3(0.0, 0.0, 5.0));
-    auto _bus = std::make_shared<bus>();
-    _bus->position(vector3(0.0, 0.0, 10.0));
+    _frog->position(vector3( 0.0, 1.0, -1.0));
     auto _river = std::make_shared<river>();
-    _river->position(vector3(0.0, 0.0, -10.0));
+    _river->position(vector3(0.0, 0.0, -1.0));
     auto _road = std::make_shared<road>();
-    _road->position(vector3(0.0, 0.0, -5.0));
-    auto _timberlog = std::make_shared<timberlog>();
-    _timberlog->position(vector3(-5.0, 0.0, 0.0));
+    _road->position(vector3( 0.0, 0.0,  1.0));
 
     _game_objects.push_back(_frog);
-    _game_objects.push_back(_turtle);
-    _game_objects.push_back(_car);
-    _game_objects.push_back(_bus);
     _game_objects.push_back(_river);
     _game_objects.push_back(_road);
-    _game_objects.push_back(_timberlog);
 }
 
 void game_manager::timer() {
@@ -63,8 +52,11 @@ void game_manager::display() {
 
         for (auto obj : _game_objects) {
             glPushMatrix();
+                auto scl = obj->scale();
+                glScalef(scl.x(), scl.y(), scl.z());
                 auto pos = obj->position();
                 glTranslatef(pos.x(), pos.y(), pos.z());
+
                 obj->draw();
             glPopMatrix();
         }
@@ -84,6 +76,8 @@ void game_manager::update() {
     _spin += _spin_speed / (1000.0 / dt);
     _tilt += _tilt_speed / (1000.0 / dt);
 
+    _camera->update(dt);
+
     glutPostRedisplay();
 }
 
@@ -92,13 +86,17 @@ void game_manager::reshape(int w, int h) {
     GLfloat shininess[] = { 1.0 };
     GLfloat light_pos[]  = { 100.0, 100.0, 100.0, 0.0 };
     GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+    
+    // TODO: extract
+    float ySize = h / float(w) * GAME_SIZE;
+    _camera = std::make_shared<orthogonal_camera>(-GAME_SIZE, GAME_SIZE, -ySize, ySize, -GAME_SIZE*5, GAME_SIZE*5);
+    _camera->position(0.0, 0.0, 0.0);
 
-    glViewport(0, 0, w, h);
 
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
     glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
-
+    glViewport(0, 0, w, h);
 
     glMatrixMode(GL_VIEWPORT);
     glLoadIdentity();
@@ -106,13 +104,12 @@ void game_manager::reshape(int w, int h) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    // TODO: extract
-    float gameSize = 10.f;
-    float ySize = h / float(w) * gameSize;
-    glOrtho(-gameSize, gameSize, -ySize, ySize, -gameSize*5, gameSize*5);
+    _camera->compute_projection_matrix();
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
+    _camera->compute_visualization_matrix();
 
     glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 }

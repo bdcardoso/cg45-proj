@@ -3,26 +3,39 @@
 #include "opengl.h"
 
 class vector3 {
+    typedef GLdouble scalar_t;
     // [0] -> x, [1] -> y, [2] -> z
-    GLdouble _coords[3];
+    scalar_t _coords[3];
 
 public:
-    vector3(GLdouble x = 0, GLdouble y = 0, GLdouble z = 0);
+    vector3(scalar_t x = 0, scalar_t y = 0, scalar_t z = 0);
 
-    GLdouble x() const;
-    GLdouble y() const;
-    GLdouble z() const;
+    scalar_t x() const;
+    scalar_t y() const;
+    scalar_t z() const;
 
-    void x(GLdouble newx);
-    void y(GLdouble newy);
-    void z(GLdouble newz);
+    void x(scalar_t newx);
+    void y(scalar_t newy);
+    void z(scalar_t newz);
 
-    const GLdouble *get() const;
-    void set(GLdouble x, GLdouble y, GLdouble z = 0);
+    const scalar_t *get() const;
+    void set(scalar_t x, scalar_t y, scalar_t z = 0);
 
     vector3 operator+(const vector3 &rhs) const;
     vector3 &operator+=(const vector3 &rhs);
     vector3 operator-(const vector3 &rhs) const;
-    vector3 operator*(GLdouble scalar) const;
+    vector3 operator*(scalar_t scalar) const;
+
+    scalar_t dot(const vector3 &rhs) const {
+        return x() * rhs.x() +
+               y() * rhs.y() +
+               z() * rhs.z();
+    }
+
+    vector3 ext(const vector3 &rhs) const {
+        return vector3(y() * rhs.z() - z() * rhs.y(),
+                       z() * rhs.x() - x() * rhs.z(),
+                       x() * rhs.y() - y() * rhs.x());
+    }
 };
 

@@ -48,10 +48,10 @@ void frog::keydown(unsigned char key) {
             speed(speed() - vector3(SPEED_X, 0, 0));
             break;
         case 'q':
-            speed(speed() + vector3(0, SPEED_Y, 0));
+            speed(speed() + vector3(0, 0, SPEED_Z));
             break;
         case 'a':
-            speed(speed() - vector3(0, SPEED_Y, 0));
+            speed(speed() - vector3(0, 0, SPEED_Z));
             break;
         default:
             break;
@@ -67,10 +67,10 @@ void frog::keyup(unsigned char key) {
             speed(speed() + vector3(SPEED_X, 0, 0));
             break;
         case 'q':
-            speed(speed() - vector3(0, SPEED_Y, 0));
+            speed(speed() - vector3(0, 0, SPEED_Z));
             break;
         case 'a':
-            speed(speed() + vector3(0, SPEED_Y, 0));
+            speed(speed() + vector3(0, 0, SPEED_Z));
             break;
         default:
             break;

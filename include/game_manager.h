@@ -9,9 +9,11 @@ class game_manager {
 private:
     std::vector<std::shared_ptr<game_object>> _game_objects;
     std::vector<std::shared_ptr<light_source>> _light_sources;
-    std::vector<std::shared_ptr<camera>> _cameras;
+    std::shared_ptr<camera> _camera;
     glut_time_t _lastTime;
     GLdouble _spin, _tilt, _spin_speed, _tilt_speed;
+
+    GLdouble GAME_SIZE;
 
 public:
     game_manager();

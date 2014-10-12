@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowPosition(-1, -1);
-    glutInitWindowSize(640, 480);
+    glutInitWindowSize(640, 640);
     glutCreateWindow("Projeto CGra45 grupo 42");
 
     init();
