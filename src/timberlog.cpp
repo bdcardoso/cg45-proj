@@ -18,7 +18,7 @@ void timberlog::draw() {
     glColor3ub(COLOR_RED, COLOR_GREEN, COLOR_BLUE);
 
     //Timberlog
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(COORD_X, COORD_Y, COORD_Z);
         glRotatef(90, 0.0, 1.0, 0.0);
         glScalef(3.0, 1.0, 1.0);

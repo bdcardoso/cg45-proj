@@ -12,7 +12,7 @@ constexpr auto FROG_LEVEL =   0.40,
                ROAD_LEVEL =   0.39,
                RIVER_LEVEL =  0.41;
 
-game_manager::game_manager() : _spin(0.0), _tilt(90.0), _spin_speed(0.0), _tilt_speed(0.0), GAME_SIZE(2.5) {
+game_manager::game_manager() : _spin(0.0), _tilt(0.0), _spin_speed(0.0), _tilt_speed(0.0), GAME_SIZE(2.5) {
     _lastTime = glutGet(GLUT_ELAPSED_TIME);
 
     auto _frog = std::make_shared<frog>();
@@ -22,7 +22,7 @@ game_manager::game_manager() : _spin(0.0), _tilt(90.0), _spin_speed(0.0), _tilt_
     auto _car1 = std::make_shared<car>();
     _car1->position(vector3(-1.2, ROAD_LEVEL,  1.0));
     _car1->scale(0.1);
-    
+
     auto _car2 = std::make_shared<car>();
     _car2->position(vector3( 1.3, ROAD_LEVEL,  0.5));
     _car2->scale(0.1);
@@ -31,17 +31,17 @@ game_manager::game_manager() : _spin(0.0), _tilt(90.0), _spin_speed(0.0), _tilt_
     _bus->position(vector3( 0.9, ROAD_LEVEL,  1.5));
     _bus->scale(0.1);
 
-	auto _log1 = std::make_shared<timberlog>();
-	_log1->position(vector3(-0.6, RIVER_LEVEL, -1.0));
-	_log1->scale(0.1);
-	
-	auto _log2 = std::make_shared<timberlog>();
-	_log2->position(vector3(-0.0, RIVER_LEVEL, -0.5));
-	_log2->scale(0.1);
-	
-	auto _turtle = std::make_shared<turtle>();
-	_turtle->position(vector3( 2.0, RIVER_LEVEL, -1.5));
-	_turtle->scale(0.1);
+    auto _log1 = std::make_shared<timberlog>();
+    _log1->position(vector3(-0.6, RIVER_LEVEL, -1.0));
+    _log1->scale(0.1);
+
+    auto _log2 = std::make_shared<timberlog>();
+    _log2->position(vector3(-0.0, RIVER_LEVEL, -0.5));
+    _log2->scale(0.1);
+
+    auto _turtle = std::make_shared<turtle>();
+    _turtle->position(vector3( 2.0, RIVER_LEVEL, -1.5));
+    _turtle->scale(0.1);
 
     auto _river = std::make_shared<river>();
     _river->position(vector3(0.0, 0.0, -1.0));
@@ -66,37 +66,37 @@ void game_manager::timer() {
 
 void game_manager::display() {
     glPushMatrix();
-        glRotatef(_tilt, 1.0, 0.0, 0.0);
-        glRotatef(_spin, 0.0, 1.0, 0.0);
+    glRotatef(_tilt, 1.0, 0.0, 0.0);
+    glRotatef(_spin, 0.0, 1.0, 0.0);
 
-        // Axis helpers
-        glLineWidth(1.0);
-        glColor3ub(255, 0, 0);
-        glBegin(GL_LINES);
-            glVertex3f(0, 0, 0);
-            glVertex3f(100, 0, 0);
-        glEnd();
-        glColor3ub(0, 255, 0);
-        glBegin(GL_LINES);
-            glVertex3f(0, 0, 0);
-            glVertex3f(0, 100, 0);
-        glEnd();
-        glColor3ub(0, 0, 255);
-        glBegin(GL_LINES);
-            glVertex3f(0, 0, 0);
-            glVertex3f(0, 0, 100);
-        glEnd();
+    // Axis helpers
+    glLineWidth(1.0);
+    glColor3ub(255, 0, 0);
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0);
+    glVertex3f(100, 0, 0);
+    glEnd();
+    glColor3ub(0, 255, 0);
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0);
+    glVertex3f(0, 100, 0);
+    glEnd();
+    glColor3ub(0, 0, 255);
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0);
+    glVertex3f(0, 0, 100);
+    glEnd();
 
-        for (auto obj : _game_objects) {
-            glPushMatrix();
-                auto pos = obj->position();
-                glTranslatef(pos.x(), pos.y(), pos.z());
-                auto scl = obj->scale();
-                glScalef(scl.x(), scl.y(), scl.z());
+    for (auto obj : _game_objects) {
+        glPushMatrix();
+        auto pos = obj->position();
+        glTranslatef(pos.x(), pos.y(), pos.z());
+        auto scl = obj->scale();
+        glScalef(scl.x(), scl.y(), scl.z());
 
-                obj->draw();
-            glPopMatrix();
-        }
+        obj->draw();
+        glPopMatrix();
+    }
 
     glPopMatrix();
 }
@@ -123,7 +123,7 @@ void game_manager::reshape(int w, int h) {
     GLfloat shininess[] = { 1.0 };
     GLfloat light_pos[]  = { 100.0, 100.0, 100.0, 0.0 };
     GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-    
+
     // TODO: extract
     float ySize = h / float(w) * GAME_SIZE;
     _camera = std::make_shared<orthogonal_camera>(-GAME_SIZE, GAME_SIZE, -ySize, ySize, -GAME_SIZE*5, GAME_SIZE*5);
@@ -146,80 +146,78 @@ void game_manager::reshape(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    _camera->compute_visualization_matrix();
-
     glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
+    _camera->compute_visualization_matrix();
 }
 
 void game_manager::keyboard(unsigned char key, int x, int y) {
     (void)x, (void)y;
 
     for (auto obj : _game_objects) {
-	obj->keydown(key);
-    }	
+        obj->keydown(key);
+    }
 }
 
 void game_manager::keyboardUp(unsigned char key, int x, int y) {
     (void)x, (void)y;
-    
+
     for (auto obj : _game_objects) {
-	obj->keyup(key);
-    }	
+        obj->keyup(key);
+    }
 }
 
 void game_manager::special(int key, int x, int y) {
     (void)x, (void)y;
 
     switch (key) {
-        case GLUT_KEY_DOWN:
-            _tilt_speed = -30.0;
-            break;
-        case GLUT_KEY_UP:
-            _tilt_speed = 30.0;
-            break;
-        case GLUT_KEY_LEFT:
-            _spin_speed = -30.0;
-            break;
-        case GLUT_KEY_RIGHT:
-            _spin_speed =  30.0;
-            break;
-        default:
-            break;
+    case GLUT_KEY_DOWN:
+        _tilt_speed = -30.0;
+        break;
+    case GLUT_KEY_UP:
+        _tilt_speed = 30.0;
+        break;
+    case GLUT_KEY_LEFT:
+        _spin_speed = -30.0;
+        break;
+    case GLUT_KEY_RIGHT:
+        _spin_speed =  30.0;
+        break;
+    default:
+        break;
     }
 
     for (auto obj : _game_objects) {
-	obj->specialdown(key);
-    }	
+        obj->specialdown(key);
+    }
 }
 
 void game_manager::specialUp(int key, int x, int y) {
     (void)x, (void)y;
-    
+
     switch (key) {
-        case GLUT_KEY_HOME: {
-            _tilt = 90.0;
-            _spin = 0;
-            break;
-        }
-        case GLUT_KEY_DOWN:
-            _tilt_speed = 0.0;
-            break;
-        case GLUT_KEY_UP:
-            _tilt_speed = 0.0;
-            break;
-        case GLUT_KEY_LEFT:
-            _spin_speed = 0.0;
-            break;
-        case GLUT_KEY_RIGHT:
-            _spin_speed = 0.0;
-            break;
-        default:
-            break;
+    case GLUT_KEY_HOME: {
+        _tilt = 0.0;
+        _spin = 0;
+        break;
+    }
+    case GLUT_KEY_DOWN:
+        _tilt_speed = 0.0;
+        break;
+    case GLUT_KEY_UP:
+        _tilt_speed = 0.0;
+        break;
+    case GLUT_KEY_LEFT:
+        _spin_speed = 0.0;
+        break;
+    case GLUT_KEY_RIGHT:
+        _spin_speed = 0.0;
+        break;
+    default:
+        break;
     }
 
     for (auto obj : _game_objects) {
-	obj->specialup(key);
+        obj->specialup(key);
     }
-
 }
 

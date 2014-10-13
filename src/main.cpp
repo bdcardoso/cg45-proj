@@ -33,7 +33,7 @@ void reshape(int w, int h) {
 void timer(int value) {
     manager->timer();
 
-    glutTimerFunc(1000 / FPS, timer, value);
+    glutTimerFunc(1000 / FPS, timer, 0);
 }
 
 void keyboard(unsigned char key, int x, int y) {

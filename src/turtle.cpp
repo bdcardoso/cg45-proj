@@ -47,7 +47,7 @@ void turtle::draw() {
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
 
     //Body
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(BODY_COORD_X, BODY_COORD_Y, BODY_COORD_Z);
         glScalef(BODY_SIZE_X, BODY_SIZE_Y, BODY_SIZE_Z);
         glutSolidCube(1);
@@ -56,42 +56,42 @@ void turtle::draw() {
     glColor3ub(SKIN_COLOR_RED, SKIN_COLOR_GREEN, SKIN_COLOR_BLUE);
 
     //Head
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(HEAD_COORD_X, HEAD_COORD_Y, HEAD_COORD_Z);
         glScalef(HEAD_SIZE_X, HEAD_SIZE_Y, HEAD_SIZE_Z);
         glutSolidCube(1);
     glPopMatrix();
 
     //Tail
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(TAIL_COORD_X, TAIL_COORD_Y, TAIL_COORD_Z);
         glScalef(TAIL_SIZE_X, TAIL_SIZE_Y, TAIL_SIZE_Z);
         glutSolidCube(1);
     glPopMatrix();
 
     //Front-Left Leg
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(LEG_COORD_FRONT_LEFT_X, LEG_COORD_FRONT_LEFT_Y, LEG_COORD_FRONT_LEFT_Z);
         glScalef(LEG_SIZE_X, LEG_SIZE_Y, LEG_SIZE_Z);
         glutSolidCube(1);
     glPopMatrix();
 
     //Front-Right Leg
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(LEG_COORD_FRONT_RIGHT_X, LEG_COORD_FRONT_RIGHT_Y, LEG_COORD_FRONT_RIGHT_Z);
         glScalef(LEG_SIZE_X, LEG_SIZE_Y, LEG_SIZE_Z);
         glutSolidCube(1);
     glPopMatrix();
 
     //Back-Left Leg
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(LEG_COORD_BACK_LEFT_X, LEG_COORD_BACK_LEFT_Y, LEG_COORD_BACK_LEFT_Z);
         glScalef(LEG_SIZE_X, LEG_SIZE_Y, LEG_SIZE_Z);
         glutSolidCube(1);
     glPopMatrix();
 
     //Back-Right Leg
-    glPushMatrix();	
+    glPushMatrix();    
         glTranslatef(LEG_COORD_BACK_RIGHT_X, LEG_COORD_BACK_RIGHT_Y, LEG_COORD_BACK_RIGHT_Z);
         glScalef(LEG_SIZE_X, LEG_SIZE_Y, LEG_SIZE_Z);
         glutSolidCube(1);
