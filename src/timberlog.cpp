@@ -21,6 +21,7 @@ void timberlog::draw() {
     glPushMatrix();	
         glTranslatef(COORD_X, COORD_Y, COORD_Z);
         glRotatef(90, 0.0, 1.0, 0.0);
+        glScalef(3.0, 1.0, 1.0);
         gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, HEIGHT, SLICES, STACKS);
     glPopMatrix();
 
