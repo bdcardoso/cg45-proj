@@ -119,10 +119,10 @@ void game_manager::update() {
 }
 
 void game_manager::reshape(int w, int h) {
-    GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat shininess[] = { 1.0 };
-    GLfloat light_pos[]  = { 100.0, 100.0, 100.0, 0.0 };
-    GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+    // GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+    // GLfloat shininess[] = { 1.0 };
+    // GLfloat light_pos[]  = { 100.0, 100.0, 100.0, 0.0 };
+    // GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
 
     // TODO: extract
     float ySize = h / float(w) * GAME_SIZE;
@@ -130,9 +130,9 @@ void game_manager::reshape(int w, int h) {
     _camera->position(0.0, 0.0, 0.0);
 
 
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-    glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+    // glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+    // glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+    // glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
     glViewport(0, 0, w, h);
 
     glMatrixMode(GL_VIEWPORT);
@@ -146,7 +146,7 @@ void game_manager::reshape(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
+    // glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
     _camera->compute_visualization_matrix();
 }
 

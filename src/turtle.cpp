@@ -1,11 +1,11 @@
 #include "turtle.h"
 
-constexpr auto BODY_COLOR_RED =           10,
-               BODY_COLOR_GREEN =         25,
-               BODY_COLOR_BLUE =          10,
-               SKIN_COLOR_RED =           10,
-               SKIN_COLOR_GREEN =         50,
-               SKIN_COLOR_BLUE =          10;
+constexpr auto BODY_COLOR_RED =           20,
+               BODY_COLOR_GREEN =         50,
+               BODY_COLOR_BLUE =          20,
+               SKIN_COLOR_RED =           30,
+               SKIN_COLOR_GREEN =         80,
+               SKIN_COLOR_BLUE =          30;
 
 constexpr auto BODY_SIZE_X =              3.0f,
                BODY_SIZE_Y =              1.0f,

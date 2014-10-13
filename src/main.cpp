@@ -5,13 +5,13 @@ game_manager *manager = nullptr;
 constexpr int FPS = 60;
 
 void init(void) {
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_COLOR_MATERIAL);
+    // glEnable(GL_LIGHTING);
+    // glEnable(GL_LIGHT0);
+    // glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_DEPTH_TEST);
 
-    glShadeModel(GL_SMOOTH);
-    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+    // glShadeModel(GL_SMOOTH);
+    // glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 void display() {
