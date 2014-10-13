@@ -7,6 +7,8 @@ constexpr auto ROAD_LENGTH = 5.0,
                ROAD_BOTTOM = 0.1,
                ROAD_MARGIN = 0.2,
                TAR_DEPTH  = 0.8,
+               ROADLINE_HEIGHT=0.85,
+               LINE_WIDTH=0.05,
                // ----
                BOTTOM_RAISE = -ROAD_HEIGHT / 2,
                MARGIN_DELTA = (ROAD_WIDTH - ROAD_MARGIN) / 2,
@@ -46,11 +48,27 @@ void road::draw() {
     glPopMatrix();
     
 
-    // Water
+    // road
     glColor3ub(30, 30, 30);
     glPushMatrix();
         glTranslatef(0.0, TAR_RAISE, 0.0);
         glScalef(ROAD_LENGTH, TAR_DEPTH, TAR_WIDTH);
+        glutSolidCube(1.0);
+    glPopMatrix();
+    
+    // roadline1
+    glColor3ub(255,255,255);
+    glPushMatrix();
+        glTranslatef(0.0, TAR_RAISE, 0.25);
+        glScalef(ROAD_LENGTH, ROADLINE_HEIGHT, LINE_WIDTH);
+        glutSolidCube(1.0);
+    glPopMatrix();
+    
+     // roadline2
+    glColor3ub(255,255,255);
+    glPushMatrix();
+        glTranslatef(0.0, TAR_RAISE, -0.25);
+        glScalef(ROAD_LENGTH, ROADLINE_HEIGHT, LINE_WIDTH);
         glutSolidCube(1.0);
     glPopMatrix();
 }
