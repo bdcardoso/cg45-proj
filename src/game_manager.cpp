@@ -20,7 +20,7 @@ game_manager::game_manager(int w, int h) :
     _last_time = glutGet(GLUT_ELAPSED_TIME);
 
     auto _frog = std::make_shared<frog>();
-    _frog->position(vector3( 0.0, 0.45, 2.0));
+    _frog->position(vector3( 0.0, 0.45, 1.95));
     _frog->scale(0.1);
 
     auto _car1 = std::make_shared<car>();
@@ -63,8 +63,11 @@ game_manager::game_manager(int w, int h) :
     _game_objects.push_back(_car2);
     _game_objects.push_back(_bus);
 
+    // Camera 0: top view orthogonal camera
     _cameras.push_back(std::make_shared<orthogonal_camera>(0,0,0,0,0,0));
+    // Camera 1: top view perspective camera
     _cameras.push_back(std::make_shared<perspective_camera>(0,0,0,0));
+    // Camera 2: frog perspective camera
     _cameras.push_back(std::make_shared<perspective_camera>(0,0,0,0));
 }
 
@@ -133,12 +136,18 @@ void game_manager::reshape(int w, int h) {
 
     float xScale = float(w) / WINDOW_WIDTH,
           yScale = float(h) / WINDOW_HEIGHT,
-          scale  = std::min(xScale, yScale),
-          gameWidth  = GAME_WIDTH  * xScale / scale,
-          gameHeight = GAME_HEIGHT * yScale / scale;
+          scale  = std::min(xScale, yScale);
+
+    xScale /= scale;
+    yScale /= scale;
+    float gameWidth  = GAME_WIDTH  * xScale,
+          gameHeight = GAME_HEIGHT * yScale,
+          fovy       = 90 / yScale;
 
     _cameras[0] = std::make_shared<orthogonal_camera>(-gameWidth,  gameWidth, -gameHeight, gameHeight, -GAME_DEPTH, GAME_DEPTH);
     _cameras[0]->position(0.0, 0.0, 0.0);
+    _cameras[1] = std::make_shared<perspective_camera>(90 / yScale, xScale, 0.1, 10);
+    _cameras[1]->position(0.0, 0.0, 0.0);
 
     glMatrixMode(GL_VIEWPORT);
     glLoadIdentity();
@@ -164,6 +173,18 @@ void game_manager::keyboard(unsigned char key, int x, int y) {
 
 void game_manager::keyboardUp(unsigned char key, int x, int y) {
     (void)x, (void)y;
+
+    switch (key) {
+    case '1':
+    case '2':
+    case '3':
+        _current_camera = key - '1';
+        // HACK: We need to force reshape
+        glutReshapeWindow(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+        break;
+    default:
+        break;
+    }
 
     for (auto obj : _game_objects) {
         obj->keyup(key);
