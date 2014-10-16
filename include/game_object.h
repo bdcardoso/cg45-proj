@@ -2,6 +2,7 @@
 #include "entity.h"
 
 class game_object : public entity {
+protected:
     vector3 _scale;
 
 public:

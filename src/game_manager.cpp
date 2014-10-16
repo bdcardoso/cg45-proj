@@ -146,7 +146,7 @@ void game_manager::reshape(int w, int h) {
 
     _cameras[0] = std::make_shared<orthogonal_camera>(-gameWidth,  gameWidth, -gameHeight, gameHeight, -GAME_DEPTH, GAME_DEPTH);
     _cameras[0]->position(0.0, 0.0, 0.0);
-    _cameras[1] = std::make_shared<perspective_camera>(90 / yScale, xScale, 0.1, 10);
+    _cameras[1] = std::make_shared<perspective_camera>(60 / yScale, xScale, 0.1, 10);
     _cameras[1]->position(0.0, 0.0, 0.0);
 
     glMatrixMode(GL_VIEWPORT);
