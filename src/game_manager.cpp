@@ -3,6 +3,7 @@
 #include "car.h"
 #include "frog.h"
 #include "orthogonal_camera.h"
+#include "perspective_camera.h"
 #include "river.h"
 #include "road.h"
 #include "timberlog.h"
@@ -12,8 +13,11 @@ constexpr auto FROG_LEVEL =   0.40,
                ROAD_LEVEL =   0.39,
                RIVER_LEVEL =  0.41;
 
-game_manager::game_manager() : _spin(0.0), _tilt(0.0), _spin_speed(0.0), _tilt_speed(0.0), GAME_SIZE(2.5) {
-    _lastTime = glutGet(GLUT_ELAPSED_TIME);
+game_manager::game_manager(int w, int h) :
+        _spin(0.0), _tilt(0.0), _spin_speed(0.0), _tilt_speed(0.0),
+        _current_camera(0), WINDOW_WIDTH(w), WINDOW_HEIGHT(h), GAME_WIDTH(2.5), GAME_HEIGHT(2), GAME_DEPTH(5) {
+
+    _last_time = glutGet(GLUT_ELAPSED_TIME);
 
     auto _frog = std::make_shared<frog>();
     _frog->position(vector3( 0.0, 0.45, 2.0));
@@ -58,6 +62,10 @@ game_manager::game_manager() : _spin(0.0), _tilt(0.0), _spin_speed(0.0), _tilt_s
     _game_objects.push_back(_car1);
     _game_objects.push_back(_car2);
     _game_objects.push_back(_bus);
+
+    _cameras.push_back(std::make_shared<orthogonal_camera>(0,0,0,0,0,0));
+    _cameras.push_back(std::make_shared<perspective_camera>(0,0,0,0));
+    _cameras.push_back(std::make_shared<perspective_camera>(0,0,0,0));
 }
 
 void game_manager::timer() {
@@ -73,18 +81,18 @@ void game_manager::display() {
     glLineWidth(1.0);
     glColor3ub(255, 0, 0);
     glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(100, 0, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(100, 0, 0);
     glEnd();
     glColor3ub(0, 255, 0);
     glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 100, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 100, 0);
     glEnd();
     glColor3ub(0, 0, 255);
     glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 0, 100);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 0, 100);
     glEnd();
 
     for (auto obj : _game_objects) {
@@ -103,37 +111,34 @@ void game_manager::display() {
 
 void game_manager::update() {
     auto currentTime = glutGet(GLUT_ELAPSED_TIME);
-    auto dt = currentTime - _lastTime;
+    auto dt = (currentTime - _last_time) / glut_time_t(1000);
 
     for (auto obj : _game_objects) {
         obj->update(dt);
     }
 
-    _lastTime = currentTime;
-    _spin += _spin_speed / (1000.0 / dt);
-    _tilt += _tilt_speed / (1000.0 / dt);
+    _last_time = currentTime;
+    _spin += _spin_speed * dt;
+    _tilt += _tilt_speed * dt;
 
-    _camera->update(dt);
+    for (auto cam : _cameras) {
+        cam->update(dt);
+    }
 
     glutPostRedisplay();
 }
 
 void game_manager::reshape(int w, int h) {
-    // GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-    // GLfloat shininess[] = { 1.0 };
-    // GLfloat light_pos[]  = { 100.0, 100.0, 100.0, 0.0 };
-    // GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-
-    // TODO: extract
-    float ySize = h / float(w) * GAME_SIZE;
-    _camera = std::make_shared<orthogonal_camera>(-GAME_SIZE, GAME_SIZE, -ySize, ySize, -GAME_SIZE*5, GAME_SIZE*5);
-    _camera->position(0.0, 0.0, 0.0);
-
-
-    // glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-    // glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-    // glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
     glViewport(0, 0, w, h);
+
+    float xScale = float(w) / WINDOW_WIDTH,
+          yScale = float(h) / WINDOW_HEIGHT,
+          scale  = std::min(xScale, yScale),
+          gameWidth  = GAME_WIDTH  * xScale / scale,
+          gameHeight = GAME_HEIGHT * yScale / scale;
+
+    _cameras[0] = std::make_shared<orthogonal_camera>(-gameWidth,  gameWidth, -gameHeight, gameHeight, -GAME_DEPTH, GAME_DEPTH);
+    _cameras[0]->position(0.0, 0.0, 0.0);
 
     glMatrixMode(GL_VIEWPORT);
     glLoadIdentity();
@@ -141,13 +146,12 @@ void game_manager::reshape(int w, int h) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    _camera->compute_projection_matrix();
+    _cameras[_current_camera]->compute_projection_matrix();
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
-    _camera->compute_visualization_matrix();
+    _cameras[_current_camera]->compute_visualization_matrix();
 }
 
 void game_manager::keyboard(unsigned char key, int x, int y) {

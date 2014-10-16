@@ -6,7 +6,7 @@ dynamic_object::dynamic_object() {}
 
 // By default we just advance the position
 void dynamic_object::update(glut_time_t dt) {
-    _position += _speed * (dt / 1000.0);
+    _position += _speed * dt;
 }
 
 vector3 dynamic_object::speed() const {

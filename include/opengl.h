@@ -11,5 +11,5 @@
 #include <GL/glut.h>
 #endif
 
-typedef decltype(glutGet(GLUT_ELAPSED_TIME)) glut_time_t;
+typedef GLdouble glut_time_t;
 

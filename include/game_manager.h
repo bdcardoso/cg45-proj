@@ -9,14 +9,15 @@ class game_manager {
 private:
     std::vector<std::shared_ptr<game_object>> _game_objects;
     std::vector<std::shared_ptr<light_source>> _light_sources;
-    std::shared_ptr<camera> _camera;
-    glut_time_t _lastTime;
+    std::vector<std::shared_ptr<camera>> _cameras;
+    glut_time_t _last_time;
     GLdouble _spin, _tilt, _spin_speed, _tilt_speed;
+    unsigned _current_camera;
 
-    GLdouble GAME_SIZE;
+    GLdouble WINDOW_WIDTH, WINDOW_HEIGHT, GAME_WIDTH, GAME_HEIGHT, GAME_DEPTH;
 
 public:
-    game_manager();
+    game_manager(int w, int h);
 
     void display();
     void reshape(int w, int h);

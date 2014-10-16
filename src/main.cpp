@@ -2,16 +2,12 @@
 #include "opengl.h"
 
 game_manager *manager = nullptr;
-constexpr int FPS = 60;
+constexpr int FPS = 60,
+              GAME_WIDTH  = 500,
+              GAME_HEIGHT = 400;
 
 void init(void) {
-    // glEnable(GL_LIGHTING);
-    // glEnable(GL_LIGHT0);
-    // glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_DEPTH_TEST);
-
-    // glShadeModel(GL_SMOOTH);
-    // glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 void display() {
@@ -56,12 +52,12 @@ int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowPosition(-1, -1);
-    glutInitWindowSize(640, 640);
+    glutInitWindowSize(GAME_WIDTH, GAME_HEIGHT);
     glutCreateWindow("Projeto CGra45 grupo 42");
 
     init();
 
-    manager = new game_manager;
+    manager = new game_manager(GAME_WIDTH, GAME_HEIGHT);
 
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
