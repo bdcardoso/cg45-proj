@@ -8,6 +8,7 @@
 #include "road.h"
 #include "timberlog.h"
 #include "turtle.h"
+#include "truck.h"
 
 constexpr auto FROG_LEVEL =   0.40,
                ROAD_LEVEL =   0.39,
@@ -27,7 +28,7 @@ game_manager::game_manager(int w, int h) :
     _car1->position(vector3(-1.2, ROAD_LEVEL,  1.0));
     _car1->scale(0.1);
 
-    auto _car2 = std::make_shared<car>();
+    auto _truck = std::make_shared<truck>();
     _car2->position(vector3( 1.3, ROAD_LEVEL,  0.5));
     _car2->scale(0.1);
 
