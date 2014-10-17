@@ -5,5 +5,6 @@ class timberlog : public dynamic_object{
 
 public:
     void draw() override;
+	void move();
 
 };

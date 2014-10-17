@@ -26,3 +26,11 @@ void timberlog::draw() {
     glPopMatrix();
 
 }
+
+void timberlog::move() {
+        speed(speed() - vector3(4, 0, 0));
+    }
+
+void frog::update(glut_time_t dt) {
+    dynamic_object::update(dt);
+}
