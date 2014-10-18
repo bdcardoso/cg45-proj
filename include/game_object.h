@@ -8,7 +8,7 @@ protected:
 public:
     game_object();
 
-    const vector3 &scale() const;
+    vector3 &scale();
     void scale(const vector3 &s);
     void scale(GLdouble factor);
 

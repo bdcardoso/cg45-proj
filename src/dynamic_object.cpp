@@ -9,7 +9,7 @@ void dynamic_object::update(glut_time_t dt) {
     _position += _speed * dt;
 }
 
-vector3 dynamic_object::speed() const {
+vector3 dynamic_object::speed() {
     return _speed;
 }
 

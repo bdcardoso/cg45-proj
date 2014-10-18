@@ -10,8 +10,7 @@ public:
 
     void update(glut_time_t dt);
 
-    vector3 speed() const;
+    vector3 speed();
     void speed(const vector3 &speed);
     void speed(GLdouble x, GLdouble y, GLdouble z);
-
 };

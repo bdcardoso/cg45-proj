@@ -4,7 +4,7 @@ entity::entity() {
 
 }
 
-vector3 entity::position() const {
+vector3 entity::position() {
     return _position;
 }
 

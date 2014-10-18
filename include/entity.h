@@ -9,7 +9,7 @@ protected:
 public:
     entity();
 
-    vector3 position() const;
+    vector3 position();
     void position(GLdouble x, GLdouble y, GLdouble z);
     void position(const vector3 &p);
 };

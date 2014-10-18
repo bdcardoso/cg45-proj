@@ -2,7 +2,7 @@
 
 game_object::game_object() : _scale(1.0, 1.0, 1.0) {}
 
-const vector3 &game_object::scale() const {
+vector3 &game_object::scale() {
     return _scale;
 }
 
