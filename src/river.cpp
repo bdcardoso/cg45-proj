@@ -6,9 +6,11 @@ constexpr auto RIVER_LENGTH = 5.0,
                RIVER_HEIGHT = 1.0,
                RIVER_BOTTOM = 0.1,
                RIVER_MARGIN = 0.2,
-               WATER_DEPTH  = 0.8,
+               WATER_DEPTH  = 0.8;
+
                // ----
-               BOTTOM_RAISE = -RIVER_HEIGHT / 2,
+               
+constexpr auto BOTTOM_RAISE = -RIVER_HEIGHT / 2,
                MARGIN_DELTA = (RIVER_WIDTH - RIVER_MARGIN) / 2,
                MARGIN_HEIGHT = RIVER_HEIGHT - RIVER_BOTTOM,
                WATER_RAISE = -(MARGIN_HEIGHT - WATER_DEPTH) / 2,
@@ -54,6 +56,7 @@ void river::draw() {
         glScalef(RIVER_LENGTH, WATER_DEPTH, WATER_WIDTH);
         glutSolidCube(1.0);
     glPopMatrix();
+    
 }
 
 void river::update(glut_time_t dt) {

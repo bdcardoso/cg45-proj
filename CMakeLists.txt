@@ -5,7 +5,7 @@ include_directories(include)
 
 find_package(Threads REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
+#find_package(GLUT REQUIRED)
 
 set(HEADER_FILES
   include/bus.h
@@ -26,7 +26,8 @@ set(HEADER_FILES
   include/timberlog.h
   include/turtle.h
   include/vector3.h
-  include/vector4.h)
+  include/vector4.h
+  include/tunnel.h)
 
 set(SOURCE_FILES
   src/bus.cpp
@@ -49,9 +50,10 @@ set(SOURCE_FILES
   src/truck.cpp
   src/turtle.cpp
   src/vector3.cpp
-  src/vector4.cpp)
+  src/vector4.cpp
+  src/tunnel.cpp)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pedantic -lglut -lGL -lGLU")
 
 add_executable(cg45-proj ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(cg45-proj ${CMAKE_THREAD_LIBS_INIT} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

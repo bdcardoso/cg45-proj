@@ -9,6 +9,7 @@
 #include "timberlog.h"
 #include "turtle.h"
 #include "truck.h"
+#include "tunnel.h"
 
 constexpr auto FROG_LEVEL =   0.05,
                ROAD_LEVEL =   0.05,
@@ -58,12 +59,16 @@ game_manager::game_manager(int w, int h) :
 
     auto _river = std::make_shared<river>();
     _river->position(vector3(0.0, 0.0, -1.0));
+    
+    auto _tunnel = std::make_shared<tunnel>();
+    _tunnel->position(vector3(0.0, 0.0, -1.0));
 
     auto _road = std::make_shared<road>();
     _road->position(vector3( 0.0, 0.0,  1.0));
 
     _game_objects.push_back(_frog);
     _game_objects.push_back(_river);
+    _game_objects.push_back(_tunnel);
     _game_objects.push_back(_log1);
     _game_objects.push_back(_log2);
     _game_objects.push_back(_turtle);
