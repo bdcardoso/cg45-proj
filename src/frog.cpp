@@ -39,26 +39,29 @@ void frog::draw() {
 void frog::update(glut_time_t dt) {
     dynamic_object::update(dt);
     
-    if(position().x() < -2.4){
-		auto newPos = position();
-		newPos.x(-2.4);
-		position(newPos);
-		}
-    if(position().x() > 2.4){
-		auto newPos = position();
-		newPos.x(2.4);
-		position(newPos);
-		}
-    if(position().z() < -1.9){
-		auto newPos = position();
-		newPos.z(-1.9);
-		position(newPos);
-		}
-    if(position().z() > 1.9){
-		auto newPos = position();
-		newPos.z(1.9);
-		position(newPos);
-		}
+    if (position().x() < -2.4) {
+	auto newPos = position();
+	newPos.x(-2.4);
+	position(newPos);
+    }
+
+    if (position().x() > 2.4) {
+	auto newPos = position();
+	newPos.x(2.4);
+	position(newPos);
+    }
+
+    if (position().z() < -1.9) {
+	auto newPos = position();
+	newPos.z(-1.9);
+	position(newPos);
+    }
+
+    if (position().z() > 1.9) {
+	auto newPos = position();
+	newPos.z(1.9);
+	position(newPos);
+    }
 }
 
 void frog::keydown(unsigned char key) {

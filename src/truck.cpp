@@ -64,7 +64,6 @@ constexpr auto BODY_SIZE_X =          2.0f,
 
 
 void truck::draw() {
-
     glColor3ub(BACK_COLOR_RED, BACK_COLOR_GREEN, BACK_COLOR_BLUE);
    
     //Back
@@ -75,7 +74,7 @@ void truck::draw() {
     glPopMatrix();
     
     //body
-	glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
+    glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
 	
     glPushMatrix();    
         glTranslatef(BODY_COORD_X, BODY_COORD_Y, BODY_COORD_Z);
@@ -92,7 +91,7 @@ void truck::draw() {
         glutSolidCube(1);
     glPopMatrix();
 
-	glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
+    glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
 
     //Front-Left Wheel
     glPushMatrix();    
@@ -134,11 +133,10 @@ void truck::draw() {
 void truck::update(glut_time_t dt) {
     dynamic_object::update(dt);
            
-    if(position().x() > 2.75){
-		auto newPos = position();
-		newPos.x(-2.90);
-		position(newPos);
-	 }
-	 
+    if (position().x() > 2.75) {
+	auto newPos = position();
+	newPos.x(-2.90);
+	position(newPos);
+    }
 }
 

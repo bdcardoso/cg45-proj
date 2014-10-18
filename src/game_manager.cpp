@@ -51,11 +51,72 @@ game_manager::game_manager(int w, int h) :
     _log2->position(vector3(-0.0, RIVER_LEVEL, -0.5));
     _log2->scale(0.1);
     _log2->speed(4, 0, 0);    
+    
+    auto _log3 = std::make_shared<timberlog>();
+    _log3->position(vector3(-0.8, RIVER_LEVEL, -0.5));
+    _log3->scale(0.1);
+    _log3->speed(1, 0, 0); 
 
-    auto _turtle = std::make_shared<turtle>();
-    _turtle->position(vector3( 2.0, RIVER_LEVEL+0.05, -1.5));
-    _turtle->scale(0.1);
-    _turtle->speed(1, 0, 0);    
+    auto _turtle1 = std::make_shared<turtle>();
+    _turtle1->position(vector3( -1.9, RIVER_LEVEL+0.05, -1.5));
+    _turtle1->scale(0.1);
+    _turtle1->speed(1, 0, 0);    
+    
+    auto _turtle2 = std::make_shared<turtle>();
+    _turtle2->position(vector3( -1.6, RIVER_LEVEL+0.05, -1.5));
+    _turtle2->scale(0.1);
+    _turtle2->speed(1, 0, 0); 
+    
+    auto _turtle3 = std::make_shared<turtle>();
+    _turtle3->position(vector3( -1.3, RIVER_LEVEL+0.05, -1.5));
+    _turtle3->scale(0.1);
+    _turtle3->speed(1, 0, 0); 
+    
+    auto _turtle4 = std::make_shared<turtle>();
+    _turtle4->position(vector3( -1, RIVER_LEVEL+0.05, -1.5));
+    _turtle4->scale(0.1);
+    _turtle4->speed(1, 0, 0); 
+    
+    auto _turtle5 = std::make_shared<turtle>();
+    _turtle5->position(vector3( -0.7, RIVER_LEVEL+0.05, -1.5));
+    _turtle5->scale(0.1);
+    _turtle5->speed(1, 0, 0); 
+    
+    auto _turtle6 = std::make_shared<turtle>();
+    _turtle6->position(vector3( 0.4, RIVER_LEVEL+0.05, -1.5));
+    _turtle6->scale(0.1);
+    _turtle6->speed(1, 0, 0); 
+    
+    auto _turtle7 = std::make_shared<turtle>();
+    _turtle7->position(vector3( 0.0, RIVER_LEVEL+0.05, -1.5));
+    _turtle7->scale(0.1);
+    _turtle7->speed(1, 0, 0);    
+    
+    auto _turtle8 = std::make_shared<turtle>();
+    _turtle8->position(vector3( -0.4, RIVER_LEVEL+0.05, -1.5));
+    _turtle8->scale(0.1);
+    _turtle8->speed(1, 0, 0); 
+    
+    auto _turtle9 = std::make_shared<turtle>();
+    _turtle9->position(vector3( -0.8, RIVER_LEVEL+0.05, -1.5));
+    _turtle9->scale(0.1);
+    _turtle9->speed(1, 0, 0); 
+    
+    auto _turtle10 = std::make_shared<turtle>();
+    _turtle10->position(vector3( -1.2, RIVER_LEVEL+0.05, -1.5));
+    _turtle10->scale(0.1);
+    _turtle10->speed(1, 0, 0); 
+    
+    auto _turtle11 = std::make_shared<turtle>();
+    _turtle11->position(vector3( -1.55, RIVER_LEVEL+0.05, -1.5));
+    _turtle11->scale(0.1);
+    _turtle11->speed(1, 0, 0); 
+    
+    auto _turtle12 = std::make_shared<turtle>();
+    _turtle12->position(vector3( -1.95, RIVER_LEVEL+0.05, -1.5));
+    _turtle12->scale(0.1);
+    _turtle12->speed(1, 0, 0); 
+    
 
     auto _river = std::make_shared<river>();
     _river->position(vector3(0.0, 0.0, -1.0));
@@ -71,7 +132,20 @@ game_manager::game_manager(int w, int h) :
     _game_objects.push_back(_tunnel);
     _game_objects.push_back(_log1);
     _game_objects.push_back(_log2);
-    _game_objects.push_back(_turtle);
+    _game_objects.push_back(_log3);
+    _game_objects.push_back(_turtle1);
+    _game_objects.push_back(_turtle2);
+    _game_objects.push_back(_turtle3);
+    _game_objects.push_back(_turtle4);
+    _game_objects.push_back(_turtle5);
+    _game_objects.push_back(_turtle6);
+    _game_objects.push_back(_turtle7);
+    _game_objects.push_back(_turtle8);
+    _game_objects.push_back(_turtle9);
+    _game_objects.push_back(_turtle10);
+    _game_objects.push_back(_turtle11);
+    _game_objects.push_back(_turtle11);
+
     _game_objects.push_back(_road);
     _game_objects.push_back(_car1);
     _game_objects.push_back(_truck);
@@ -143,8 +217,8 @@ void game_manager::update() {
     for (auto cam : _cameras) {
         cam->update(dt);
     }
-	 
-	glutPostRedisplay();
+
+    glutPostRedisplay();
 }
 
 void game_manager::reshape(int w, int h) {
@@ -162,7 +236,7 @@ void game_manager::reshape(int w, int h) {
 
     _cameras[0] = std::make_shared<orthogonal_camera>(-gameWidth,  gameWidth, -gameHeight, gameHeight, -GAME_DEPTH, GAME_DEPTH);
     _cameras[0]->position(0.0, 0.0, 0.0);
-    _cameras[1] = std::make_shared<perspective_camera>(60 / yScale, xScale, 0.1, 10);
+    _cameras[1] = std::make_shared<perspective_camera>(fovy, xScale, 0.1, 10);
     _cameras[1]->position(0.0, 0.0, 0.0);
 
     glMatrixMode(GL_VIEWPORT);
