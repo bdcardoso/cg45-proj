@@ -23,7 +23,8 @@ void timberlog::draw() {
         glRotatef(90, 0.0, 1.0, 0.0);
         glScalef(3.0, 1.0, 1.0);
         gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, HEIGHT, SLICES, STACKS);
-    glPopMatrix();
+
+	glPopMatrix();
 
 }
 
