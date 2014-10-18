@@ -24,29 +24,37 @@ game_manager::game_manager(int w, int h) :
     _frog->position(vector3( 0.0, FROG_LEVEL, 1.95));
     _frog->scale(0.1);
 
+
     auto _car1 = std::make_shared<car>();
     _car1->position(vector3(-1.2, ROAD_LEVEL,  1.0));
     _car1->scale(0.1);
+    _car1->speed(1.5, 0, 0);
 
     auto _truck = std::make_shared<truck>();
     _truck->position(vector3( 1.3, ROAD_LEVEL,  0.5));
     _truck->scale(0.1);
+    _truck->speed(2, 0, 0);
+
 
     auto _bus = std::make_shared<bus>();
     _bus->position(vector3( 0.9, ROAD_LEVEL,  1.5));
     _bus->scale(0.1);
+    _bus->speed(1, 0, 0);
 
     auto _log1 = std::make_shared<timberlog>();
     _log1->position(vector3(-0.6, RIVER_LEVEL, -1.0));
     _log1->scale(0.1);
+    _log1->speed(5.5, 0, 0);    
 
     auto _log2 = std::make_shared<timberlog>();
     _log2->position(vector3(-0.0, RIVER_LEVEL, -0.5));
     _log2->scale(0.1);
+    _log2->speed(4, 0, 0);    
 
     auto _turtle = std::make_shared<turtle>();
     _turtle->position(vector3( 2.0, RIVER_LEVEL+0.05, -1.5));
     _turtle->scale(0.1);
+    _turtle->speed(1, 0, 0);    
 
     auto _river = std::make_shared<river>();
     _river->position(vector3(0.0, 0.0, -1.0));
@@ -112,6 +120,7 @@ void game_manager::display() {
     }
 
     glPopMatrix();
+
 }
 
 void game_manager::update() {
@@ -129,8 +138,8 @@ void game_manager::update() {
     for (auto cam : _cameras) {
         cam->update(dt);
     }
-
-    glutPostRedisplay();
+	 
+	glutPostRedisplay();
 }
 
 void game_manager::reshape(int w, int h) {

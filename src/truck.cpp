@@ -132,6 +132,11 @@ void truck::draw() {
 }
 
 void truck::update(glut_time_t dt) {
-    (void)dt;
+    dynamic_object::update(dt);
+           
+    if(position().x() > 2.75){
+		 position(vector3( -2.90, 0.05,  0.5));
+	 }
+	 
 }
 
