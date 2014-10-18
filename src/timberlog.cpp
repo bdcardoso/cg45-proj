@@ -27,10 +27,7 @@ void timberlog::draw() {
 
 }
 
-void timberlog::move() {
-        speed(speed() - vector3(4, 0, 0));
-    }
-
-void frog::update(glut_time_t dt) {
+void timberlog::update(glut_time_t dt) {
     dynamic_object::update(dt);
 }
+

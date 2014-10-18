@@ -29,8 +29,8 @@ game_manager::game_manager(int w, int h) :
     _car1->scale(0.1);
 
     auto _truck = std::make_shared<truck>();
-    _car2->position(vector3( 1.3, ROAD_LEVEL,  0.5));
-    _car2->scale(0.1);
+    _truck->position(vector3( 1.3, ROAD_LEVEL,  0.5));
+    _truck->scale(0.1);
 
     auto _bus = std::make_shared<bus>();
     _bus->position(vector3( 0.9, ROAD_LEVEL,  1.5));
@@ -61,9 +61,10 @@ game_manager::game_manager(int w, int h) :
     _game_objects.push_back(_turtle);
     _game_objects.push_back(_road);
     _game_objects.push_back(_car1);
-    _game_objects.push_back(_car2);
+    _game_objects.push_back(_truck);
     _game_objects.push_back(_bus);
 
+    // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
     _cameras.push_back(std::make_shared<orthogonal_camera>(0,0,0,0,0,0));
     // Camera 1: top view perspective camera

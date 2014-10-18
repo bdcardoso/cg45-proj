@@ -46,6 +46,7 @@ set(SOURCE_FILES
   src/road.cpp
   src/static_object.cpp
   src/timberlog.cpp
+  src/truck.cpp
   src/turtle.cpp
   src/vector3.cpp
   src/vector4.cpp)

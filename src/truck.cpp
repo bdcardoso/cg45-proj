@@ -1,4 +1,4 @@
-#include "bus.h"
+#include "truck.h"
 
 constexpr auto BODY_COLOR_RED =             255,
                BODY_COLOR_GREEN =           50,

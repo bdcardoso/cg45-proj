@@ -10,9 +10,10 @@ void perspective_camera::compute_projection_matrix() {
 
 void perspective_camera::compute_visualization_matrix() {
     vector3 eye(0.0, 3.0, 2.0);
+    vector3  at(0.0, 0.0, 0.0);
 
     gluLookAt(eye.x(), eye.y(), eye.z(),
-              _at.x(), _at.y(), _at.z(),
+               at.x(),  at.y(),  at.z(),
                   0.0,     1.0,     0.0);
 }
 
