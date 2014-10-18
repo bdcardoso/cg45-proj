@@ -10,9 +10,9 @@
 #include "turtle.h"
 #include "truck.h"
 
-constexpr auto FROG_LEVEL =   0.40,
-               ROAD_LEVEL =   0.39,
-               RIVER_LEVEL =  0.41;
+constexpr auto FROG_LEVEL =   0.05,
+               ROAD_LEVEL =   0.05,
+               RIVER_LEVEL =  0.05;
 
 game_manager::game_manager(int w, int h) :
         _spin(0.0), _tilt(0.0), _spin_speed(0.0), _tilt_speed(0.0),
@@ -21,7 +21,7 @@ game_manager::game_manager(int w, int h) :
     _last_time = glutGet(GLUT_ELAPSED_TIME);
 
     auto _frog = std::make_shared<frog>();
-    _frog->position(vector3( 0.0, 0.45, 1.95));
+    _frog->position(vector3( 0.0, FROG_LEVEL, 1.95));
     _frog->scale(0.1);
 
     auto _car1 = std::make_shared<car>();
@@ -45,7 +45,7 @@ game_manager::game_manager(int w, int h) :
     _log2->scale(0.1);
 
     auto _turtle = std::make_shared<turtle>();
-    _turtle->position(vector3( 2.0, RIVER_LEVEL, -1.5));
+    _turtle->position(vector3( 2.0, RIVER_LEVEL+0.05, -1.5));
     _turtle->scale(0.1);
 
     auto _river = std::make_shared<river>();
