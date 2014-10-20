@@ -34,7 +34,8 @@ void tunnel::draw() {
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
     
-
+	
+	//Reusable for the car destroyer
 	glBegin(GL_POLYGON);
     glColor3f(0.0, 0.0,  0.0 );        
     glVertex3f(2.5, 5.0, 4.0);      
@@ -43,6 +44,7 @@ void tunnel::draw() {
     glVertex3f(2.5, -5.0, 4.0);
 	glEnd();
 	
+	//Reusable for the car destroyer
 	glBegin(GL_POLYGON);
     glColor3f(0.0, 0.0,  0.0 );        
     glVertex3f(-2.5, 5.0, 4.0);      
@@ -50,5 +52,44 @@ void tunnel::draw() {
     glVertex3f(-2.5, -5.0, -4.0);      
     glVertex3f(-2.5, -5.0, 4.0);
 	glEnd();
+	
+	//Ground Wall
+    /* glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0,  0.0 );        
+    glVertex3f(-10.0, 0.0, 10.0);      
+    glVertex3f(-10.0, 0.0, -10.0);      
+    glVertex3f(10.0, 0.0, -10.0);      
+    glVertex3f(10.0, 0.0, 10.0);
+	glEnd(); */
 
+	//Covering bottom wall
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0,  0.0 );   
+    glVertex3f(-10.0, -10.0, 3.1);      
+    glVertex3f(10.0, -10.0, 3.1);     
+    glVertex3f(10.0, 0.0, 3.1);      
+    glVertex3f(-10, 0.0, 3.1);      
+	glEnd();
+	
+	//COVERING-LEFT-WALL
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0,  0.0 );  
+     
+    glVertex3f(-10.0, 10.0, 3.1);      
+    glVertex3f(-2.5, 10.0, 3.1);     
+    glVertex3f(-2.5, 0.0, 3.1);      
+    glVertex3f(-10, 0.0, 3.1);      
+	glEnd();
+	
+	//COVERING-RIGHT-WALL
+    glBegin(GL_POLYGON);
+    glColor3f(0.0,0.0, 0.0 ); 
+      
+    glVertex3f(10.0, 10.0, 3.1);      
+    glVertex3f(2.5, 10.0, 3.1);     
+    glVertex3f(2.5, 0.0, 3.1);      
+    glVertex3f(10, 0.0, 3.1);      
+	glEnd();
 }
+
+
