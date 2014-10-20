@@ -4,7 +4,6 @@
 #include "vector3.h"
 #include "vector4.h"
 
-
 class light_source {
     vector4 _ambient, _diffuse, _specular, _position;
     vector3 _direction;
@@ -37,4 +36,3 @@ public:
 
     void draw();
 };
-

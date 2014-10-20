@@ -38,4 +38,3 @@ public:
 
     vector4 operator*(GLdouble scalar) const;
 };
-

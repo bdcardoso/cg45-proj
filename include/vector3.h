@@ -27,9 +27,7 @@ public:
     vector3 operator*(scalar_t scalar) const;
 
     scalar_t dot(const vector3 &rhs) const {
-        return x() * rhs.x() +
-               y() * rhs.y() +
-               z() * rhs.z();
+        return x() * rhs.x() + y() * rhs.y() + z() * rhs.z();
     }
 
     vector3 ext(const vector3 &rhs) const {
@@ -38,4 +36,3 @@ public:
                        x() * rhs.y() - y() * rhs.x());
     }
 };
-

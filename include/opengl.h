@@ -12,4 +12,3 @@
 #endif
 
 typedef GLdouble glut_time_t;
-

@@ -3,9 +3,5 @@
 
 class tunnel : public static_object {
 public:
-
     void draw();
-
 };
-
-

@@ -2,29 +2,23 @@
 #include "opengl.h"
 
 game_manager *manager = nullptr;
-constexpr int FPS = 60,
-              GAME_WIDTH  = 500,
-              GAME_HEIGHT = 400;
+constexpr int FPS = 60, GAME_WIDTH = 500, GAME_HEIGHT = 400;
 
-void init(void) {
-    glEnable(GL_DEPTH_TEST);
-}
+void init(void) { glEnable(GL_DEPTH_TEST); }
 
 void display() {
     glClearColor(0.f, 0.f, 0.f, 0.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
-        manager->display();
+    manager->display();
     glPopMatrix();
 
     glFlush();
     glutSwapBuffers();
 }
 
-void reshape(int w, int h) {
-    manager->reshape(w, h);
-}
+void reshape(int w, int h) { manager->reshape(w, h); }
 
 void timer(int value) {
     manager->timer();
@@ -32,21 +26,15 @@ void timer(int value) {
     glutTimerFunc(1000 / FPS, timer, 0);
 }
 
-void keyboard(unsigned char key, int x, int y) {
-    manager->keyboard(key, x, y);
-}
+void keyboard(unsigned char key, int x, int y) { manager->keyboard(key, x, y); }
 
 void keyboardUp(unsigned char key, int x, int y) {
     manager->keyboardUp(key, x, y);
 }
 
-void special(int key, int x, int y) {
-    manager->special(key, x, y);
-}
+void special(int key, int x, int y) { manager->special(key, x, y); }
 
-void specialUp(int key, int x, int y) {
-    manager->specialUp(key, x, y);
-}
+void specialUp(int key, int x, int y) { manager->specialUp(key, x, y); }
 
 int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
@@ -74,4 +62,3 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
-

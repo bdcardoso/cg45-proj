@@ -5,19 +5,12 @@
 dynamic_object::dynamic_object() {}
 
 // By default we just advance the position
-void dynamic_object::update(glut_time_t dt) {
-    _position += _speed * dt;
-}
+void dynamic_object::update(glut_time_t dt) { _position += _speed * dt; }
 
-vector3 dynamic_object::speed() {
-    return _speed;
-}
+vector3 dynamic_object::speed() { return _speed; }
 
 void dynamic_object::speed(GLdouble x, GLdouble y, GLdouble z) {
     _speed.set(x, y, z);
 }
 
-void dynamic_object::speed(const vector3 &s) {
-    _speed = s;
-}
-
+void dynamic_object::speed(const vector3 &s) { _speed = s; }

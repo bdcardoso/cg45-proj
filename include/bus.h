@@ -6,4 +6,3 @@ public:
     void draw() override;
     void update(glut_time_t dt) override;
 };
-
