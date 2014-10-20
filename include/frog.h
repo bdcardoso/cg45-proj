@@ -4,7 +4,7 @@
 #include <memory>
 
 class frog : public dynamic_object {
-    static constexpr GLdouble SPEED_X = 3.0, SPEED_Z = 3.0;
+    static constexpr GLdouble SPEED_X = 1.0, SPEED_Z = 1.0;
 
     // The frog's legs
     class leg : public dynamic_object {
