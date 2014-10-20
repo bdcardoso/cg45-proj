@@ -1,5 +1,13 @@
 #include "frog.h"
-#include <cassert>
+#include "perspective_camera.h"
+
+frog::frog() {
+    _camera = std::make_shared<perspective_camera>();
+}
+
+std::shared_ptr<camera> frog::cam() {
+    return _camera;
+}
 
 void frog::draw() {
     glPushMatrix();
@@ -37,6 +45,7 @@ void frog::draw() {
 }
 
 void frog::update(glut_time_t dt) {
+    auto oldPos = position();
     dynamic_object::update(dt);
 
     if (position().x() < -2.4) {
@@ -62,6 +71,9 @@ void frog::update(glut_time_t dt) {
         newPos.z(1.9);
         position(newPos);
     }
+
+    // Update camera position
+    _camera->position(_camera->position() + (position() - oldPos));
 }
 
 void frog::keydown(unsigned char key) {

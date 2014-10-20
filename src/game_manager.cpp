@@ -10,6 +10,7 @@
 #include "turtle.h"
 #include "truck.h"
 #include "tunnel.h"
+#include <cassert>
 
 constexpr auto FROG_LEVEL = 0.05, ROAD_LEVEL = 0.05, RIVER_LEVEL = 0.05;
 
@@ -24,6 +25,13 @@ game_manager::game_manager(int w, int h)
           GAME_WIDTH(2.5),
           GAME_HEIGHT(2),
           GAME_DEPTH(5) {
+
+    if (_instance != nullptr) {
+        delete _instance;
+        _instance = nullptr;
+    }
+
+    _instance = this;
 
     _last_time = glutGet(GLUT_ELAPSED_TIME);
 
@@ -131,6 +139,7 @@ game_manager::game_manager(int w, int h)
     _road->position(vector3(0.0, 0.0, 1.0));
 
     _game_objects.push_back(_frog);
+
     _game_objects.push_back(_river);
     _game_objects.push_back(_tunnel);
     _game_objects.push_back(_log1);
@@ -160,7 +169,7 @@ game_manager::game_manager(int w, int h)
     // Camera 1: top view perspective camera
     _cameras.push_back(std::make_shared<perspective_camera>(0, 0, 0, 0));
     // Camera 2: frog perspective camera
-    _cameras.push_back(std::make_shared<perspective_camera>(0, 0, 0, 0));
+    _cameras.push_back(_frog->cam());
 }
 
 void game_manager::timer() { update(); }
@@ -224,6 +233,10 @@ void game_manager::update() {
 void game_manager::reshape(int w, int h) {
     glViewport(0, 0, w, h);
 
+    for (auto cam : _cameras) {
+        cam->reshape(w, h);
+    }
+
     float xScale = float(w) / WINDOW_WIDTH, yScale = float(h) / WINDOW_HEIGHT,
           scale = std::min(xScale, yScale);
 
@@ -235,9 +248,8 @@ void game_manager::reshape(int w, int h) {
     _cameras[0] = std::make_shared<orthogonal_camera>(-gameWidth, gameWidth,
                                                       -gameHeight, gameHeight,
                                                       -GAME_DEPTH, GAME_DEPTH);
-    _cameras[0]->position(0.0, 0.0, 0.0);
     _cameras[1] = std::make_shared<perspective_camera>(fovy, xScale, 0.1, 10);
-    _cameras[1]->position(0.0, 0.0, 0.0);
+
 
     glMatrixMode(GL_VIEWPORT);
     glLoadIdentity();
@@ -336,3 +348,26 @@ void game_manager::specialUp(int key, int x, int y) {
         obj->specialup(key);
     }
 }
+
+game_manager *game_manager::instance() {
+    return game_manager::_instance;
+}
+
+GLdouble game_manager::game_width() const {
+    return GAME_WIDTH;
+}
+GLdouble game_manager::game_height() const {
+    return GAME_HEIGHT;
+}
+GLdouble game_manager::game_depth() const {
+    return GAME_DEPTH;
+}
+GLdouble game_manager::window_width() const {
+    return WINDOW_WIDTH;
+}
+GLdouble game_manager::window_height() const {
+    return WINDOW_HEIGHT;
+}
+
+game_manager *game_manager::_instance = nullptr;
+

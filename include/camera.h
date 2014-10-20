@@ -9,6 +9,7 @@ protected:
     camera(GLdouble near = 0.0, GLdouble far = 1.0);
 
 public:
+    virtual void reshape(int w, int h) = 0;
     virtual void compute_projection_matrix() = 0;
     virtual void compute_visualization_matrix() = 0;
 };

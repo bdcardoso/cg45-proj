@@ -4,6 +4,10 @@ perspective_camera::perspective_camera(GLdouble fovy, GLdouble aspect,
                                        GLdouble near, GLdouble far)
         : _fovy(fovy), _aspect(aspect), camera::camera(near, far) {}
 
+void perspective_camera::reshape(int w, int h) {
+
+}
+
 void perspective_camera::compute_projection_matrix() {
     gluPerspective(_fovy, _aspect, _near, _far);
 }

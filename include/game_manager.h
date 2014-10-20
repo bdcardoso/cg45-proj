@@ -16,6 +16,8 @@ private:
 
     GLdouble WINDOW_WIDTH, WINDOW_HEIGHT, GAME_WIDTH, GAME_HEIGHT, GAME_DEPTH;
 
+    static game_manager *_instance;
+
 public:
     game_manager(int w, int h);
 
@@ -29,4 +31,14 @@ public:
     void idle();
     void update();
     void init();
+
+    // Singleton
+    static game_manager *instance();
+
+    // CONSTANTS
+    GLdouble window_width() const;
+    GLdouble window_height() const;
+    GLdouble game_width() const;
+    GLdouble game_height() const;
+    GLdouble game_depth() const;
 };
