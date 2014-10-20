@@ -48,15 +48,15 @@ void frog::update(glut_time_t dt) {
     auto oldPos = position();
     dynamic_object::update(dt);
 
-    if (position().x() < -2.4) {
+    if (position().x() < -1.85) {
         auto newPos = position();
-        newPos.x(-2.4);
+        newPos.x(-1.85);
         position(newPos);
     }
 
-    if (position().x() > 2.4) {
+    if (position().x() > 1.85) {
         auto newPos = position();
-        newPos.x(2.4);
+        newPos.x(1.85);
         position(newPos);
     }
 

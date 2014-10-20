@@ -3,7 +3,7 @@
 
 constexpr auto SLICES = 20.0, STACKS = 20.0;
 
-constexpr auto RADIUS_0 = 1.0, RADIUS_Z = 1.0, COORD_X = 2.3, COORD_XNEG = -3.3,
+constexpr auto RADIUS_0 = 1.0, RADIUS_Z = 1.0, COORD_X = 2.0, COORD_XNEG = -3.0,
                COORD_Y = -0.2, COORD_Z = 0.0;
 
 void tunnel::draw() {
