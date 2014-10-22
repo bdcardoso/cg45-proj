@@ -31,8 +31,3 @@ void orthogonal_camera::reshape(int w, int h) {
 void orthogonal_camera::compute_projection_matrix() {
     glOrtho(left_, right_, bottom_, top_, near_, far_);
 }
-
-void orthogonal_camera::compute_visualization_matrix() {
-    gluLookAt(position().x(), position().y(), position().z(), 0.0, -1.0, 0.0,
-              0.0, 0.0, -1.0);
-}

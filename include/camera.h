@@ -20,5 +20,5 @@ public:
 
     virtual void reshape(int w, int h) = 0;
     virtual void compute_projection_matrix() = 0;
-    virtual void compute_visualization_matrix() = 0;
+    virtual void compute_visualization_matrix();
 };

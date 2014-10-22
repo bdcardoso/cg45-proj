@@ -142,10 +142,17 @@ game_manager::game_manager(int w, int h)
 
     // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
-    cameras_.push_back(std::make_shared<orthogonal_camera>(0, 0, 0, 0, 0, 0));
-    cameras_.back()->position(vector3(0, 1, 0));
+    cameras_.push_back(std::make_shared<orthogonal_camera>());
+    cameras_.back()->eye().set(0.0, 0.0, 0.0);
+    cameras_.back()->at().set(0.0, -1.0, 0.0);
+    cameras_.back()->up().set(0.0, 0.0, -1.0);
+
     // Camera 1: top view perspective camera
-    cameras_.push_back(std::make_shared<perspective_camera>(0, 0, 0, 0));
+    cameras_.push_back(std::make_shared<perspective_camera>());
+    cameras_.back()->eye().set(0.0, 3.0, 2.0);
+    cameras_.back()->at().set(0.0, 0.0, 0.0);
+    cameras_.back()->up().set(0.0, 0.0, -1.0);
+
     // Camera 2: frog perspective camera
     cameras_.push_back(frog_->cam());
 }

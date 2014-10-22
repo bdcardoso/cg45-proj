@@ -13,5 +13,4 @@ public:
 
     void reshape(int w, int h) override;
     void compute_projection_matrix() override;
-    void compute_visualization_matrix() override;
 };
