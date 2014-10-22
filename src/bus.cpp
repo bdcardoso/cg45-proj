@@ -67,10 +67,10 @@ void bus::draw() {
 
 void bus::update(glut_time_t dt) {
     dynamic_object::update(dt);
-    
+
     if (position().x() > 2.75) {
         auto newPos = position();
         newPos.x(-2.90);
-        position(newPos);}
-        
+        position(newPos);
+    }
 }

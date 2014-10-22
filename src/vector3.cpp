@@ -1,46 +1,68 @@
 #include "vector3.h"
 
 vector3::vector3(GLdouble x, GLdouble y, GLdouble z) {
-    _coords[0] = x;
-    _coords[1] = y;
-    _coords[2] = z;
+    coords_[0] = x;
+    coords_[1] = y;
+    coords_[2] = z;
 }
 
-GLdouble vector3::x() const { return _coords[0]; }
+GLdouble vector3::x() const { return coords_[0]; }
 
-GLdouble vector3::y() const { return _coords[1]; }
+GLdouble vector3::y() const { return coords_[1]; }
 
-GLdouble vector3::z() const { return _coords[2]; }
+GLdouble vector3::z() const { return coords_[2]; }
 
-void vector3::x(GLdouble newx) { _coords[0] = newx; }
+void vector3::x(GLdouble newx) { coords_[0] = newx; }
 
-void vector3::y(GLdouble newy) { _coords[1] = newy; }
+void vector3::y(GLdouble newy) { coords_[1] = newy; }
 
-void vector3::z(GLdouble newz) { _coords[2] = newz; }
+void vector3::z(GLdouble newz) { coords_[2] = newz; }
 
 void vector3::set(GLdouble x, GLdouble y, GLdouble z) {
-    _coords[0] = x;
-    _coords[1] = y;
-    _coords[2] = z;
+    coords_[0] = x;
+    coords_[1] = y;
+    coords_[2] = z;
 }
 
-const GLdouble *vector3::get() const { return _coords; }
+const GLdouble *vector3::get() const { return coords_; }
 
-vector3 vector3::operator+(const vector3 &rhs) const {
-    return vector3(x() + rhs.x(), y() + rhs.y(), z() + rhs.z());
+vector3::scalar_t vector3::dot(const vector3 &rhs) const {
+    return x() * rhs.x() + y() * rhs.y() + z() * rhs.z();
 }
 
-vector3 &vector3::operator+=(const vector3 &rhs) {
-    x(x() + rhs.x());
-    y(y() + rhs.y());
-    z(z() + rhs.z());
-    return *this;
+vector3 vector3::ext(const vector3 &rhs) const {
+    return vector3(y() * rhs.z() - z() * rhs.y(), z() * rhs.x() - x() * rhs.z(),
+                   x() * rhs.y() - y() * rhs.x());
 }
 
-vector3 vector3::operator-(const vector3 &rhs) const {
-    return vector3(x() - rhs.x(), y() - rhs.y(), z() - rhs.z());
+vector3 vector3::normalized() const { return *this / this->dot(*this); }
+
+vector3 operator+(const vector3 &lhs, const vector3 &rhs) {
+    return vector3(lhs.x() + rhs.x(), lhs.y() + rhs.y(), lhs.z() + rhs.z());
 }
 
-vector3 vector3::operator*(GLdouble scalar) const {
-    return vector3(x() * scalar, y() * scalar, z() * scalar);
+vector3 &operator+=(vector3 &lhs, const vector3 &rhs) {
+    lhs.set(lhs.x() + rhs.x(), lhs.y() + rhs.y(), lhs.z() + rhs.z());
+    return lhs;
+}
+
+vector3 operator-(const vector3 &lhs, const vector3 &rhs) {
+    return vector3(lhs.x() - rhs.x(), lhs.y() - rhs.y(), lhs.z() - rhs.z());
+}
+
+vector3 &operator-=(vector3 &lhs, const vector3 &rhs) {
+    lhs.set(lhs.x() - rhs.x(), lhs.y() - rhs.y(), lhs.z() - rhs.z());
+    return lhs;
+}
+
+vector3 operator*(const vector3 &lhs, const vector3::scalar_t &rhs) {
+    return vector3(lhs.x() * rhs, lhs.y() * rhs, lhs.z() * rhs);
+}
+
+vector3 operator*(const vector3::scalar_t &lhs, const vector3 &rhs) {
+    return rhs * lhs;
+}
+
+vector3 operator/(const vector3 &lhs, const vector3::scalar_t &rhs) {
+    return vector3(lhs.x() / rhs, lhs.y() / rhs, lhs.z() / rhs);
 }

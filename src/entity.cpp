@@ -2,10 +2,10 @@
 
 entity::entity() {}
 
-vector3 entity::position() { return _position; }
+vector3 &entity::position() { return position_; }
 
-void entity::position(GLdouble x, GLdouble y, GLdouble z) {
-    position(vector3(x, y, z));
+void entity::position(scalar_t x, scalar_t y, scalar_t z) {
+    position().set(x, y, z);
 }
 
-void entity::position(const vector3 &v) { _position = v; }
+void entity::position(const vector3 &v) { position_ = v; }

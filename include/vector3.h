@@ -3,11 +3,9 @@
 #include "opengl.h"
 
 class vector3 {
-    typedef GLdouble scalar_t;
-    // [0] -> x, [1] -> y, [2] -> z
-    scalar_t _coords[3];
-
 public:
+    typedef GLdouble scalar_t;
+
     vector3(scalar_t x = 0, scalar_t y = 0, scalar_t z = 0);
 
     scalar_t x() const;
@@ -21,18 +19,18 @@ public:
     const scalar_t *get() const;
     void set(scalar_t x, scalar_t y, scalar_t z = 0);
 
-    vector3 operator+(const vector3 &rhs) const;
-    vector3 &operator+=(const vector3 &rhs);
-    vector3 operator-(const vector3 &rhs) const;
-    vector3 operator*(scalar_t scalar) const;
+    scalar_t dot(const vector3 &rhs) const;
+    vector3 ext(const vector3 &rhs) const;
+    vector3 normalized() const;
 
-    scalar_t dot(const vector3 &rhs) const {
-        return x() * rhs.x() + y() * rhs.y() + z() * rhs.z();
-    }
-
-    vector3 ext(const vector3 &rhs) const {
-        return vector3(y() * rhs.z() - z() * rhs.y(),
-                       z() * rhs.x() - x() * rhs.z(),
-                       x() * rhs.y() - y() * rhs.x());
-    }
+private:
+    // [0] -> x, [1] -> y, [2] -> z
+    scalar_t coords_[3];
 };
+
+vector3 operator+(const vector3 &lhs, const vector3 &rhs);
+vector3 &operator+=(vector3 &lhs, const vector3 &rhs);
+vector3 operator-(const vector3 &lhs, const vector3 &rhs);
+vector3 operator*(const vector3 &lhs, const vector3::scalar_t &rhs);
+vector3 operator*(const vector3::scalar_t &lhs, const vector3 &rhs);
+vector3 operator/(const vector3 &lhs, const vector3::scalar_t &rhs);

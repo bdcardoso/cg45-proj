@@ -1,13 +1,9 @@
 #include "frog.h"
 #include "perspective_camera.h"
 
-frog::frog() {
-    _camera = std::make_shared<perspective_camera>();
-}
+frog::frog() { camera_ = std::make_shared<perspective_camera>(); }
 
-std::shared_ptr<camera> frog::cam() {
-    return _camera;
-}
+std::shared_ptr<camera> frog::cam() { return camera_; }
 
 void frog::draw() {
     glPushMatrix();
@@ -32,14 +28,14 @@ void frog::draw() {
     glPushMatrix();
     glTranslatef(-0.3, 0.0, -1.0);
     glScalef(1.0, 1.0, 1.0); // For symmetry
-    _leftleg.draw();
+    leftleg_.draw();
     glPopMatrix();
 
     // Right leg
     glPushMatrix();
     glTranslatef(-0.3, 0.0, 1.0);
     glScalef(1.0, 1.0, -1.0);
-    _rightleg.draw();
+    rightleg_.draw();
     glPopMatrix();
     glPopMatrix();
 }
@@ -73,7 +69,7 @@ void frog::update(glut_time_t dt) {
     }
 
     // Update camera position
-    _camera->position(_camera->position() + (position() - oldPos));
+    camera_->position(camera_->position() + (position() - oldPos));
 }
 
 void frog::keydown(unsigned char key) {

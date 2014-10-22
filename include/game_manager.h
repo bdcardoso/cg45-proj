@@ -7,16 +7,16 @@
 
 class game_manager {
 private:
-    std::vector<std::shared_ptr<game_object>> _game_objects;
-    std::vector<std::shared_ptr<light_source>> _light_sources;
-    std::vector<std::shared_ptr<camera>> _cameras;
-    glut_time_t _last_time;
-    GLdouble _spin, _tilt, _spin_speed, _tilt_speed;
-    unsigned _current_camera;
+    std::vector<std::shared_ptr<game_object>> game_objects_;
+    std::vector<std::shared_ptr<light_source>> light_sources_;
+    std::vector<std::shared_ptr<camera>> cameras_;
+    glut_time_t last_time_;
+    GLdouble spin_, tilt_, spin_speed_, tilt_speed_;
+    unsigned current_camera_;
 
     GLdouble WINDOW_WIDTH, WINDOW_HEIGHT, GAME_WIDTH, GAME_HEIGHT, GAME_DEPTH;
 
-    static game_manager *_instance;
+    static game_manager *instance_;
 
 public:
     game_manager(int w, int h);

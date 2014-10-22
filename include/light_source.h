@@ -5,11 +5,11 @@
 #include "vector4.h"
 
 class light_source {
-    vector4 _ambient, _diffuse, _specular, _position;
-    vector3 _direction;
-    GLdouble _cutoff, _exponent;
-    GLenum _num;
-    bool _state;
+    vector4 ambient_, diffuse_, specular_, position_;
+    vector3 direction_;
+    GLdouble cutoff_, exponent_;
+    GLenum num_;
+    bool state_;
 
 public:
     light_source(GLenum number);

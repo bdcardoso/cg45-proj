@@ -5,7 +5,7 @@
 
 class vector4 {
     // [0] -> x, [1] -> y, [2] -> z, [3] -> w
-    GLdouble _coords[4];
+    GLdouble coords_[4];
 
 public:
     vector4(const vector3 &in);

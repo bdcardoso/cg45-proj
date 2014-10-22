@@ -7,7 +7,7 @@ constexpr auto RADIUS_0 = 1.0, RADIUS_Z = 1.0, COORD_X = 2.0, COORD_XNEG = -3.0,
                COORD_Y = -0.2, COORD_Z = 0.0;
 
 void tunnel::draw() {
-	
+
     glColor3ub(50, 50, 50);
 
     glPushMatrix();
@@ -33,63 +33,60 @@ void tunnel::draw() {
     glRotatef(90, 0.0, 1.0, 0.0);
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
-    
-	
-	//Reusable for the car destroyer
-	glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0,  0.0 );        
-    glVertex3f(2.5, 5.0, 4.0);      
-    glVertex3f(2.5, 5.0, -4.0);      
-    glVertex3f(2.5, -5.0, -4.0);      
+
+    // Reusable for the car destroyer
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(2.5, 5.0, 4.0);
+    glVertex3f(2.5, 5.0, -4.0);
+    glVertex3f(2.5, -5.0, -4.0);
     glVertex3f(2.5, -5.0, 4.0);
-	glEnd();
-	
-	//Reusable for the car destroyer
-	glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0,  0.0 );        
-    glVertex3f(-2.5, 5.0, 4.0);      
-    glVertex3f(-2.5, 5.0, -4.0);      
-    glVertex3f(-2.5, -5.0, -4.0);      
+    glEnd();
+
+    // Reusable for the car destroyer
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(-2.5, 5.0, 4.0);
+    glVertex3f(-2.5, 5.0, -4.0);
+    glVertex3f(-2.5, -5.0, -4.0);
     glVertex3f(-2.5, -5.0, 4.0);
-	glEnd();
-	
-	//Ground Wall
+    glEnd();
+
+    // Ground Wall
     /* glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0,  0.0 );        
-    glVertex3f(-10.0, 0.0, 10.0);      
-    glVertex3f(-10.0, 0.0, -10.0);      
-    glVertex3f(10.0, 0.0, -10.0);      
+    glColor3f(0.0, 0.0,  0.0 );
+    glVertex3f(-10.0, 0.0, 10.0);
+    glVertex3f(-10.0, 0.0, -10.0);
+    glVertex3f(10.0, 0.0, -10.0);
     glVertex3f(10.0, 0.0, 10.0);
-	glEnd(); */
+    glEnd(); */
 
-	//Covering bottom wall
+    // Covering bottom wall
     glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0,  0.0 );   
-    glVertex3f(-10.0, -10.0, 3.1);      
-    glVertex3f(10.0, -10.0, 3.1);     
-    glVertex3f(10.0, 0.0, 3.1);      
-    glVertex3f(-10, 0.0, 3.1);      
-	glEnd();
-	
-	//COVERING-LEFT-WALL
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(-10.0, -10.0, 3.1);
+    glVertex3f(10.0, -10.0, 3.1);
+    glVertex3f(10.0, 0.0, 3.1);
+    glVertex3f(-10, 0.0, 3.1);
+    glEnd();
+
+    // COVERING-LEFT-WALL
     glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0,  0.0 );  
-     
-    glVertex3f(-10.0, 10.0, 3.1);      
-    glVertex3f(-2.5, 10.0, 3.1);     
-    glVertex3f(-2.5, 0.0, 3.1);      
-    glVertex3f(-10, 0.0, 3.1);      
-	glEnd();
-	
-	//COVERING-RIGHT-WALL
+    glColor3f(0.0, 0.0, 0.0);
+
+    glVertex3f(-10.0, 10.0, 3.1);
+    glVertex3f(-2.5, 10.0, 3.1);
+    glVertex3f(-2.5, 0.0, 3.1);
+    glVertex3f(-10, 0.0, 3.1);
+    glEnd();
+
+    // COVERING-RIGHT-WALL
     glBegin(GL_POLYGON);
-    glColor3f(0.0,0.0, 0.0 ); 
-      
-    glVertex3f(10.0, 10.0, 3.1);      
-    glVertex3f(2.5, 10.0, 3.1);     
-    glVertex3f(2.5, 0.0, 3.1);      
-    glVertex3f(10, 0.0, 3.1);      
-	glEnd();
+    glColor3f(0.0, 0.0, 0.0);
+
+    glVertex3f(10.0, 10.0, 3.1);
+    glVertex3f(2.5, 10.0, 3.1);
+    glVertex3f(2.5, 0.0, 3.1);
+    glVertex3f(10, 0.0, 3.1);
+    glEnd();
 }
-
-

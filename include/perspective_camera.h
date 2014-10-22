@@ -2,7 +2,7 @@
 #include "camera.h"
 
 class perspective_camera : public camera {
-    GLdouble _fovy, _aspect;
+    GLdouble fovy_, aspect_;
 
 public:
     perspective_camera(GLdouble fovy = 90.0, GLdouble aspect = 1.0,

@@ -4,7 +4,7 @@
 #include "opengl.h"
 
 class orthogonal_camera : public camera {
-    GLdouble _left, _right, _bottom, _top;
+    GLdouble left_, right_, bottom_, top_;
 
 public:
     orthogonal_camera(GLdouble left = -1.0, GLdouble right = 1.0,

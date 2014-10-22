@@ -13,9 +13,8 @@ class frog : public dynamic_object {
     };
 
 private:
-    leg _leftleg, _rightleg;
-    std::shared_ptr<camera> _camera;
-
+    leg leftleg_, rightleg_;
+    std::shared_ptr<camera> camera_;
 
 public:
     frog();
