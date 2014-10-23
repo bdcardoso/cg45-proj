@@ -21,6 +21,8 @@ void display() {
 void reshape(int w, int h) { manager->reshape(w, h); }
 
 void timer(int value) {
+    (void)value;
+
     manager->timer();
 
     glutTimerFunc(1000 / FPS, timer, 0);

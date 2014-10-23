@@ -1,7 +1,9 @@
 #include "frog.h"
 #include "perspective_camera.h"
 
-frog::frog() { camera_ = std::make_shared<perspective_camera>(); }
+frog::frog() {
+    camera_ = std::make_shared<perspective_camera>(90, 1, 0.01, 10);
+}
 
 std::shared_ptr<camera> frog::cam() { return camera_; }
 
@@ -10,6 +12,7 @@ void frog::draw() {
     glRotatef(90, 0.0, 1.0, 0.0);
     glColor3ub(5, 55, 5);
 
+    // Body
     glPushMatrix();
     glTranslatef(0.0, 0.55, 0.0);
     glRotatef(10, 0.0, 0.0, 1.0);
@@ -41,7 +44,6 @@ void frog::draw() {
 }
 
 void frog::update(glut_time_t dt) {
-    auto oldPos = position();
     dynamic_object::update(dt);
 
     if (position().x() < -1.85) {
@@ -68,8 +70,9 @@ void frog::update(glut_time_t dt) {
         position(newPos);
     }
 
-    // Update camera position
-    camera_->position(camera_->position() + (position() - oldPos));
+    camera_->eye() = position() + vector3(0, 1.5, 0.5);
+    camera_->at() = position();
+    camera_->up() = vector3(0.0, 1.0, 0.0);
 }
 
 void frog::keydown(unsigned char key) {

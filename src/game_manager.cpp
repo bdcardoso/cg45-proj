@@ -160,6 +160,11 @@ game_manager::game_manager(int w, int h)
 void game_manager::timer() { update(); }
 
 void game_manager::display() {
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    cameras_[current_camera_]->compute_visualization_matrix();
+
     glPushMatrix();
     glRotatef(tilt_, 1.0, 0.0, 0.0);
     glRotatef(spin_, 0.0, 1.0, 0.0);
@@ -229,11 +234,6 @@ void game_manager::reshape(int w, int h) {
     glLoadIdentity();
 
     cameras_[current_camera_]->compute_projection_matrix();
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    cameras_[current_camera_]->compute_visualization_matrix();
 }
 
 void game_manager::keyboard(unsigned char key, int x, int y) {
