@@ -16,24 +16,20 @@ constexpr auto FROG_LEVEL = 0.05, ROAD_LEVEL = 0.05, RIVER_LEVEL = 0.05,
                LINE_1 = -1.0, LINE_2 = -0.5, LINE_3 = 0.5, LINE_4 = 1.0,
                LINE_5 = 1.5, LINE_6 = -1.5;
 
-game_manager::game_manager(int w, int h)
-        : spin_(0.0),
+void game_manager::init(int w, int h) {
+    WINDOW_WIDTH = w;
+    WINDOW_HEIGHT = h;
+}
+
+game_manager::game_manager()
+        : current_camera_(0),
+          spin_(0.0),
           tilt_(0.0),
           spin_speed_(0.0),
           tilt_speed_(0.0),
-          current_camera_(0),
-          WINDOW_WIDTH(w),
-          WINDOW_HEIGHT(h),
           GAME_WIDTH(2.5),
           GAME_HEIGHT(2),
           GAME_DEPTH(5) {
-
-    if (instance_ != nullptr) {
-        delete instance_;
-        instance_ = nullptr;
-    }
-
-    instance_ = this;
 
     last_time_ = glutGet(GLUT_ELAPSED_TIME);
 
@@ -139,6 +135,22 @@ game_manager::game_manager(int w, int h)
     game_objects_.push_back(truck3_);
     game_objects_.push_back(bus1_);
     game_objects_.push_back(bus2_);
+
+    colman_.register_object(frog_);
+    colman_.register_object(log1_);
+    colman_.register_object(log2_);
+    colman_.register_object(log3_);
+    colman_.register_object(log3_);
+    colman_.register_object(turtle1_);
+    colman_.register_object(turtle2_);
+    colman_.register_object(turtle3_);
+    colman_.register_object(turtle3_);
+    colman_.register_object(car1_);
+    colman_.register_object(truck1_);
+    colman_.register_object(truck2_);
+    colman_.register_object(truck3_);
+    colman_.register_object(bus1_);
+    colman_.register_object(bus2_);
 
     // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
@@ -320,12 +332,9 @@ void game_manager::specialUp(int key, int x, int y) {
     }
 }
 
-game_manager *game_manager::instance() { return game_manager::instance_; }
-
 GLdouble game_manager::game_width() const { return GAME_WIDTH; }
 GLdouble game_manager::game_height() const { return GAME_HEIGHT; }
 GLdouble game_manager::game_depth() const { return GAME_DEPTH; }
 GLdouble game_manager::window_width() const { return WINDOW_WIDTH; }
 GLdouble game_manager::window_height() const { return WINDOW_HEIGHT; }
 
-game_manager *game_manager::instance_ = nullptr;

@@ -8,9 +8,11 @@ find_package(OpenGL REQUIRED)
 #find_package(GLUT REQUIRED)
 
 set(HEADER_FILES
+  include/bounding_box.h
   include/bus.h
   include/camera.h
   include/car.h
+  include/collision_manager.h
   include/dynamic_object.h
   include/entity.h
   include/frog.h
@@ -22,6 +24,7 @@ set(HEADER_FILES
   include/perspective_camera.h
   include/river.h
   include/road.h
+  include/singleton.h
   include/static_object.h
   include/timberlog.h
   include/turtle.h
@@ -30,9 +33,11 @@ set(HEADER_FILES
   include/tunnel.h)
 
 set(SOURCE_FILES
+  src/bounding_box.cpp
   src/bus.cpp
   src/camera.cpp
   src/car.cpp
+  src/collision_manager.cpp
   src/dynamic_object.cpp
   src/entity.cpp
   src/frog.cpp
