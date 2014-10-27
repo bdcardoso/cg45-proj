@@ -15,7 +15,7 @@ void tunnel::draw() {
     glRotatef(90, 0.0, 1.0, 0.0);
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
-
+    
     glPushMatrix();
     glTranslatef(COORD_XNEG, COORD_Y, COORD_Z);
     glRotatef(90, 0.0, 1.0, 0.0);
@@ -30,6 +30,34 @@ void tunnel::draw() {
 
     glPushMatrix();
     glTranslatef(COORD_XNEG, COORD_Y, 2);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
+    glPopMatrix();
+
+	//INVISIBLE TUNNELS
+
+	glColor3ub(0, 0, 0);
+
+    glPushMatrix();
+    glTranslatef(COORD_X+0.5, COORD_Y+0.01, COORD_Z);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(COORD_XNEG-0.5, COORD_Y+0.01, COORD_Z);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(COORD_X+0.5, COORD_Y+0.01, 2);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(COORD_XNEG-0.5, COORD_Y+0.01, 2);
     glRotatef(90, 0.0, 1.0, 0.0);
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
@@ -52,22 +80,13 @@ void tunnel::draw() {
     glVertex3f(-2.5, -5.0, 4.0);
     glEnd();
 
-    // Ground Wall
-    /* glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0,  0.0 );
-    glVertex3f(-10.0, 0.0, 10.0);
-    glVertex3f(-10.0, 0.0, -10.0);
-    glVertex3f(10.0, 0.0, -10.0);
-    glVertex3f(10.0, 0.0, 10.0);
-    glEnd(); */
-
     // Covering bottom wall
     glBegin(GL_POLYGON);
     glColor3f(0.0, 0.0, 0.0);
-    glVertex3f(-10.0, -10.0, 3.1);
-    glVertex3f(10.0, -10.0, 3.1);
-    glVertex3f(10.0, 0.0, 3.1);
-    glVertex3f(-10, 0.0, 3.1);
+    glVertex3f(-10.0, -10.0, 3.01);
+    glVertex3f(10.0, -10.0, 3.01);
+    glVertex3f(10.0, 0.0, 3.01);
+    glVertex3f(-10, 0.0, 3.01);
     glEnd();
 
     // COVERING-LEFT-WALL
