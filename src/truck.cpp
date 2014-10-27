@@ -127,7 +127,7 @@ void truck::update(glut_time_t dt) {
     dynamic_object::update(dt);
     
     if(speed().x() < 4.0){
-		speed().x() += 0.001;
+		speed().x() += 0.0003;
 	}
 
     if (position().x() > 2.75) {

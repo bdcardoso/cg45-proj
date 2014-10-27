@@ -3,11 +3,12 @@
 #include "perspective_camera.h"
 #include "river.h"
 #include "timberlog.h"
+#include "turtle.h"
 #include <cstdio>
 
 frog::frog() {
     camera_ = std::make_shared<perspective_camera>(90, 1, 0.01, 10);
-    bounding_box() = ::bounding_box(-1.0, -1.0, -1.0, 1.0, 1.0, 1.0);
+    bounding_box() = ::bounding_box(-1.3, -1.3, -1.3, 1.3, 1.3, 1.3);
 }
 
 std::shared_ptr<camera> frog::cam() { return camera_; }
@@ -52,12 +53,15 @@ void frog::update(glut_time_t dt) {
 
     auto collisions = collision_manager::instance().collisions(this);
     if (collisions.size() != 0) {
+		GLdouble collisionSpeed = 0;
+		
         puts("Frog collision!");
         // position() = vector3(0.0, 0.05, 1.95);
         
-        bool touchesRiver = false,
-             touchesLog   = false,
-             touchesOther = false;
+        bool touchesRiver  = false,
+             touchesLog    = false,
+             touchesTurtle = false,
+             touchesOther  = false;
 
         for (auto col : collisions) {
             std::shared_ptr<game_object> obj;
@@ -72,7 +76,14 @@ void frog::update(glut_time_t dt) {
             else if (dynamic_cast<timberlog *>(obj.get()) != nullptr) {
                 puts("Frog touching timberlog!");
                 touchesLog = true;
-                continue;
+                collisionSpeed = std::max(collisionSpeed, ((timberlog *)obj.get())->speed().x());
+                continue;             
+		    }   
+            else if (dynamic_cast<turtle *>(obj.get()) != nullptr) {
+                puts("Frog touching turtle!");
+                touchesTurtle = true;
+                collisionSpeed = std::max(collisionSpeed, ((turtle *)obj.get())->speed().x());
+                continue;                
             }
             else {
                 puts("Frog touching other!");
@@ -80,9 +91,11 @@ void frog::update(glut_time_t dt) {
                 break;
             }
         }
-
-        if (touchesOther || (touchesRiver && !touchesLog)) {
-            position() = vector3(0.0, 0.05, 1.95);
+        
+        position().x() += collisionSpeed * dt;
+        
+        if (touchesOther || (touchesRiver && !(touchesLog || touchesTurtle))) {
+            position() = vector3(0.0, 0.05, 1.95);            
         }
     }
 

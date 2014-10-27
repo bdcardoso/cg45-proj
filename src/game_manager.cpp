@@ -34,76 +34,76 @@ game_manager::game_manager()
     last_time_ = glutGet(GLUT_ELAPSED_TIME);
 
     auto frog_ = std::make_shared<frog>();
-    frog_->position() = vector3(0.0, FROG_LEVEL, 1.95);
+    frog_->position() = vector3(0.0 -5, FROG_LEVEL, 1.95);
     frog_->scale(0.1);
 
     auto car1_ = std::make_shared<car>();
-    car1_->position() = vector3(-1.2, ROAD_LEVEL, LINE_4);
+    car1_->position() = vector3(-1.2 -5, ROAD_LEVEL, LINE_4);
     car1_->scale(0.1);
     car1_->speed().x() = 1.0;
 
     auto truck1_ = std::make_shared<truck>();
-    truck1_->position() = vector3(-1.5, ROAD_LEVEL, LINE_3);
+    truck1_->position() = vector3(-1.5 -5, ROAD_LEVEL, LINE_3);
     truck1_->scale(0.1);
     truck1_->speed().x() = 0.5;
 
     auto truck2_ = std::make_shared<truck>();
-    truck2_->position() = vector3(0.0, ROAD_LEVEL, LINE_3);
+    truck2_->position() = vector3(0.0 -5, ROAD_LEVEL, LINE_3);
     truck2_->scale(0.1);
     truck2_->speed().x() = 0.5;
 
     auto truck3_ = std::make_shared<truck>();
-    truck3_->position() = vector3(1.5, ROAD_LEVEL, LINE_3);
+    truck3_->position() = vector3(1.5 -5, ROAD_LEVEL, LINE_3);
     truck3_->scale(0.1);
     truck3_->speed().x() = 0.5;
 
     auto bus1_ = std::make_shared<bus>();
-    bus1_->position() = vector3(0.9, ROAD_LEVEL, LINE_5);
+    bus1_->position() = vector3(0.9 -5, ROAD_LEVEL, LINE_5);
     bus1_->scale(0.1);
     bus1_->speed().x() = 1.5;
 
     auto bus2_ = std::make_shared<bus>();
-    bus2_->position() = vector3(-0.1, ROAD_LEVEL, LINE_4);
+    bus2_->position() = vector3(-0.1 -5, ROAD_LEVEL, LINE_4);
     bus2_->scale(0.1);
     bus2_->speed().x() = 1.0;
 
     auto log1_ = std::make_shared<timberlog>();
-    log1_->position() = vector3(-0.6, RIVER_LEVEL, LINE_1);
+    log1_->position() = vector3(-0.6 -5 , RIVER_LEVEL, LINE_1);
     log1_->scale(0.1);
     log1_->speed().x() = 0.5;
 
     auto log2_ = std::make_shared<timberlog>();
-    log2_->position() = vector3(-1.4, RIVER_LEVEL, LINE_2);
+    log2_->position() = vector3(-1.1 - 5, RIVER_LEVEL, LINE_2);
     log2_->scale(0.1);
-    log2_->speed().x() = 1.5;
+    log2_->speed().x() = 0.5;
 
     auto log3_ = std::make_shared<timberlog>();
-    log3_->position() = vector3(0.8, RIVER_LEVEL, LINE_2);
+    log3_->position() = vector3(0.8 -5, RIVER_LEVEL, LINE_2);
     log3_->scale(0.1);
-    log3_->speed().x() = 1.5;
+    log3_->speed().x() = 0.5;
 
     auto log4_ = std::make_shared<timberlog>();
-    log4_->position() = vector3(1.4, RIVER_LEVEL, LINE_1);
+    log4_->position() = vector3(1.4 -5, RIVER_LEVEL, LINE_1);
     log4_->scale(0.1);
     log4_->speed().x() = 0.5;
 
     auto turtle1_ = std::make_shared<turtle>();
-    turtle1_->position() = vector3(-2.5, RIVER_LEVEL + 0.05, LINE_6);
+    turtle1_->position() = vector3(-2.5 -5, RIVER_LEVEL + 0.05, LINE_6);
     turtle1_->scale(0.1);
     turtle1_->speed().x() = 0.5;
 
     auto turtle2_ = std::make_shared<turtle>();
-    turtle2_->position() = vector3(-1.25, RIVER_LEVEL + 0.05, LINE_6);
+    turtle2_->position() = vector3(-1.25 -5, RIVER_LEVEL + 0.05, LINE_6);
     turtle2_->scale(0.1);
     turtle2_->speed().x() = 0.5;
 
     auto turtle3_ = std::make_shared<turtle>();
-    turtle3_->position() = vector3(1.25, RIVER_LEVEL + 0.05, LINE_6);
+    turtle3_->position() = vector3(1.25 -5, RIVER_LEVEL + 0.05, LINE_6);
     turtle3_->scale(0.1);
     turtle3_->speed().x() = 0.5;
 
     auto turtle4_ = std::make_shared<turtle>();
-    turtle4_->position() = vector3(2.5, RIVER_LEVEL + 0.05, LINE_6);
+    turtle4_->position() = vector3(2.5 -5, RIVER_LEVEL + 0.05, LINE_6);
     turtle4_->scale(0.1);
     turtle4_->speed().x() = 0.5;
 
@@ -143,7 +143,16 @@ game_manager::game_manager()
     collision_manager::instance().register_object(truck1_);
     collision_manager::instance().register_object(truck2_);
     collision_manager::instance().register_object(truck3_);
-    collision_manager::instance().register_object(river_);    
+    collision_manager::instance().register_object(river_);  
+    collision_manager::instance().register_object(log1_);    
+    collision_manager::instance().register_object(log2_);    
+    collision_manager::instance().register_object(log3_);    
+    collision_manager::instance().register_object(log4_);   
+    collision_manager::instance().register_object(turtle1_);    
+    collision_manager::instance().register_object(turtle2_);    
+    collision_manager::instance().register_object(turtle3_);
+    collision_manager::instance().register_object(turtle4_);                     
+                      
 
 
 
