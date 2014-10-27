@@ -20,6 +20,13 @@ constexpr auto BODY_SIZE_X = 11.0f, BODY_SIZE_Y = 3.0f, BODY_SIZE_Z = 3.0f,
                WHEEL_COORD_BACK_RIGHT_X = -3.5f,
                WHEEL_COORD_BACK_RIGHT_Y = 0.5f, WHEEL_COORD_BACK_RIGHT_Z = 1.5f;
 
+bus::bus() {
+    bounding_box() = ::bounding_box(
+        -BODY_SIZE_X/2, -3, -BODY_SIZE_Z/2,
+         BODY_SIZE_X/2,  3,  BODY_SIZE_Z/2);
+}
+
+
 void bus::draw() {
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
 
@@ -67,7 +74,9 @@ void bus::draw() {
 
 void bus::update(glut_time_t dt) {
     dynamic_object::update(dt);
-
+    if(speed().x() < 4.0){
+		speed().x() += 0.001;
+	}
     if (position().x() > 2.75) {
         position().x() = -2.90;
     }

@@ -136,7 +136,7 @@ void print_box(const char *name, const bounding_box &b) {
 }
 
 bounding_box::operator bool() const {
-    return width() >= DBL_EPSILON && height() >= DBL_EPSILON &&
+    return width() >= DBL_EPSILON && 
            length() >= DBL_EPSILON;
 }
 

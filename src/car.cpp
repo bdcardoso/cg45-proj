@@ -99,6 +99,9 @@ void car::draw() {
 
 void car::update(glut_time_t dt) {
     dynamic_object::update(dt);
+    if(speed().x() < 4.0){
+		speed().x() += 0.001;
+	}
 
     if (position().x() > 2.75) {
         position().x() = -2.90;

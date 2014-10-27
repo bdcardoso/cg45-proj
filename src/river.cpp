@@ -18,7 +18,14 @@ river::river() {
     assert(RIVER_WIDTH > 2 * RIVER_MARGIN);
     assert(WATER_DEPTH <= MARGIN_HEIGHT);
     scale().y() = 0.1;
+    
+    bounding_box() = ::bounding_box(
+        -RIVER_LENGTH / 2, 0, -WATER_WIDTH / 2,
+        RIVER_LENGTH / 2, 0, WATER_WIDTH / 2);
 }
+
+
+
 
 void river::draw() {
     glColor3ub(0x8b, 0x45, 0x13);

@@ -3,6 +3,8 @@
 
 class truck : public dynamic_object {
 public:
+	truck();
+	
     void draw() override;
     void update(glut_time_t dt) override;
 };

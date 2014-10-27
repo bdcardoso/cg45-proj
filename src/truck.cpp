@@ -16,7 +16,7 @@ constexpr auto BODY_SIZE_X = 2.0f, BODY_SIZE_Y = 2.0f, BODY_SIZE_Z = 3.0f,
                BACK_COORD_Z = 0.0f, CONTAINER_SIZE_X = 5.0f,
                CONTAINER_SIZE_Y = 2.5f, CONTAINER_SIZE_Z = 3.0f,
                CONTAINER_COORD_X = -1.5f, CONTAINER_COORD_Y = 3.0f,
-               CONTAINER_COORD_Z = 0.0f,
+               CONTAINER_COORD_Z = 0.0f, TRUCK_END = 4.0f,
 
                // ----
     WHEEL_SIZE_INNER_RADIUS = 0.3f, WHEEL_SIZE_OUTER_RADIUS = 0.5f,
@@ -36,6 +36,12 @@ constexpr auto BODY_SIZE_X = 2.0f, BODY_SIZE_Y = 2.0f, BODY_SIZE_Z = 3.0f,
                WHEEL_COORD_BACK_RIGHT2_X = -1.0f,
                WHEEL_COORD_BACK_RIGHT2_Y = 0.5f,
                WHEEL_COORD_BACK_RIGHT2_Z = 1.5f;
+
+truck::truck() {
+    bounding_box() = ::bounding_box(
+        -TRUCK_END, -3, -BODY_SIZE_Z/2,
+         TRUCK_END,  3,  BODY_SIZE_Z/2);
+}
 
 void truck::draw() {
     glColor3ub(BACK_COLOR_RED, BACK_COLOR_GREEN, BACK_COLOR_BLUE);
@@ -119,6 +125,10 @@ void truck::draw() {
 
 void truck::update(glut_time_t dt) {
     dynamic_object::update(dt);
+    
+    if(speed().x() < 4.0){
+		speed().x() += 0.001;
+	}
 
     if (position().x() > 2.75) {
         position().x() = -2.90;
