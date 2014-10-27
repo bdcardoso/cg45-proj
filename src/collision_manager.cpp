@@ -29,12 +29,16 @@ collision_manager::collisions(std::shared_ptr<game_object> obj) const {
     if (!obj)
         return ret;
 
-    bounding_box bb = obj->bounding_box();
-    bb.translate(obj->position());
+    bounding_box b1 = obj->bounding_box();
+    b1.scale(obj->scale());
+    b1.translate(obj->position());
 
     for (auto other : objs_) {
         if (obj != other) {
-            auto isct = obj->bounding_box().intersect(other->bounding_box());
+            auto b2 = obj->bounding_box();
+            b2.scale(obj->scale());
+            b2.translate(obj->position());
+            auto isct = b1.intersect(b2);
 
             if (isct) {
                 ret.emplace_back(isct, other);
@@ -52,9 +56,16 @@ collision_manager::collisions(const game_object *obj) const {
     if (!obj)
         return ret;
 
+    bounding_box b1 = obj->bounding_box();
+    b1.scale(obj->scale());
+    b1.translate(obj->position());
+
     for (auto other : objs_) {
         if (obj != other.get()) {
-            auto isct = obj->bounding_box().intersect(other->bounding_box());
+            auto b2 = other->bounding_box();
+            b2.scale(other->scale());
+            b2.translate(other->position());
+            auto isct = b1.intersect(b2);
 
             if (isct) {
                 ret.emplace_back(isct, other);

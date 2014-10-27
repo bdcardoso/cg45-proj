@@ -49,7 +49,10 @@ void frog::update(glut_time_t dt) {
     dynamic_object::update(dt);
 
     auto collisions = collision_manager::instance().collisions(this);
-    printf("frog collision length: %zu\n", collisions.size());
+    if (collisions.size() != 0) {
+        puts("Frog collision!");
+        position() = vector3(0.0, 0.05, 1.95);
+    }
 
     position().x() = position().x() < -1.85 ? -1.85 : position().x();
     position().x() = position().x() > 1.85 ? 1.85 : position().x();

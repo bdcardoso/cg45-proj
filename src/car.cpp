@@ -23,11 +23,9 @@ constexpr auto BODY_SIZE_LOWER_X = 6.0f, BODY_SIZE_LOWER_Y = 1.0f,
                WHEEL_COORD_BACK_RIGHT_Y = 0.5f, WHEEL_COORD_BACK_RIGHT_Z = 1.5f;
 
 car::car() {
-    bounding_box() =
-        ::bounding_box(
-                -BODY_SIZE_LOWER_X / 2, -BODY_SIZE_LOWER_Y / 2, -BODY_SIZE_LOWER_Z / 2,
-                 BODY_SIZE_LOWER_X / 2,  BODY_COORD_UPPER_Y + BODY_SIZE_UPPER_Y,  BODY_SIZE_LOWER_Z / 2
-                );
+    bounding_box() = ::bounding_box(
+        -BODY_SIZE_LOWER_X / 2, -BODY_SIZE_LOWER_Y, -BODY_SIZE_LOWER_Z / 2,
+        BODY_SIZE_LOWER_X / 2, BODY_SIZE_UPPER_Y, BODY_SIZE_LOWER_Z / 2);
 }
 
 void car::draw() {

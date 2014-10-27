@@ -73,7 +73,7 @@ game_manager::game_manager()
     log1_->speed().x() = 4.5;
 
     auto log2_ = std::make_shared<timberlog>();
-    log2_->position() =vector3(-1.4, RIVER_LEVEL, LINE_2);
+    log2_->position() = vector3(-1.4, RIVER_LEVEL, LINE_2);
     log2_->scale(0.1);
     log2_->speed().x() = 4.0;
 
@@ -137,20 +137,7 @@ game_manager::game_manager()
     game_objects_.push_back(bus2_);
 
     collision_manager::instance().register_object(frog_);
-    collision_manager::instance().register_object(log1_);
-    collision_manager::instance().register_object(log2_);
-    collision_manager::instance().register_object(log3_);
-    collision_manager::instance().register_object(log3_);
-    collision_manager::instance().register_object(turtle1_);
-    collision_manager::instance().register_object(turtle2_);
-    collision_manager::instance().register_object(turtle3_);
-    collision_manager::instance().register_object(turtle3_);
     collision_manager::instance().register_object(car1_);
-    collision_manager::instance().register_object(truck1_);
-    collision_manager::instance().register_object(truck2_);
-    collision_manager::instance().register_object(truck3_);
-    collision_manager::instance().register_object(bus1_);
-    collision_manager::instance().register_object(bus2_);
 
     // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
@@ -203,10 +190,15 @@ void game_manager::display() {
         glPushMatrix();
 
         auto pos = obj->position();
-        glTranslatef(pos.x(), pos.y(), pos.z());
         auto scl = obj->scale();
+        auto bb = obj->bounding_box();
+
+        bb.translate(pos);
+        bb.scale(scl);
+        bb.draw();
+
+        glTranslatef(pos.x(), pos.y(), pos.z());
         glScalef(scl.x(), scl.y(), scl.z());
-        obj->bounding_box().draw();
 
         obj->draw();
         glPopMatrix();

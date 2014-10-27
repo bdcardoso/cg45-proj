@@ -24,7 +24,6 @@ private:
     game_manager();
 
 public:
-
     void init(int w, int h);
 
     void display();

@@ -69,19 +69,35 @@ void bounding_box::draw() {
 
     glPushMatrix();
     glColor3ub(0, 255, 0);
-    //glTranslatef(-width() / 2.0, -height() / 2.0, -length() / 2.0);
-    glScalef(width(), height(), length());
-    glutWireCube(1);
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(x1(), y1(), z1());
+    glVertex3d(x2(), y1(), z1());
+    glVertex3d(x2(), y2(), z1());
+    glVertex3d(x1(), y2(), z1());
+    glEnd();
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(x1(), y1(), z2());
+    glVertex3d(x2(), y1(), z2());
+    glVertex3d(x2(), y2(), z2());
+    glVertex3d(x1(), y2(), z2());
+    glEnd();
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(x1(), y1(), z1());
+    glVertex3d(x1(), y1(), z2());
+    glEnd();
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(x1(), y2(), z1());
+    glVertex3d(x1(), y2(), z2());
+    glEnd();
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(x2(), y1(), z1());
+    glVertex3d(x2(), y1(), z2());
+    glEnd();
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(x2(), y2(), z1());
+    glVertex3d(x2(), y2(), z2());
+    glEnd();
     glPopMatrix();
-}
-
-bounding_box::operator bool() const {
-    return width() >= DBL_EPSILON || height() >= DBL_EPSILON ||
-           length() >= DBL_EPSILON;
-}
-
-void print_box(const char *name, const bounding_box &b) {
-    printf("%s - x:%.2f y:%.2f z:%.2f w:%.2f h:%.2f l:%.2f\n", name, b.x1(), b.y1(), b.z1(), b.width(), b.height(), b.length());
 }
 
 void bounding_box::scale(scalar_t sx, scalar_t sy, scalar_t sz) {
@@ -114,35 +130,46 @@ void bounding_box::translate(const vector3 &delta) {
     translate(delta.x(), delta.y(), delta.z());
 }
 
+void print_box(const char *name, const bounding_box &b) {
+    printf("%s - x:%.2f y:%.2f z:%.2f w:%.2f h:%.2f l:%.2f\n", name, b.x1(),
+           b.y1(), b.z1(), b.width(), b.height(), b.length());
+}
+
+bounding_box::operator bool() const {
+    return width() >= DBL_EPSILON && height() >= DBL_EPSILON &&
+           length() >= DBL_EPSILON;
+}
+
 bounding_box bounding_box::intersect(const bounding_box &bb) const {
     bounding_box ret;
+    scalar_t l, r, aux;
 
-    if (!bb || !*this)
-        return ret;
+    if (x2() < bb.x1() || x1() > bb.x2())
+        goto yy;
 
-    if (x1() <= bb.x2()) {
-        ret.x2() = std::fmin(x2(), bb.x2());
-    }
-    if (x2() >= bb.x1()) {
-        ret.x1() = std::fmax(x1(), bb.x1());
-    }
-    if (y1() <= bb.y2()) {
-        ret.y2() = std::fmin(y2(), bb.y2());
-    }
-    if (y2() >= bb.y1()) {
-        ret.y1() = std::fmax(y1(), bb.y1());
-    }
-    if (z1() <= bb.z2()) {
-        ret.z2() = std::fmin(z2(), bb.z2());
-    }
-    if (z2() >= bb.z1()) {
-        ret.z1() = std::fmax(z1(), bb.z1());
-    }
+    ret.x1() = std::fmax(x1(), bb.x1());
+    ret.x2() = std::fmin(x2(), bb.x2());
 
+yy:
+    if (y2() < bb.y1() || y1() > bb.y2())
+        goto zz;
 
-    print_box("Box 1", *this);
-    print_box("Box 2", bb);
-    print_box("Isct", ret);
+    ret.y1() = std::fmax(y1(), bb.y1());
+    ret.y2() = std::fmin(y2(), bb.y2());
+
+zz:
+    if (z2() < bb.z1() || z1() > bb.z2())
+        goto ee;
+
+    ret.z1() = std::fmax(z1(), bb.z1());
+    ret.z2() = std::fmin(z2(), bb.z2());
+
+ee:
+    if (ret) {
+        print_box("Box 1", *this);
+        print_box("Box 2", bb);
+        print_box("Isct", ret);
+    }
 
     return ret;
 }

@@ -15,7 +15,7 @@ void tunnel::draw() {
     glRotatef(90, 0.0, 1.0, 0.0);
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
-    
+
     glPushMatrix();
     glTranslatef(COORD_XNEG, COORD_Y, COORD_Z);
     glRotatef(90, 0.0, 1.0, 0.0);
@@ -34,30 +34,30 @@ void tunnel::draw() {
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
 
-	//INVISIBLE TUNNELS
+    // INVISIBLE TUNNELS
 
-	glColor3ub(0, 0, 0);
+    glColor3ub(0, 0, 0);
 
     glPushMatrix();
-    glTranslatef(COORD_X+0.5, COORD_Y+0.01, COORD_Z);
-    glRotatef(90, 0.0, 1.0, 0.0);
-    gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(COORD_XNEG-0.5, COORD_Y+0.01, COORD_Z);
+    glTranslatef(COORD_X + 0.5, COORD_Y + 0.01, COORD_Z);
     glRotatef(90, 0.0, 1.0, 0.0);
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(COORD_X+0.5, COORD_Y+0.01, 2);
+    glTranslatef(COORD_XNEG - 0.5, COORD_Y + 0.01, COORD_Z);
     glRotatef(90, 0.0, 1.0, 0.0);
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(COORD_XNEG-0.5, COORD_Y+0.01, 2);
+    glTranslatef(COORD_X + 0.5, COORD_Y + 0.01, 2);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(COORD_XNEG - 0.5, COORD_Y + 0.01, 2);
     glRotatef(90, 0.0, 1.0, 0.0);
     gluCylinder(gluNewQuadric(), RADIUS_0, RADIUS_Z, 1, SLICES, STACKS);
     glPopMatrix();
