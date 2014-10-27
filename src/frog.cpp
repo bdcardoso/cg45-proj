@@ -1,5 +1,7 @@
 #include "frog.h"
+#include "collision_manager.h"
 #include "perspective_camera.h"
+#include <cstdio>
 
 frog::frog() {
     camera_ = std::make_shared<perspective_camera>(90, 1, 0.01, 10);
@@ -45,6 +47,9 @@ void frog::draw() {
 
 void frog::update(glut_time_t dt) {
     dynamic_object::update(dt);
+
+    auto collisions = collision_manager::instance().collisions(this);
+    printf("frog collision length: %zu\n", collisions.size());
 
     position().x() = position().x() < -1.85 ? -1.85 : position().x();
     position().x() = position().x() > 1.85 ? 1.85 : position().x();

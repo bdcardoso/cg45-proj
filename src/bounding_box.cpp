@@ -1,6 +1,9 @@
 #include "bounding_box.h"
+#include "vector3.h"
 #include <cassert>
 #include <cfloat>
+#include <cmath>
+#include <cstdio>
 
 typedef bounding_box::scalar_t scalar_t;
 
@@ -17,12 +20,18 @@ bounding_box::bounding_box(scalar_t x1, scalar_t y1, scalar_t z1, scalar_t x2,
     assert(z2 >= z1);
 }
 
-scalar_t bounding_box::x1() const { return x1_; }
-scalar_t bounding_box::x2() const { return x2_; }
-scalar_t bounding_box::y1() const { return y1_; }
-scalar_t bounding_box::y2() const { return y2_; }
-scalar_t bounding_box::z1() const { return z1_; }
-scalar_t bounding_box::z2() const { return z2_; }
+scalar_t &bounding_box::x1() { return x1_; }
+scalar_t &bounding_box::x2() { return x2_; }
+scalar_t &bounding_box::y1() { return y1_; }
+scalar_t &bounding_box::y2() { return y2_; }
+scalar_t &bounding_box::z1() { return z1_; }
+scalar_t &bounding_box::z2() { return z2_; }
+const scalar_t &bounding_box::x1() const { return x1_; }
+const scalar_t &bounding_box::x2() const { return x2_; }
+const scalar_t &bounding_box::y1() const { return y1_; }
+const scalar_t &bounding_box::y2() const { return y2_; }
+const scalar_t &bounding_box::z1() const { return z1_; }
+const scalar_t &bounding_box::z2() const { return z2_; }
 
 void bounding_box::x1(scalar_t c) {
     assert(c <= x2());
@@ -60,7 +69,7 @@ void bounding_box::draw() {
 
     glPushMatrix();
     glColor3ub(0, 255, 0);
-    glTranslatef(-width() / 2.0, -height() / 2.0, -length() / 2.0);
+    //glTranslatef(-width() / 2.0, -height() / 2.0, -length() / 2.0);
     glScalef(width(), height(), length());
     glutWireCube(1);
     glPopMatrix();
@@ -71,8 +80,71 @@ bounding_box::operator bool() const {
            length() >= DBL_EPSILON;
 }
 
+void print_box(const char *name, const bounding_box &b) {
+    printf("%s - x:%.2f y:%.2f z:%.2f w:%.2f h:%.2f l:%.2f\n", name, b.x1(), b.y1(), b.z1(), b.width(), b.height(), b.length());
+}
+
+void bounding_box::scale(scalar_t sx, scalar_t sy, scalar_t sz) {
+    auto w = (fabs(width() * sx) - width()) / 2,
+         h = (fabs(height() * sy) - height()) / 2,
+         l = (fabs(length() * sz) - length()) / 2;
+
+    x1_ -= w;
+    x2_ += w;
+    y1_ -= h;
+    y2_ += h;
+    z1_ -= l;
+    z2_ += l;
+}
+
+void bounding_box::scale(const vector3 &delta) {
+    scale(delta.x(), delta.y(), delta.z());
+}
+
+void bounding_box::translate(scalar_t dx, scalar_t dy, scalar_t dz) {
+    x1_ += dx;
+    x2_ += dx;
+    y1_ += dy;
+    y2_ += dy;
+    z1_ += dz;
+    z2_ += dz;
+}
+
+void bounding_box::translate(const vector3 &delta) {
+    translate(delta.x(), delta.y(), delta.z());
+}
+
 bounding_box bounding_box::intersect(const bounding_box &bb) const {
-    return bounding_box();
+    bounding_box ret;
+
+    if (!bb || !*this)
+        return ret;
+
+    if (x1() <= bb.x2()) {
+        ret.x2() = std::fmin(x2(), bb.x2());
+    }
+    if (x2() >= bb.x1()) {
+        ret.x1() = std::fmax(x1(), bb.x1());
+    }
+    if (y1() <= bb.y2()) {
+        ret.y2() = std::fmin(y2(), bb.y2());
+    }
+    if (y2() >= bb.y1()) {
+        ret.y1() = std::fmax(y1(), bb.y1());
+    }
+    if (z1() <= bb.z2()) {
+        ret.z2() = std::fmin(z2(), bb.z2());
+    }
+    if (z2() >= bb.z1()) {
+        ret.z1() = std::fmax(z1(), bb.z1());
+    }
+
+
+    print_box("Box 1", *this);
+    print_box("Box 2", bb);
+    print_box("Isct", ret);
+
+    return ret;
 }
 
 bool bounding_box::intersects(const bounding_box &bb) const {

@@ -1,6 +1,8 @@
 #pragma once
 #include "opengl.h"
 
+class vector3;
+
 class bounding_box {
 public:
     typedef GLdouble scalar_t;
@@ -10,12 +12,18 @@ public:
     bounding_box(scalar_t x1, scalar_t y1, scalar_t z1, scalar_t x2,
                  scalar_t y2, scalar_t z2);
 
-    scalar_t x1() const;
-    scalar_t x2() const;
-    scalar_t y1() const;
-    scalar_t y2() const;
-    scalar_t z1() const;
-    scalar_t z2() const;
+    scalar_t &x1();
+    const scalar_t &x1() const;
+    scalar_t &x2();
+    const scalar_t &x2() const;
+    scalar_t &y1();
+    const scalar_t &y1() const;
+    scalar_t &y2();
+    const scalar_t &y2() const;
+    scalar_t &z1();
+    const scalar_t &z1() const;
+    scalar_t &z2();
+    const scalar_t &z2() const;
 
     scalar_t length() const;
     scalar_t height() const;
@@ -29,6 +37,12 @@ public:
     void z2(scalar_t newz);
 
     void draw();
+
+    void scale(scalar_t dx, scalar_t dy, scalar_t dz);
+    void scale(const vector3 &delta);
+
+    void translate(scalar_t dx, scalar_t dy, scalar_t dz);
+    void translate(const vector3 &delta);
 
     bool intersects(const bounding_box &bb) const;
     bounding_box intersect(const bounding_box &bb) const;

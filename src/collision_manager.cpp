@@ -29,8 +29,31 @@ collision_manager::collisions(std::shared_ptr<game_object> obj) const {
     if (!obj)
         return ret;
 
+    bounding_box bb = obj->bounding_box();
+    bb.translate(obj->position());
+
     for (auto other : objs_) {
         if (obj != other) {
+            auto isct = obj->bounding_box().intersect(other->bounding_box());
+
+            if (isct) {
+                ret.emplace_back(isct, other);
+            }
+        }
+    }
+
+    return ret;
+}
+
+std::vector<std::pair<bounding_box, std::shared_ptr<game_object>>>
+collision_manager::collisions(const game_object *obj) const {
+    std::vector<std::pair<bounding_box, std::shared_ptr<game_object>>> ret;
+
+    if (!obj)
+        return ret;
+
+    for (auto other : objs_) {
+        if (obj != other.get()) {
             auto isct = obj->bounding_box().intersect(other->bounding_box());
 
             if (isct) {

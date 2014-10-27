@@ -14,7 +14,6 @@ set(HEADER_FILES
   include/car.h
   include/collision_manager.h
   include/dynamic_object.h
-  include/entity.h
   include/frog.h
   include/game_manager.h
   include/game_object.h
@@ -39,7 +38,6 @@ set(SOURCE_FILES
   src/car.cpp
   src/collision_manager.cpp
   src/dynamic_object.cpp
-  src/entity.cpp
   src/frog.cpp
   src/frog_leg.cpp
   src/game_manager.cpp

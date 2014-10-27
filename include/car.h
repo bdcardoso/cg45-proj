@@ -3,6 +3,8 @@
 
 class car : public dynamic_object {
 public:
+    car();
+
     void draw() override;
     void update(glut_time_t dt) override;
 };

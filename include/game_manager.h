@@ -12,7 +12,6 @@ private:
     std::vector<std::shared_ptr<game_object>> game_objects_;
     std::vector<std::shared_ptr<light_source>> light_sources_;
     std::vector<std::shared_ptr<camera>> cameras_;
-    collision_manager colman_;
 
     glut_time_t last_time_;
 
@@ -22,9 +21,9 @@ private:
     GLdouble WINDOW_WIDTH, WINDOW_HEIGHT, GAME_WIDTH, GAME_HEIGHT, GAME_DEPTH;
 
     friend class singleton;
+    game_manager();
 
 public:
-    game_manager();
 
     void init(int w, int h);
 

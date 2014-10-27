@@ -3,7 +3,10 @@
 dynamic_object::dynamic_object() {}
 
 // By default we just advance the position
-void dynamic_object::update(glut_time_t dt) { position() += speed() * dt; }
+void dynamic_object::update(glut_time_t dt) {
+    game_object::update(dt);
+    position() += speed() * dt;
+}
 
 vector3 &dynamic_object::speed() { return speed_; }
 

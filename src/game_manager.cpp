@@ -34,87 +34,87 @@ game_manager::game_manager()
     last_time_ = glutGet(GLUT_ELAPSED_TIME);
 
     auto frog_ = std::make_shared<frog>();
-    frog_->position(vector3(0.0, FROG_LEVEL, 1.95));
+    frog_->position() = vector3(0.0, FROG_LEVEL, 1.95);
     frog_->scale(0.1);
 
     auto car1_ = std::make_shared<car>();
-    car1_->position(vector3(-1.2, ROAD_LEVEL, LINE_4));
+    car1_->position() = vector3(-1.2, ROAD_LEVEL, LINE_4);
     car1_->scale(0.1);
-    car1_->speed(1.5, 0, 0);
+    car1_->speed().x() = 1.5;
 
     auto truck1_ = std::make_shared<truck>();
-    truck1_->position(vector3(-1.5, ROAD_LEVEL, LINE_3));
+    truck1_->position() = vector3(-1.5, ROAD_LEVEL, LINE_3);
     truck1_->scale(0.1);
-    truck1_->speed(2.5, 0, 0);
+    truck1_->speed().x() = 2.5;
 
     auto truck2_ = std::make_shared<truck>();
-    truck2_->position(vector3(0.0, ROAD_LEVEL, LINE_3));
+    truck2_->position() = vector3(0.0, ROAD_LEVEL, LINE_3);
     truck2_->scale(0.1);
-    truck2_->speed(2.5, 0, 0);
+    truck2_->speed().x() = 2.5;
 
     auto truck3_ = std::make_shared<truck>();
-    truck3_->position(vector3(1.5, ROAD_LEVEL, LINE_3));
+    truck3_->position() = vector3(1.5, ROAD_LEVEL, LINE_3);
     truck3_->scale(0.1);
-    truck3_->speed(2.5, 0, 0);
+    truck3_->speed().x() = 2.5;
 
     auto bus1_ = std::make_shared<bus>();
-    bus1_->position(vector3(0.9, ROAD_LEVEL, LINE_5));
+    bus1_->position() = vector3(0.9, ROAD_LEVEL, LINE_5);
     bus1_->scale(0.1);
-    bus1_->speed(1.5, 0, 0);
+    bus1_->speed().x() = 1.5;
 
     auto bus2_ = std::make_shared<bus>();
-    bus2_->position(vector3(-0.1, ROAD_LEVEL, LINE_4));
+    bus2_->position() = vector3(-0.1, ROAD_LEVEL, LINE_4);
     bus2_->scale(0.1);
-    bus2_->speed(1.5, 0, 0);
+    bus2_->speed().x() = 1.5;
 
     auto log1_ = std::make_shared<timberlog>();
-    log1_->position(vector3(-0.6, RIVER_LEVEL, LINE_1));
+    log1_->position() = vector3(-0.6, RIVER_LEVEL, LINE_1);
     log1_->scale(0.1);
-    log1_->speed(4.5, 0, 0);
+    log1_->speed().x() = 4.5;
 
     auto log2_ = std::make_shared<timberlog>();
-    log2_->position(vector3(-1.4, RIVER_LEVEL, LINE_2));
+    log2_->position() =vector3(-1.4, RIVER_LEVEL, LINE_2);
     log2_->scale(0.1);
-    log2_->speed(4.0, 0, 0);
+    log2_->speed().x() = 4.0;
 
     auto log3_ = std::make_shared<timberlog>();
-    log3_->position(vector3(0.8, RIVER_LEVEL, LINE_2));
+    log3_->position() = vector3(0.8, RIVER_LEVEL, LINE_2);
     log3_->scale(0.1);
-    log3_->speed(4.0, 0, 0);
+    log3_->speed().x() = 4.0;
 
     auto log4_ = std::make_shared<timberlog>();
-    log4_->position(vector3(1.4, RIVER_LEVEL, LINE_1));
+    log4_->position() = vector3(1.4, RIVER_LEVEL, LINE_1);
     log4_->scale(0.1);
-    log4_->speed(4.5, 0, 0);
+    log4_->speed().x() = 4.5;
 
     auto turtle1_ = std::make_shared<turtle>();
-    turtle1_->position(vector3(-2.5, RIVER_LEVEL + 0.05, LINE_6));
+    turtle1_->position() = vector3(-2.5, RIVER_LEVEL + 0.05, LINE_6);
     turtle1_->scale(0.1);
-    turtle1_->speed(2, 0, 0);
+    turtle1_->speed().x() = 2;
 
     auto turtle2_ = std::make_shared<turtle>();
-    turtle2_->position(vector3(-1.25, RIVER_LEVEL + 0.05, LINE_6));
+    turtle2_->position() = vector3(-1.25, RIVER_LEVEL + 0.05, LINE_6);
     turtle2_->scale(0.1);
-    turtle2_->speed(2, 0, 0);
+    turtle2_->speed().x() = 2;
 
     auto turtle3_ = std::make_shared<turtle>();
-    turtle3_->position(vector3(1.25, RIVER_LEVEL + 0.05, LINE_6));
+    turtle3_->position() = vector3(1.25, RIVER_LEVEL + 0.05, LINE_6);
     turtle3_->scale(0.1);
-    turtle3_->speed(2, 0, 0);
+    turtle3_->speed().x() = 2;
 
     auto turtle4_ = std::make_shared<turtle>();
-    turtle4_->position(vector3(2.5, RIVER_LEVEL + 0.05, LINE_6));
+    turtle4_->position() = vector3(2.5, RIVER_LEVEL + 0.05, LINE_6);
     turtle4_->scale(0.1);
-    turtle4_->speed(2, 0, 0);
+    turtle4_->speed().x() = 2;
 
     auto river_ = std::make_shared<river>();
-    river_->position(vector3(0.0, 0.0, LINE_1));
+    river_->position() = vector3(0.0, 0.0, LINE_1);
 
     auto tunnel_ = std::make_shared<tunnel>();
-    tunnel_->position(vector3(0.0, 0.0, LINE_1));
+    tunnel_->position() = vector3(0.0, 0.0, LINE_1);
 
     auto road_ = std::make_shared<road>();
-    road_->position(vector3(0.0, 0.0, LINE_4));
+    road_->position() = vector3(0.0, 0.0, LINE_4);
 
     game_objects_.push_back(frog_);
 
@@ -136,21 +136,21 @@ game_manager::game_manager()
     game_objects_.push_back(bus1_);
     game_objects_.push_back(bus2_);
 
-    colman_.register_object(frog_);
-    colman_.register_object(log1_);
-    colman_.register_object(log2_);
-    colman_.register_object(log3_);
-    colman_.register_object(log3_);
-    colman_.register_object(turtle1_);
-    colman_.register_object(turtle2_);
-    colman_.register_object(turtle3_);
-    colman_.register_object(turtle3_);
-    colman_.register_object(car1_);
-    colman_.register_object(truck1_);
-    colman_.register_object(truck2_);
-    colman_.register_object(truck3_);
-    colman_.register_object(bus1_);
-    colman_.register_object(bus2_);
+    collision_manager::instance().register_object(frog_);
+    collision_manager::instance().register_object(log1_);
+    collision_manager::instance().register_object(log2_);
+    collision_manager::instance().register_object(log3_);
+    collision_manager::instance().register_object(log3_);
+    collision_manager::instance().register_object(turtle1_);
+    collision_manager::instance().register_object(turtle2_);
+    collision_manager::instance().register_object(turtle3_);
+    collision_manager::instance().register_object(turtle3_);
+    collision_manager::instance().register_object(car1_);
+    collision_manager::instance().register_object(truck1_);
+    collision_manager::instance().register_object(truck2_);
+    collision_manager::instance().register_object(truck3_);
+    collision_manager::instance().register_object(bus1_);
+    collision_manager::instance().register_object(bus2_);
 
     // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
@@ -201,10 +201,12 @@ void game_manager::display() {
 
     for (auto obj : game_objects_) {
         glPushMatrix();
+
         auto pos = obj->position();
         glTranslatef(pos.x(), pos.y(), pos.z());
         auto scl = obj->scale();
         glScalef(scl.x(), scl.y(), scl.z());
+        obj->bounding_box().draw();
 
         obj->draw();
         glPopMatrix();
