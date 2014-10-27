@@ -16,7 +16,7 @@ road::road() {
            ROAD_MARGIN > 0 && TAR_DEPTH > 0 && ROAD_BOTTOM > 0);
     assert(ROAD_WIDTH > 2 * ROAD_MARGIN);
     assert(TAR_DEPTH <= MARGIN_HEIGHT);
-    scale_.y(0.1);
+    scale().y() = 0.1;
 }
 
 void road::draw() {

@@ -6,17 +6,12 @@ vector3::vector3(GLdouble x, GLdouble y, GLdouble z) {
     coords_[2] = z;
 }
 
-GLdouble vector3::x() const { return coords_[0]; }
-
-GLdouble vector3::y() const { return coords_[1]; }
-
-GLdouble vector3::z() const { return coords_[2]; }
-
-void vector3::x(GLdouble newx) { coords_[0] = newx; }
-
-void vector3::y(GLdouble newy) { coords_[1] = newy; }
-
-void vector3::z(GLdouble newz) { coords_[2] = newz; }
+GLdouble &vector3::x() { return coords_[0]; }
+const GLdouble &vector3::x() const { return coords_[0]; }
+GLdouble &vector3::y() { return coords_[1]; }
+const GLdouble &vector3::y() const { return coords_[1]; }
+GLdouble &vector3::z() { return coords_[2]; }
+const GLdouble &vector3::z() const { return coords_[2]; }
 
 void vector3::set(GLdouble x, GLdouble y, GLdouble z) {
     coords_[0] = x;

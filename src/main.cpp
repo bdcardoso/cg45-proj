@@ -3,7 +3,10 @@
 
 constexpr int FPS = 60, GAME_WIDTH = 500, GAME_HEIGHT = 400;
 
-void init(void) { glEnable(GL_DEPTH_TEST); game_manager::instance().init(GAME_WIDTH, GAME_HEIGHT); }
+void init(void) {
+    glEnable(GL_DEPTH_TEST);
+    game_manager::instance().init(GAME_WIDTH, GAME_HEIGHT);
+}
 
 void display() {
     glClearColor(0.f, 0.f, 0.f, 0.f);
@@ -27,15 +30,21 @@ void timer(int value) {
     glutTimerFunc(1000 / FPS, timer, 0);
 }
 
-void keyboard(unsigned char key, int x, int y) { game_manager::instance().keyboard(key, x, y); }
+void keyboard(unsigned char key, int x, int y) {
+    game_manager::instance().keyboard(key, x, y);
+}
 
 void keyboardUp(unsigned char key, int x, int y) {
     game_manager::instance().keyboardUp(key, x, y);
 }
 
-void special(int key, int x, int y) { game_manager::instance().special(key, x, y); }
+void special(int key, int x, int y) {
+    game_manager::instance().special(key, x, y);
+}
 
-void specialUp(int key, int x, int y) { game_manager::instance().specialUp(key, x, y); }
+void specialUp(int key, int x, int y) {
+    game_manager::instance().specialUp(key, x, y);
+}
 
 int main(int argc, char *argv[]) {
     glutInit(&argc, argv);

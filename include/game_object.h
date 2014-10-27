@@ -11,11 +11,11 @@ public:
     game_object();
 
     vector3 &scale();
-    void scale(const vector3 &s);
-    void scale(GLdouble factor);
+    const vector3 &scale() const;
+    void scale(vector3::scalar_t s);
 
-    const class bounding_box &bounding_box() const;
     class bounding_box &bounding_box();
+    const class bounding_box &bounding_box() const;
 
     virtual void draw(){};
     virtual void keydown(unsigned char key) { (void)key; };

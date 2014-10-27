@@ -17,7 +17,7 @@ river::river() {
            RIVER_MARGIN > 0 && WATER_DEPTH > 0 && RIVER_BOTTOM > 0);
     assert(RIVER_WIDTH > 2 * RIVER_MARGIN);
     assert(WATER_DEPTH <= MARGIN_HEIGHT);
-    scale().y(0.1);
+    scale().y() = 0.1;
 }
 
 void river::draw() {

@@ -8,13 +8,12 @@ public:
 
     vector3(scalar_t x = 0, scalar_t y = 0, scalar_t z = 0);
 
-    scalar_t x() const;
-    scalar_t y() const;
-    scalar_t z() const;
-
-    void x(scalar_t newx);
-    void y(scalar_t newy);
-    void z(scalar_t newz);
+    scalar_t &x();
+    const scalar_t &x() const;
+    scalar_t &y();
+    const scalar_t &y() const;
+    scalar_t &z();
+    const scalar_t &z() const;
 
     const scalar_t *get() const;
     void set(scalar_t x, scalar_t y, scalar_t z = 0);

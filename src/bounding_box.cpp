@@ -55,12 +55,13 @@ scalar_t bounding_box::length() const { return z2() - z1(); }
 
 void bounding_box::draw() {
     // Don't draw if "null" box
-    if (!*this) return;
+    if (!*this)
+        return;
 
     glPushMatrix();
     glColor3ub(0, 255, 0);
-    glTranslatef(-width()/2.0, -height()/2.0, -length()/2.0);
-    glScalef(width(), height(), length());            
+    glTranslatef(-width() / 2.0, -height() / 2.0, -length() / 2.0);
+    glScalef(width(), height(), length());
     glutWireCube(1);
     glPopMatrix();
 }

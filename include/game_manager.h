@@ -21,6 +21,8 @@ private:
     GLdouble spin_, tilt_, spin_speed_, tilt_speed_;
     GLdouble WINDOW_WIDTH, WINDOW_HEIGHT, GAME_WIDTH, GAME_HEIGHT, GAME_DEPTH;
 
+    friend class singleton;
+
 public:
     game_manager();
 

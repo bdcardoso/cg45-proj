@@ -337,4 +337,3 @@ GLdouble game_manager::game_height() const { return GAME_HEIGHT; }
 GLdouble game_manager::game_depth() const { return GAME_DEPTH; }
 GLdouble game_manager::window_width() const { return WINDOW_WIDTH; }
 GLdouble game_manager::window_height() const { return WINDOW_HEIGHT; }
-

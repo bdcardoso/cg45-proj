@@ -3,8 +3,7 @@
 
 frog::frog() {
     camera_ = std::make_shared<perspective_camera>(90, 1, 0.01, 10);
-    bounding_box() = ::bounding_box(-1.0, -1.0, -1.0,
-                                     1.0,  1.0,  1.0);
+    bounding_box() = ::bounding_box(-1.0, -1.0, -1.0, 1.0, 1.0, 1.0);
 }
 
 std::shared_ptr<camera> frog::cam() { return camera_; }
@@ -47,31 +46,10 @@ void frog::draw() {
 void frog::update(glut_time_t dt) {
     dynamic_object::update(dt);
 
-
-
-    if (position().x() < -1.85) {
-        auto newPos = position();
-        newPos.x(-1.85);
-        position(newPos);
-    }
-
-    if (position().x() > 1.85) {
-        auto newPos = position();
-        newPos.x(1.85);
-        position(newPos);
-    }
-
-    if (position().z() < -1.9) {
-        auto newPos = position();
-        newPos.z(-1.9);
-        position(newPos);
-    }
-
-    if (position().z() > 1.9) {
-        auto newPos = position();
-        newPos.z(1.9);
-        position(newPos);
-    }
+    position().x() = position().x() < -1.85 ? -1.85 : position().x();
+    position().x() = position().x() > 1.85 ? 1.85 : position().x();
+    position().z() = position().z() < -1.90 ? -1.90 : position().z();
+    position().z() = position().z() > 1.90 ? 1.90 : position().z();
 
     camera_->eye() = position() + vector3(0, 1.5, 0.5);
     camera_->at() = position();
@@ -81,16 +59,16 @@ void frog::update(glut_time_t dt) {
 void frog::keydown(unsigned char key) {
     switch (key) {
     case 'o':
-        speed(speed() - vector3(SPEED_X, 0, 0));
+        speed().x() -= SPEED_X;
         break;
     case 'p':
-        speed(speed() + vector3(SPEED_X, 0, 0));
+        speed().x() += SPEED_X;
         break;
     case 'q':
-        speed(speed() - vector3(0, 0, SPEED_Z));
+        speed().z() -= SPEED_Z;
         break;
     case 'a':
-        speed(speed() + vector3(0, 0, SPEED_Z));
+        speed().z() += SPEED_Z;
         break;
     default:
         break;
@@ -100,16 +78,16 @@ void frog::keydown(unsigned char key) {
 void frog::keyup(unsigned char key) {
     switch (key) {
     case 'o':
-        speed(speed() + vector3(SPEED_X, 0, 0));
+        speed().x() += SPEED_X;
         break;
     case 'p':
-        speed(speed() - vector3(SPEED_X, 0, 0));
+        speed().x() -= SPEED_X;
         break;
     case 'q':
-        speed(speed() + vector3(0, 0, SPEED_Z));
+        speed().z() += SPEED_Z;
         break;
     case 'a':
-        speed(speed() - vector3(0, 0, SPEED_Z));
+        speed().z() -= SPEED_Z;
         break;
     default:
         break;
