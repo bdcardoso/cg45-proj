@@ -1,6 +1,8 @@
 #include "frog.h"
 #include "collision_manager.h"
 #include "perspective_camera.h"
+#include "river.h"
+#include "timberlog.h"
 #include <cstdio>
 
 frog::frog() {
@@ -51,7 +53,37 @@ void frog::update(glut_time_t dt) {
     auto collisions = collision_manager::instance().collisions(this);
     if (collisions.size() != 0) {
         puts("Frog collision!");
-        position() = vector3(0.0, 0.05, 1.95);
+        // position() = vector3(0.0, 0.05, 1.95);
+        
+        bool touchesRiver = false,
+             touchesLog   = false,
+             touchesOther = false;
+
+        for (auto col : collisions) {
+            std::shared_ptr<game_object> obj;
+            class bounding_box bb;
+            std::tie(bb, obj) = col;
+
+            if (dynamic_cast<river *>(obj.get()) != nullptr) {
+                puts("Frog touching river!");
+                touchesRiver = true;
+                continue;
+            }
+            else if (dynamic_cast<timberlog *>(obj.get()) != nullptr) {
+                puts("Frog touching timberlog!");
+                touchesLog = true;
+                continue;
+            }
+            else {
+                puts("Frog touching other!");
+                touchesOther = true;
+                break;
+            }
+        }
+
+        if (touchesOther || (touchesRiver && !touchesLog)) {
+            position() = vector3(0.0, 0.05, 1.95);
+        }
     }
 
     position().x() = position().x() < -1.85 ? -1.85 : position().x();
