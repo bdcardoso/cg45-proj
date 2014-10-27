@@ -67,7 +67,7 @@ void bounding_box::draw() {
     if (!*this)
         return;
 
-    glPushMatrix();
+    /*glPushMatrix();
     glColor3ub(0, 255, 0);
     glBegin(GL_LINE_LOOP);
     glVertex3d(x1(), y1(), z1());
@@ -97,7 +97,7 @@ void bounding_box::draw() {
     glVertex3d(x2(), y2(), z1());
     glVertex3d(x2(), y2(), z2());
     glEnd();
-    glPopMatrix();
+    glPopMatrix();*/
 }
 
 void bounding_box::scale(scalar_t sx, scalar_t sy, scalar_t sz) {

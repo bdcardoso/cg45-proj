@@ -105,7 +105,7 @@ void frog::update(glut_time_t dt) {
     position().z() = position().z() > 1.90 ? 1.90 : position().z();
 
     camera_->eye() = position() + vector3(0, 1.5, 0.5);
-    camera_->at() = position();
+    camera_->at() = position() + vector3(0.0,0.0,-1.0);
     camera_->up() = vector3(0.0, 1.0, 0.0);
 }
 
