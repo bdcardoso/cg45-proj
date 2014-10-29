@@ -97,13 +97,4 @@ void car::draw() {
     glPopMatrix();
 }
 
-void car::update(glut_time_t dt) {
-    dynamic_object::update(dt);
-    if(speed().x() < 4.0){
-		speed().x() += 0.0003;
-	}
-
-    if (position().x() > 2.75) {
-        position().x() = -2.90;
-    }
-}
+void car::update(glut_time_t dt) { dynamic_object::update(dt); }

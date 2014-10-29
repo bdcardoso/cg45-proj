@@ -62,12 +62,12 @@ scalar_t bounding_box::width() const { return x2() - x1(); }
 scalar_t bounding_box::height() const { return y2() - y1(); }
 scalar_t bounding_box::length() const { return z2() - z1(); }
 
-void bounding_box::draw() {
+void bounding_box::draw() const {
     // Don't draw if "null" box
     if (!*this)
         return;
 
-    /*glPushMatrix();
+    glPushMatrix();
     glColor3ub(0, 255, 0);
     glBegin(GL_LINE_LOOP);
     glVertex3d(x1(), y1(), z1());
@@ -97,7 +97,7 @@ void bounding_box::draw() {
     glVertex3d(x2(), y2(), z1());
     glVertex3d(x2(), y2(), z2());
     glEnd();
-    glPopMatrix();*/
+    glPopMatrix();
 }
 
 void bounding_box::scale(scalar_t sx, scalar_t sy, scalar_t sz) {
@@ -135,53 +135,45 @@ void print_box(const char *name, const bounding_box &b) {
            b.y1(), b.z1(), b.width(), b.height(), b.length());
 }
 
+//////////////////////////////////////////////////////////////////////////////
+// We need only compare the xx and zz axis, since height is not a concern
+// on this game
+//////////////////////////////////////////////////////////////////////////////
+
 bounding_box::operator bool() const {
-    return width() >= DBL_EPSILON && 
-           length() >= DBL_EPSILON;
+    if (0) {
+        return width() >= DBL_EPSILON && length() >= DBL_EPSILON &&
+               height() >= DBL_EPSILON;
+    }
+
+    return width() >= DBL_EPSILON && length() >= DBL_EPSILON;
 }
 
 bounding_box bounding_box::intersect(const bounding_box &bb) const {
     bounding_box ret;
-    scalar_t l, r, aux;
 
-    if (x2() < bb.x1() || x1() > bb.x2())
-        goto yy;
+    if (x2() >= bb.x1() && x1() <= bb.x2()) {
+        ret.x1() = std::fmax(x1(), bb.x1());
+        ret.x2() = std::fmin(x2(), bb.x2());
+    }
 
-    ret.x1() = std::fmax(x1(), bb.x1());
-    ret.x2() = std::fmin(x2(), bb.x2());
+    if (0 && y2() >= bb.y1() && y1() <= bb.y2()) {
+        ret.y1() = std::fmax(y1(), bb.y1());
+        ret.y2() = std::fmin(y2(), bb.y2());
+    }
 
-yy:
-    if (y2() < bb.y1() || y1() > bb.y2())
-        goto zz;
-
-    ret.y1() = std::fmax(y1(), bb.y1());
-    ret.y2() = std::fmin(y2(), bb.y2());
-
-zz:
-    if (z2() < bb.z1() || z1() > bb.z2())
-        goto ee;
-
-    ret.z1() = std::fmax(z1(), bb.z1());
-    ret.z2() = std::fmin(z2(), bb.z2());
-
-ee:
-    if (ret) {
-        print_box("Box 1", *this);
-        print_box("Box 2", bb);
-        print_box("Isct", ret);
+    if (z2() >= bb.z1() && z1() <= bb.z2()) {
+        ret.z1() = std::fmax(z1(), bb.z1());
+        ret.z2() = std::fmin(z2(), bb.z2());
     }
 
     return ret;
 }
 
 bool bounding_box::intersects(const bounding_box &bb) const {
-    bool xOverlaps = true;
-    bool yOverlaps = true;
-    bool zOverlaps = true;
-
-    xOverlaps = !(x2() < bb.x1() || x1() > bb.x2());
-    yOverlaps = !(y2() < bb.y1() || y1() > bb.y2());
-    zOverlaps = !(z2() < bb.z1() || z1() > bb.z2());
+    bool xOverlaps = x2() >= bb.x1() || x1() <= bb.x2();
+    bool yOverlaps = true || y2() >= bb.y1() || y1() <= bb.y2();
+    bool zOverlaps = z2() >= bb.z1() || z1() <= bb.z2();
 
     return xOverlaps && yOverlaps && zOverlaps;
 }

@@ -5,13 +5,10 @@ constexpr auto COLOR_RED = 255, COLOR_GREEN = 100, COLOR_BLUE = 20, SLICES = 20,
 
 constexpr auto RADIUS_0 = 0.5f, RADIUS_Z = 0.5f, HEIGHT = 6.0f,
                COORD_X = HEIGHT / -2, COORD_Y = 0.0f, COORD_Z = 0.0f;
-               
-timberlog::timberlog(){
-    bounding_box() = ::bounding_box(
-        -3.5, 0, -1.8,
-        3.5, 0, 1.8 );
-}
 
+timberlog::timberlog() {
+    bounding_box() = ::bounding_box(-3.5, 0, -1.8, 3.5, 0, 1.8);
+}
 
 void timberlog::draw() {
     glColor3ub(COLOR_RED, COLOR_GREEN, COLOR_BLUE);
@@ -25,14 +22,4 @@ void timberlog::draw() {
     glPopMatrix();
 }
 
-void timberlog::update(glut_time_t dt) {
-    dynamic_object::update(dt);
-    
-    if(speed().x() < 4.0){
-		speed().x() += 0.0003;
-	}
-
-    if (position().x() > 2.75) {
-        position().x() = -2.90;
-    }
-}
+void timberlog::update(glut_time_t dt) { dynamic_object::update(dt); }

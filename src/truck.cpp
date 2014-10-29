@@ -38,9 +38,8 @@ constexpr auto BODY_SIZE_X = 2.0f, BODY_SIZE_Y = 2.0f, BODY_SIZE_Z = 3.0f,
                WHEEL_COORD_BACK_RIGHT2_Z = 1.5f;
 
 truck::truck() {
-    bounding_box() = ::bounding_box(
-        -TRUCK_END, -3, -BODY_SIZE_Z/2,
-         TRUCK_END,  3,  BODY_SIZE_Z/2);
+    bounding_box() = ::bounding_box(-TRUCK_END, -3, -BODY_SIZE_Z / 2, TRUCK_END,
+                                    3, BODY_SIZE_Z / 2);
 }
 
 void truck::draw() {
@@ -123,14 +122,4 @@ void truck::draw() {
     glPopMatrix();
 }
 
-void truck::update(glut_time_t dt) {
-    dynamic_object::update(dt);
-    
-    if(speed().x() < 4.0){
-		speed().x() += 0.0003;
-	}
-
-    if (position().x() > 2.75) {
-        position().x() = -2.90;
-    }
-}
+void truck::update(glut_time_t dt) { dynamic_object::update(dt); }

@@ -3,7 +3,7 @@
 
 class timberlog : public dynamic_object {
 public:
-	timberlog();
+    timberlog();
     void draw() override;
     void update(glut_time_t dt) override;
 };

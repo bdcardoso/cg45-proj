@@ -19,8 +19,9 @@ river::river() {
     assert(WATER_DEPTH <= MARGIN_HEIGHT);
     scale().y() = 0.1;
 
-    bounding_box() = ::bounding_box(-RIVER_LENGTH / 2, 0, 0.64 * -WATER_WIDTH / 2,
-                                    RIVER_LENGTH / 2, 0, 0.64 * WATER_WIDTH / 2);
+    bounding_box() =
+        ::bounding_box(-RIVER_LENGTH / 2, 0, 0.8 * -WATER_WIDTH / 2,
+                       RIVER_LENGTH / 2, 0, 0.8 * WATER_WIDTH / 2);
 }
 
 void river::draw() {

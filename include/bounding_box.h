@@ -36,7 +36,7 @@ public:
     void z1(scalar_t newz);
     void z2(scalar_t newz);
 
-    void draw();
+    void draw() const;
 
     void scale(scalar_t dx, scalar_t dy, scalar_t dz);
     void scale(const vector3 &delta);

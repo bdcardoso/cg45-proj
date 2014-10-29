@@ -14,15 +14,15 @@
 
 constexpr auto FROG_LEVEL = 0.05, ROAD_LEVEL = 0.05, RIVER_LEVEL = 0.05,
                LINE_1 = -1.0, LINE_2 = -0.5, LINE_3 = 0.5, LINE_4 = 1.0,
-               LINE_5 = 1.5, LINE_6 = -1.5; 
-               
+               LINE_5 = 1.5, LINE_6 = -1.5;
+
 void game_manager::init(int w, int h) {
     WINDOW_WIDTH = w;
     WINDOW_HEIGHT = h;
 }
 
 game_manager::game_manager()
-        : current_camera_(0),
+        : current_camera_(2),
           spin_(0.0),
           tilt_(0.0),
           spin_speed_(0.0),
@@ -34,76 +34,76 @@ game_manager::game_manager()
     last_time_ = glutGet(GLUT_ELAPSED_TIME);
 
     auto frog_ = std::make_shared<frog>();
-    frog_->position() = vector3(0.0 -5, FROG_LEVEL, 1.95);
+    frog_->position() = vector3(0.0, FROG_LEVEL, 1.95);
     frog_->scale(0.1);
 
     auto car1_ = std::make_shared<car>();
-    car1_->position() = vector3(-1.2 -5, ROAD_LEVEL, LINE_4);
+    car1_->position() = vector3(-1.2, ROAD_LEVEL, LINE_4);
     car1_->scale(0.1);
     car1_->speed().x() = 1.0;
 
     auto truck1_ = std::make_shared<truck>();
-    truck1_->position() = vector3(-1.5 -5, ROAD_LEVEL, LINE_3);
+    truck1_->position() = vector3(-1.5, ROAD_LEVEL, LINE_3);
     truck1_->scale(0.1);
     truck1_->speed().x() = 0.5;
 
     auto truck2_ = std::make_shared<truck>();
-    truck2_->position() = vector3(0.0 -5, ROAD_LEVEL, LINE_3);
+    truck2_->position() = vector3(0.0, ROAD_LEVEL, LINE_3);
     truck2_->scale(0.1);
     truck2_->speed().x() = 0.5;
 
     auto truck3_ = std::make_shared<truck>();
-    truck3_->position() = vector3(1.5 -5, ROAD_LEVEL, LINE_3);
+    truck3_->position() = vector3(1.5, ROAD_LEVEL, LINE_3);
     truck3_->scale(0.1);
     truck3_->speed().x() = 0.5;
 
     auto bus1_ = std::make_shared<bus>();
-    bus1_->position() = vector3(0.9 -5, ROAD_LEVEL, LINE_5);
+    bus1_->position() = vector3(0.9, ROAD_LEVEL, LINE_5);
     bus1_->scale(0.1);
     bus1_->speed().x() = 1.5;
 
     auto bus2_ = std::make_shared<bus>();
-    bus2_->position() = vector3(-0.1 -5, ROAD_LEVEL, LINE_4);
+    bus2_->position() = vector3(-0.1, ROAD_LEVEL, LINE_4);
     bus2_->scale(0.1);
     bus2_->speed().x() = 1.0;
 
     auto log1_ = std::make_shared<timberlog>();
-    log1_->position() = vector3(-0.6 -5 , RIVER_LEVEL, LINE_1);
+    log1_->position() = vector3(-0.6, RIVER_LEVEL, LINE_1);
     log1_->scale(0.1);
     log1_->speed().x() = 0.5;
 
     auto log2_ = std::make_shared<timberlog>();
-    log2_->position() = vector3(-1.1 - 5, RIVER_LEVEL, LINE_2);
+    log2_->position() = vector3(-1.1, RIVER_LEVEL, LINE_2);
     log2_->scale(0.1);
     log2_->speed().x() = 0.5;
 
     auto log3_ = std::make_shared<timberlog>();
-    log3_->position() = vector3(0.8 -5, RIVER_LEVEL, LINE_2);
+    log3_->position() = vector3(0.8, RIVER_LEVEL, LINE_2);
     log3_->scale(0.1);
     log3_->speed().x() = 0.5;
 
     auto log4_ = std::make_shared<timberlog>();
-    log4_->position() = vector3(1.4 -5, RIVER_LEVEL, LINE_1);
+    log4_->position() = vector3(1.4, RIVER_LEVEL, LINE_1);
     log4_->scale(0.1);
     log4_->speed().x() = 0.5;
 
     auto turtle1_ = std::make_shared<turtle>();
-    turtle1_->position() = vector3(-2.5 -5, RIVER_LEVEL + 0.05, LINE_6);
+    turtle1_->position() = vector3(-2.5, RIVER_LEVEL + 0.05, LINE_6);
     turtle1_->scale(0.1);
     turtle1_->speed().x() = 0.5;
 
     auto turtle2_ = std::make_shared<turtle>();
-    turtle2_->position() = vector3(-1.25 -5, RIVER_LEVEL + 0.05, LINE_6);
+    turtle2_->position() = vector3(-1.25, RIVER_LEVEL + 0.05, LINE_6);
     turtle2_->scale(0.1);
     turtle2_->speed().x() = 0.5;
 
     auto turtle3_ = std::make_shared<turtle>();
-    turtle3_->position() = vector3(1.25 -5, RIVER_LEVEL + 0.05, LINE_6);
+    turtle3_->position() = vector3(1.25, RIVER_LEVEL + 0.05, LINE_6);
     turtle3_->scale(0.1);
     turtle3_->speed().x() = 0.5;
 
     auto turtle4_ = std::make_shared<turtle>();
-    turtle4_->position() = vector3(2.5 -5, RIVER_LEVEL + 0.05, LINE_6);
+    turtle4_->position() = vector3(2.5, RIVER_LEVEL + 0.05, LINE_6);
     turtle4_->scale(0.1);
     turtle4_->speed().x() = 0.5;
 
@@ -143,20 +143,15 @@ game_manager::game_manager()
     collision_manager::instance().register_object(truck1_);
     collision_manager::instance().register_object(truck2_);
     collision_manager::instance().register_object(truck3_);
-    collision_manager::instance().register_object(river_);  
-    collision_manager::instance().register_object(log1_);    
-    collision_manager::instance().register_object(log2_);    
-    collision_manager::instance().register_object(log3_);    
-    collision_manager::instance().register_object(log4_);   
-    collision_manager::instance().register_object(turtle1_);    
-    collision_manager::instance().register_object(turtle2_);    
+    collision_manager::instance().register_object(river_);
+    collision_manager::instance().register_object(log1_);
+    collision_manager::instance().register_object(log2_);
+    collision_manager::instance().register_object(log3_);
+    collision_manager::instance().register_object(log4_);
+    collision_manager::instance().register_object(turtle1_);
+    collision_manager::instance().register_object(turtle2_);
     collision_manager::instance().register_object(turtle3_);
-    collision_manager::instance().register_object(turtle4_);                     
-                      
-
-
-
-
+    collision_manager::instance().register_object(turtle4_);
 
     // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
@@ -187,23 +182,8 @@ void game_manager::display() {
     glRotatef(tilt_, 1.0, 0.0, 0.0);
     glRotatef(spin_, 0.0, 1.0, 0.0);
 
-    // Axis helpers
-    glLineWidth(1.0);
-    glColor3ub(255, 0, 0);
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(100, 0, 0);
-    glEnd();
-    glColor3ub(0, 255, 0);
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 100, 0);
-    glEnd();
-    glColor3ub(0, 0, 255);
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 0, 100);
-    glEnd();
+    frog_bounds().draw();
+    game_object_bounds().draw();
 
     for (auto obj : game_objects_) {
         glPushMatrix();
@@ -350,3 +330,16 @@ GLdouble game_manager::game_height() const { return GAME_HEIGHT; }
 GLdouble game_manager::game_depth() const { return GAME_DEPTH; }
 GLdouble game_manager::window_width() const { return WINDOW_WIDTH; }
 GLdouble game_manager::window_height() const { return WINDOW_HEIGHT; }
+
+const bounding_box &game_manager::game_object_bounds() const {
+    // FIXME TODO XXX
+    static bounding_box bb(-game_width(), -0.5, -game_depth(), game_width(),
+                           0.5, game_depth());
+    return bb;
+}
+
+const bounding_box &game_manager::frog_bounds() const {
+    // FIXME TODO XXX
+    static bounding_box bb(-1.85, -0.5, -1.90, 1.85, 0.5, 1.90);
+    return bb;
+}

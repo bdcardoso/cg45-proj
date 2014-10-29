@@ -43,4 +43,7 @@ public:
     GLdouble game_width() const;
     GLdouble game_height() const;
     GLdouble game_depth() const;
+
+    const bounding_box &game_object_bounds() const;
+    const bounding_box &frog_bounds() const;
 };

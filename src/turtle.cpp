@@ -19,12 +19,9 @@ constexpr auto BODY_SIZE_X = 3.0f, BODY_SIZE_Y = 1.0f, BODY_SIZE_Z = 3.0f,
                LEG_COORD_BACK_LEFT_Z = -1.5f, LEG_COORD_BACK_RIGHT_X = -1.0f,
                LEG_COORD_BACK_RIGHT_Y = -0.75f, LEG_COORD_BACK_RIGHT_Z = 1.5f;
 
-turtle::turtle(){
-	    bounding_box() = ::bounding_box(
-        -2.0, 0, -2.0,
-         2.0,0,2.0);
+turtle::turtle() {
+    bounding_box() = ::bounding_box(-2.0, 0, -2.0, 2.0, 0, 2.0);
 }
-
 
 void turtle::draw() {
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
@@ -85,13 +82,4 @@ void turtle::draw() {
     glPopMatrix();
 }
 
-void turtle::update(glut_time_t dt) {
-    dynamic_object::update(dt);
-    
-    if(speed().x() < 4.0){
-		speed().x() += 0.0003;
-	}
-    if (position().x() > 2.75) {
-        position().x() = -2.90;
-    }
-}
+void turtle::update(glut_time_t dt) { dynamic_object::update(dt); }
