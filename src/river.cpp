@@ -54,7 +54,7 @@ void river::draw() {
         
     glColor3ub(0x41, 0x69, 0xe1);
     glPushMatrix();
-    glTranslatef(0.0, WATER_RAISE, 0.0);
+    glTranslatef(0.0, WATER_RAISE+3, 0.0);
     glScalef(RIVER_LENGTH, WATER_DEPTH, WATER_WIDTH);
     gluxSlicedCube(4, 1, 20);    
     glPopMatrix();
