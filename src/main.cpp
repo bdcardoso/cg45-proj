@@ -4,7 +4,18 @@
 constexpr int FPS = 60, GAME_WIDTH = 500, GAME_HEIGHT = 400;
 
 void init(void) {
+    glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+    glDisable(GL_LIGHT1);
+    glDisable(GL_LIGHT2);
+    glDisable(GL_LIGHT3);
+    glDisable(GL_LIGHT4);
+    glDisable(GL_LIGHT5);
+    glDisable(GL_LIGHT6);
+    glDisable(GL_LIGHT7);
+
     game_manager::instance().init(GAME_WIDTH, GAME_HEIGHT);
 }
 
@@ -12,9 +23,7 @@ void display() {
     glClearColor(0.f, 0.f, 0.f, 0.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glPushMatrix();
     game_manager::instance().display();
-    glPopMatrix();
 
     glFlush();
     glutSwapBuffers();

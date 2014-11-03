@@ -1,4 +1,5 @@
 #include "timberlog.h"
+#include "game_manager.h"
 
 constexpr auto COLOR_RED = 255, COLOR_GREEN = 100, COLOR_BLUE = 20, SLICES = 20,
                STACKS = 20;
@@ -22,4 +23,10 @@ void timberlog::draw() {
     glPopMatrix();
 }
 
-void timberlog::update(glut_time_t dt) { dynamic_object::update(dt); }
+void timberlog::update(glut_time_t dt) {
+    dynamic_object::update(dt);
+
+    if (position().x() > game_manager::instance().game_object_bounds().x2()) {
+        position().x() = game_manager::instance().game_object_bounds().x1();
+    }
+}

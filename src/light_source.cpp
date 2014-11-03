@@ -1,25 +1,43 @@
 #include "light_source.h"
 
-light_source::light_source(GLenum number) { num_ = number; }
+light_source::light_source(GLenum number) {
+    num_ = number;
+    state_ = true;
 
-bool light_source::state() const { return state_; }
+    ambient_.set(0.2, 0.2, 0.2, 1.0);
+    diffuse_.set(1.0, 1.0, 1.0, 1.0);
+    specular_.set(0.0, 0.0, 0.0, 1.0);
+    position_.set(0.0, 50000.0, 0.0, 0.0);
+    direction_.set(0.0, 0.0, -1.0);
 
-void light_source::state(bool state) { state_ = state; }
-
-GLenum light_source::num() const { return num_; }
-
-void light_source::ambient(const vector4 &amb) { ambient_ = amb; }
-
-void light_source::position(const vector4 &position) { position_ = position; }
-
-void light_source::direction(const vector3 &direction) {
-    direction_ = direction;
+    glEnable(num_);
 }
 
-void light_source::cutoff(GLdouble cutoff) { cutoff_ = cutoff; }
+vector4 light_source::position() { return position_; }
 
-void light_source::exponent(GLdouble exponent) { exponent_ = exponent; }
+void light_source::draw() {
+    glLightfv(num_, GL_AMBIENT, ambient_.get());
+    glLightfv(num_, GL_DIFFUSE, diffuse_.get());
+    glLightfv(num_, GL_SPECULAR, specular_.get());
+    glLightfv(num_, GL_POSITION, position_.get());
+    glLightfv(num_, GL_SPOT_DIRECTION, direction_.get());
+}
 
-void light_source::diffuse(const vector4 &diffuse) { diffuse_ = diffuse; }
+void light_source::keydown(unsigned char key) {}
+void light_source::keyup(unsigned char key) {
+    switch (key) {
+    case 'n':
+        if (state_)
+            glDisable(num_);
+        else
+            glEnable(num_);
+        state_ = !state_;
+        break;
+    default:
+        break;
+    }
+}
 
-void light_source::specular(const vector4 &specular) { specular_ = specular; }
+void light_source::specialdown(int key) {}
+void light_source::specialup(int key) {}
+void light_source::update(glut_time_t dt) {}

@@ -15,10 +15,12 @@ private:
 
     glut_time_t last_time_;
 
-    unsigned current_camera_;
+    unsigned current_camera_ = 2;
 
-    GLdouble spin_, tilt_, spin_speed_, tilt_speed_;
+    GLdouble spin_ = 0, tilt_ = 0, spin_speed_ = 0, tilt_speed_ = 0;
     GLdouble WINDOW_WIDTH, WINDOW_HEIGHT, GAME_WIDTH, GAME_HEIGHT, GAME_DEPTH;
+
+    bool lighting_enabled_ = true;
 
     friend class singleton;
     game_manager();

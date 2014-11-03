@@ -4,7 +4,7 @@
 
 class vector3 {
 public:
-    typedef GLdouble scalar_t;
+    typedef GLfloat scalar_t;
 
     vector3(scalar_t x = 0, scalar_t y = 0, scalar_t z = 0);
 
@@ -17,10 +17,6 @@ public:
 
     const scalar_t *get() const;
     void set(scalar_t x, scalar_t y, scalar_t z = 0);
-
-    scalar_t dot(const vector3 &rhs) const;
-    vector3 ext(const vector3 &rhs) const;
-    vector3 normalized() const;
 
 private:
     // [0] -> x, [1] -> y, [2] -> z

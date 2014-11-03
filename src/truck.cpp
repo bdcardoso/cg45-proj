@@ -1,22 +1,22 @@
 #include "truck.h"
+#include "game_manager.h"
 
 constexpr auto BODY_COLOR_RED = 196, BODY_COLOR_GREEN = 8, BODY_COLOR_BLUE = 49,
                BACK_COLOR_RED = 130, BACK_COLOR_GREEN = 108,
                BACK_COLOR_BLUE = 113, CONTAINER_COLOR_RED = 148,
                CONTAINER_COLOR_GREEN = 87, CONTAINER_COLOR_BLUE = 100,
-
-               // ----
-    WHEEL_COLOR_RED = 10, WHEEL_COLOR_GREEN = 10, WHEEL_COLOR_BLUE = 10,
-               WHEEL_SIZE_N_SIDES = 15, WHEEL_SIZE_RINGS = 10;
+               WHEEL_COLOR_RED = 10, WHEEL_COLOR_GREEN = 10,
+               WHEEL_COLOR_BLUE = 10, WHEEL_SIZE_N_SIDES = 15,
+               WHEEL_SIZE_RINGS = 10;
 
 constexpr auto BODY_SIZE_X = 2.0f, BODY_SIZE_Y = 2.0f, BODY_SIZE_Z = 3.0f,
-               BODY_COORD_X = 3.0f, BODY_COORD_Y = 2.7f, // 0.01 margin
-    BODY_COORD_Z = 0.0f, BACK_SIZE_X = 8.0f, BACK_SIZE_Y = 1.5f,
-               BACK_SIZE_Z = 3.0f, BACK_COORD_X = 0.0f, BACK_COORD_Y = 1.0f,
-               BACK_COORD_Z = 0.0f, CONTAINER_SIZE_X = 5.0f,
-               CONTAINER_SIZE_Y = 2.5f, CONTAINER_SIZE_Z = 3.0f,
-               CONTAINER_COORD_X = -1.5f, CONTAINER_COORD_Y = 3.0f,
-               CONTAINER_COORD_Z = 0.0f, TRUCK_END = 4.0f,
+               BODY_COORD_X = 3.0f, BODY_COORD_Y = 2.7f, BODY_COORD_Z = 0.0f,
+               BACK_SIZE_X = 8.0f, BACK_SIZE_Y = 1.5f, BACK_SIZE_Z = 3.0f,
+               BACK_COORD_X = 0.0f, BACK_COORD_Y = 1.0f, BACK_COORD_Z = 0.0f,
+               CONTAINER_SIZE_X = 5.0f, CONTAINER_SIZE_Y = 2.5f,
+               CONTAINER_SIZE_Z = 3.0f, CONTAINER_COORD_X = -1.5f,
+               CONTAINER_COORD_Y = 3.0f, CONTAINER_COORD_Z = 0.0f,
+               TRUCK_END = 4.0f,
 
                // ----
     WHEEL_SIZE_INNER_RADIUS = 0.3f, WHEEL_SIZE_OUTER_RADIUS = 0.5f,
@@ -122,4 +122,10 @@ void truck::draw() {
     glPopMatrix();
 }
 
-void truck::update(glut_time_t dt) { dynamic_object::update(dt); }
+void truck::update(glut_time_t dt) {
+    dynamic_object::update(dt);
+
+    if (position().x() > game_manager::instance().game_object_bounds().x2()) {
+        position().x() = game_manager::instance().game_object_bounds().x1();
+    }
+}

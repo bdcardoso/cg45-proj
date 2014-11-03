@@ -1,40 +1,31 @@
 #pragma once
 
-#include "vector3.h"
 #include "opengl.h"
 
 class vector4 {
-    // [0] -> x, [1] -> y, [2] -> z, [3] -> w
-    GLdouble coords_[4];
-
 public:
-    vector4(const vector3 &in);
+    typedef GLfloat scalar_t;
 
-    vector4(GLdouble x = 0, GLdouble y = 0, GLdouble z = 0, GLdouble w = 0);
+    vector4(scalar_t x = 0, scalar_t y = 0, scalar_t z = 0, scalar_t w = 0);
 
-    GLdouble x() const;
+    scalar_t &x();
+    const scalar_t &x() const;
+    scalar_t &y();
+    const scalar_t &y() const;
+    scalar_t &z();
+    const scalar_t &z() const;
+    scalar_t &w();
+    const scalar_t &w() const;
 
-    GLdouble y() const;
+    const scalar_t *get() const;
+    void set(scalar_t x, scalar_t y, scalar_t z, scalar_t w);
 
-    GLdouble z() const;
-
-    GLdouble w() const;
-
-    void x(GLdouble newx);
-
-    void y(GLdouble newy);
-
-    void z(GLdouble newz);
-
-    void w(GLdouble neww);
-
-    const GLdouble *get() const;
-
-    void set(GLdouble x, GLdouble y, GLdouble z, GLdouble w = 0.0);
-
-    vector4 operator+(const vector4 &rhs) const;
-
-    vector4 operator-(const vector4 &rhs) const;
-
-    vector4 operator*(GLdouble scalar) const;
+private:
+    // [0] -> x, [1] -> y, [2] -> z, [3] -> w
+    scalar_t coords_[4];
 };
+
+vector4 operator+(vector4 lhs, vector4 rhs);
+vector4 operator-(vector4 lhs, vector4 rhs);
+vector4 operator*(vector4 lhs, vector4::scalar_t factor);
+vector4 operator*(vector4::scalar_t factor, vector4 rhs);

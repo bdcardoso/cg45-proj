@@ -14,25 +14,12 @@ class light_source {
 public:
     light_source(GLenum number);
 
-    bool state() const;
-
-    void state(bool newstate);
-
-    GLenum num() const;
-
-    void ambient(const vector4 &amb);
-
-    void diffuse(const vector4 &dif);
-
-    void position(const vector4 &pos);
-
-    void specular(const vector4 &spec);
-
-    void direction(const vector3 &dir);
-
-    void cutoff(GLdouble cutoff);
-
-    void exponent(GLdouble exp);
+    vector4 position();
 
     void draw();
+    void keydown(unsigned char key);
+    void keyup(unsigned char key);
+    void specialdown(int key);
+    void specialup(int key);
+    void update(glut_time_t dt);
 };

@@ -4,8 +4,8 @@ game_object::game_object() : scale_(1.0, 1.0, 1.0) {}
 
 vector3 &game_object::scale() { return scale_; }
 const vector3 &game_object::scale() const { return scale_; }
-void game_object::scale(const GLdouble factor) {
-    scale() = vector3(factor, factor, factor);
+void game_object::scale(const vector3::scalar_t factor) {
+    scale().set(factor, factor, factor);
 }
 
 vector3 &game_object::position() { return position_; }

@@ -1,4 +1,5 @@
 #include "car.h"
+#include "game_manager.h"
 
 constexpr auto BODY_COLOR_RED = 50, BODY_COLOR_GREEN = 50, BODY_COLOR_BLUE = 50,
                WHEEL_COLOR_RED = 10, WHEEL_COLOR_GREEN = 10,
@@ -97,4 +98,10 @@ void car::draw() {
     glPopMatrix();
 }
 
-void car::update(glut_time_t dt) { dynamic_object::update(dt); }
+void car::update(glut_time_t dt) {
+    dynamic_object::update(dt);
+
+    if (position().x() > game_manager::instance().game_object_bounds().x2()) {
+        position().x() = game_manager::instance().game_object_bounds().x1();
+    }
+}

@@ -56,7 +56,7 @@ void frog::update(glut_time_t dt) {
 
     auto collisions = collision_manager::instance().collisions(this);
     if (collisions.size() != 0) {
-        GLdouble collisionSpeed = 0;
+        vector3::scalar_t collisionSpeed = 0;
 
         bool touchesRiver = false, touchesLog = false, touchesTurtle = false,
              touchesOther = false;

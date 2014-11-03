@@ -19,17 +19,6 @@ constexpr auto FROG_LEVEL = 0.05, ROAD_LEVEL = 0.05, RIVER_LEVEL = 0.05,
 void game_manager::init(int w, int h) {
     WINDOW_WIDTH = w;
     WINDOW_HEIGHT = h;
-}
-
-game_manager::game_manager()
-        : current_camera_(2),
-          spin_(0.0),
-          tilt_(0.0),
-          spin_speed_(0.0),
-          tilt_speed_(0.0),
-          GAME_WIDTH(2.5),
-          GAME_HEIGHT(2),
-          GAME_DEPTH(5) {
 
     last_time_ = glutGet(GLUT_ELAPSED_TIME);
 
@@ -168,11 +157,27 @@ game_manager::game_manager()
 
     // Camera 2: frog perspective camera
     cameras_.push_back(frog_->cam());
+
+    light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT0));
 }
+
+game_manager::game_manager()
+        : current_camera_(2),
+          spin_(0.0),
+          tilt_(0.0),
+          spin_speed_(0.0),
+          tilt_speed_(0.0),
+          GAME_WIDTH(2.5),
+          GAME_HEIGHT(2),
+          GAME_DEPTH(5) {}
 
 void game_manager::timer() { update(); }
 
 void game_manager::display() {
+    for (auto light : light_sources_) {
+        light->draw();
+    }
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -222,6 +227,10 @@ void game_manager::update() {
         cam->update(dt);
     }
 
+    for (auto light : light_sources_) {
+        light->update(dt);
+    }
+
     glutPostRedisplay();
 }
 
@@ -247,6 +256,10 @@ void game_manager::keyboard(unsigned char key, int x, int y) {
     for (auto obj : game_objects_) {
         obj->keydown(key);
     }
+
+    for (auto light : light_sources_) {
+        light->keydown(key);
+    }
 }
 
 void game_manager::keyboardUp(unsigned char key, int x, int y) {
@@ -261,12 +274,23 @@ void game_manager::keyboardUp(unsigned char key, int x, int y) {
         glutReshapeWindow(glutGet(GLUT_WINDOW_WIDTH),
                           glutGet(GLUT_WINDOW_HEIGHT));
         break;
+    case 'l':
+        if (lighting_enabled_)
+            glDisable(GL_LIGHTING);
+        else
+            glEnable(GL_LIGHTING);
+        lighting_enabled_ = !lighting_enabled_;
+        break;
     default:
         break;
     }
 
     for (auto obj : game_objects_) {
         obj->keyup(key);
+    }
+
+    for (auto light : light_sources_) {
+        light->keyup(key);
     }
 }
 
@@ -292,6 +316,10 @@ void game_manager::special(int key, int x, int y) {
 
     for (auto obj : game_objects_) {
         obj->specialdown(key);
+    }
+
+    for (auto light : light_sources_) {
+        light->specialdown(key);
     }
 }
 
@@ -323,6 +351,10 @@ void game_manager::specialUp(int key, int x, int y) {
     for (auto obj : game_objects_) {
         obj->specialup(key);
     }
+
+    for (auto light : light_sources_) {
+        light->specialup(key);
+    }
 }
 
 GLdouble game_manager::game_width() const { return GAME_WIDTH; }
@@ -333,8 +365,8 @@ GLdouble game_manager::window_height() const { return WINDOW_HEIGHT; }
 
 const bounding_box &game_manager::game_object_bounds() const {
     // FIXME TODO XXX
-    static bounding_box bb(-game_width(), -0.5, -game_depth(), game_width(),
-                           0.5, game_depth());
+    static bounding_box bb(-game_depth(), -0.5, -game_width(), game_depth(),
+                           0.5, game_width());
     return bb;
 }
 

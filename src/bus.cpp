@@ -1,15 +1,14 @@
 #include "bus.h"
+#include "game_manager.h"
 
 constexpr auto BODY_COLOR_RED = 255, BODY_COLOR_GREEN = 50,
-               BODY_COLOR_BLUE = 50,
-               // ----
-    WHEEL_COLOR_RED = 10, WHEEL_COLOR_GREEN = 10, WHEEL_COLOR_BLUE = 10,
+               BODY_COLOR_BLUE = 50, WHEEL_COLOR_RED = 10,
+               WHEEL_COLOR_GREEN = 10, WHEEL_COLOR_BLUE = 10,
                WHEEL_SIZE_N_SIDES = 15, WHEEL_SIZE_RINGS = 15;
 
 constexpr auto BODY_SIZE_X = 11.0f, BODY_SIZE_Y = 3.0f, BODY_SIZE_Z = 3.0f,
                BODY_COORD_X = 0.0f, BODY_COORD_Y = 2.0f, BODY_COORD_Z = 0.0f,
-               // ----
-    WHEEL_SIZE_INNER_RADIUS = 0.3f, WHEEL_SIZE_OUTER_RADIUS = 0.5f,
+               WHEEL_SIZE_INNER_RADIUS = 0.3f, WHEEL_SIZE_OUTER_RADIUS = 0.5f,
                WHEEL_COORD_FRONT_LEFT_X = 3.5f, WHEEL_COORD_FRONT_LEFT_Y = 0.5f,
                WHEEL_COORD_FRONT_LEFT_Z = -1.5f,
                WHEEL_COORD_FRONT_RIGHT_X = 3.5f,
@@ -70,4 +69,10 @@ void bus::draw() {
     glPopMatrix();
 }
 
-void bus::update(glut_time_t dt) { dynamic_object::update(dt); }
+void bus::update(glut_time_t dt) {
+    dynamic_object::update(dt);
+
+    if (position().x() > game_manager::instance().game_object_bounds().x2()) {
+        position().x() = game_manager::instance().game_object_bounds().x1();
+    }
+}
