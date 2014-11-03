@@ -3,6 +3,8 @@
 
 constexpr auto RIVER_LENGTH = 5.0, RIVER_WIDTH = 2.0, RIVER_HEIGHT = 1.0,
                RIVER_BOTTOM = 0.1, RIVER_MARGIN = 0.2, WATER_DEPTH = 0.8;
+               
+constexpr auto RIVER_LINES = 4, RIVER_COLUMNS = 20;
 
 // ----
 
@@ -49,12 +51,14 @@ void river::draw() {
     glPopMatrix();
 
     // Water
+        
     glColor3ub(0x41, 0x69, 0xe1);
     glPushMatrix();
     glTranslatef(0.0, WATER_RAISE, 0.0);
     glScalef(RIVER_LENGTH, WATER_DEPTH, WATER_WIDTH);
-    glutSolidCube(1.0);
+    gluxSlicedCube(4, 1, 20);    
     glPopMatrix();
+
 }
 
 void river::update(glut_time_t dt) { (void)dt; }

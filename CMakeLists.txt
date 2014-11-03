@@ -44,6 +44,7 @@ set(SOURCE_FILES
   src/game_object.cpp
   src/light_source.cpp
   src/main.cpp
+  src/opengl.cpp
   src/orthogonal_camera.cpp
   src/perspective_camera.cpp
   src/river.cpp

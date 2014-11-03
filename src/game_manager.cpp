@@ -25,122 +25,82 @@ void game_manager::init(int w, int h) {
     auto frog_ = std::make_shared<frog>();
     frog_->position() = vector3(0.0, FROG_LEVEL, 1.95);
     frog_->scale(0.1);
-
+    game_objects_.push_back(frog_);
+    collision_manager::instance().register_object(frog_);
+    
     auto car1_ = std::make_shared<car>();
     car1_->position() = vector3(-1.2, ROAD_LEVEL, LINE_4);
     car1_->scale(0.1);
     car1_->speed().x() = 1.0;
-
-    auto truck1_ = std::make_shared<truck>();
-    truck1_->position() = vector3(-1.5, ROAD_LEVEL, LINE_3);
-    truck1_->scale(0.1);
-    truck1_->speed().x() = 0.5;
-
-    auto truck2_ = std::make_shared<truck>();
-    truck2_->position() = vector3(0.0, ROAD_LEVEL, LINE_3);
-    truck2_->scale(0.1);
-    truck2_->speed().x() = 0.5;
-
-    auto truck3_ = std::make_shared<truck>();
-    truck3_->position() = vector3(1.5, ROAD_LEVEL, LINE_3);
-    truck3_->scale(0.1);
-    truck3_->speed().x() = 0.5;
+    game_objects_.push_back(car1_);   
+    collision_manager::instance().register_object(car1_);
+        
+    for(int i=0;i<3;i++){    
+        auto truck_ = std::make_shared<truck>();
+        truck_->position() = vector3(-1.5 + i*1.5, ROAD_LEVEL, LINE_3);
+        truck_->scale(0.1);
+        truck_->speed().x() = 0.5;
+        game_objects_.push_back(truck_);
+        collision_manager::instance().register_object(truck_);
+        
+    }
 
     auto bus1_ = std::make_shared<bus>();
     bus1_->position() = vector3(0.9, ROAD_LEVEL, LINE_5);
     bus1_->scale(0.1);
     bus1_->speed().x() = 1.5;
+    game_objects_.push_back(bus1_);
+    collision_manager::instance().register_object(bus1_);    
 
     auto bus2_ = std::make_shared<bus>();
     bus2_->position() = vector3(-0.1, ROAD_LEVEL, LINE_4);
     bus2_->scale(0.1);
     bus2_->speed().x() = 1.0;
+    game_objects_.push_back(bus2_);
+    collision_manager::instance().register_object(bus2_);
+    
+    for(int i=0;i<2;i++){
+        auto log_ = std::make_shared<timberlog>();
+        log_->position() = vector3(-0.6 + i*2.0, RIVER_LEVEL, LINE_1);
+        log_->scale(0.1);
+        log_->speed().x() = 0.5;
+        game_objects_.push_back(log_);    
+        collision_manager::instance().register_object(log_);
+        
+        auto log1_ = std::make_shared<timberlog>();
+        log1_->position() = vector3(-1.1 +i*1.9, RIVER_LEVEL, LINE_2);
+        log1_->scale(0.1);
+        log1_->speed().x() = 0.5;
+        game_objects_.push_back(log1_);
+        collision_manager::instance().register_object(log1_);
 
-    auto log1_ = std::make_shared<timberlog>();
-    log1_->position() = vector3(-0.6, RIVER_LEVEL, LINE_1);
-    log1_->scale(0.1);
-    log1_->speed().x() = 0.5;
+    }
 
-    auto log2_ = std::make_shared<timberlog>();
-    log2_->position() = vector3(-1.1, RIVER_LEVEL, LINE_2);
-    log2_->scale(0.1);
-    log2_->speed().x() = 0.5;
+    for(int i=0;i<4;i++){
+        auto turtle_ = std::make_shared<turtle>();
+        turtle_->position() = vector3(-2.5 + i*1.3, RIVER_LEVEL + 0.05, LINE_6);
+        turtle_->scale(0.1);
+        turtle_->speed().x() = 0.5;
+        game_objects_.push_back(turtle_); 
+        collision_manager::instance().register_object(turtle_);
 
-    auto log3_ = std::make_shared<timberlog>();
-    log3_->position() = vector3(0.8, RIVER_LEVEL, LINE_2);
-    log3_->scale(0.1);
-    log3_->speed().x() = 0.5;
+    }
 
-    auto log4_ = std::make_shared<timberlog>();
-    log4_->position() = vector3(1.4, RIVER_LEVEL, LINE_1);
-    log4_->scale(0.1);
-    log4_->speed().x() = 0.5;
 
-    auto turtle1_ = std::make_shared<turtle>();
-    turtle1_->position() = vector3(-2.5, RIVER_LEVEL + 0.05, LINE_6);
-    turtle1_->scale(0.1);
-    turtle1_->speed().x() = 0.5;
-
-    auto turtle2_ = std::make_shared<turtle>();
-    turtle2_->position() = vector3(-1.25, RIVER_LEVEL + 0.05, LINE_6);
-    turtle2_->scale(0.1);
-    turtle2_->speed().x() = 0.5;
-
-    auto turtle3_ = std::make_shared<turtle>();
-    turtle3_->position() = vector3(1.25, RIVER_LEVEL + 0.05, LINE_6);
-    turtle3_->scale(0.1);
-    turtle3_->speed().x() = 0.5;
-
-    auto turtle4_ = std::make_shared<turtle>();
-    turtle4_->position() = vector3(2.5, RIVER_LEVEL + 0.05, LINE_6);
-    turtle4_->scale(0.1);
-    turtle4_->speed().x() = 0.5;
 
     auto river_ = std::make_shared<river>();
     river_->position() = vector3(0.0, 0.0, LINE_1);
-
+    game_objects_.push_back(river_);
+    collision_manager::instance().register_object(river_);    
+    
     auto tunnel_ = std::make_shared<tunnel>();
     tunnel_->position() = vector3(0.0, 0.0, LINE_1);
-
+    game_objects_.push_back(tunnel_);
+    
     auto road_ = std::make_shared<road>();
     road_->position() = vector3(0.0, 0.0, LINE_4);
-
-    game_objects_.push_back(frog_);
-
-    game_objects_.push_back(river_);
-    game_objects_.push_back(tunnel_);
-    game_objects_.push_back(log1_);
-    game_objects_.push_back(log2_);
-    game_objects_.push_back(log3_);
-    game_objects_.push_back(log4_);
-    game_objects_.push_back(turtle1_);
-    game_objects_.push_back(turtle2_);
-    game_objects_.push_back(turtle3_);
-    game_objects_.push_back(turtle4_);
     game_objects_.push_back(road_);
-    game_objects_.push_back(car1_);
-    game_objects_.push_back(truck1_);
-    game_objects_.push_back(truck2_);
-    game_objects_.push_back(truck3_);
-    game_objects_.push_back(bus1_);
-    game_objects_.push_back(bus2_);
 
-    collision_manager::instance().register_object(frog_);
-    collision_manager::instance().register_object(car1_);
-    collision_manager::instance().register_object(bus1_);
-    collision_manager::instance().register_object(bus2_);
-    collision_manager::instance().register_object(truck1_);
-    collision_manager::instance().register_object(truck2_);
-    collision_manager::instance().register_object(truck3_);
-    collision_manager::instance().register_object(river_);
-    collision_manager::instance().register_object(log1_);
-    collision_manager::instance().register_object(log2_);
-    collision_manager::instance().register_object(log3_);
-    collision_manager::instance().register_object(log4_);
-    collision_manager::instance().register_object(turtle1_);
-    collision_manager::instance().register_object(turtle2_);
-    collision_manager::instance().register_object(turtle3_);
-    collision_manager::instance().register_object(turtle4_);
 
     // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
@@ -174,9 +134,6 @@ game_manager::game_manager()
 void game_manager::timer() { update(); }
 
 void game_manager::display() {
-    for (auto light : light_sources_) {
-        light->draw();
-    }
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -187,19 +144,16 @@ void game_manager::display() {
     glRotatef(tilt_, 1.0, 0.0, 0.0);
     glRotatef(spin_, 0.0, 1.0, 0.0);
 
-    frog_bounds().draw();
-    game_object_bounds().draw();
+    for (auto light : light_sources_) {
+        light->draw();
+    }
+
 
     for (auto obj : game_objects_) {
         glPushMatrix();
 
         auto pos = obj->position();
         auto scl = obj->scale();
-        auto bb = obj->bounding_box();
-
-        bb.translate(pos);
-        bb.scale(scl);
-        bb.draw();
 
         glTranslatef(pos.x(), pos.y(), pos.z());
         glScalef(scl.x(), scl.y(), scl.z());

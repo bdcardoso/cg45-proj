@@ -12,3 +12,5 @@
 #endif
 
 typedef GLdouble glut_time_t;
+
+void gluxSlicedCube(int sx, int sy, int sz);
