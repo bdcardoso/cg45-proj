@@ -1,4 +1,5 @@
 #include "turtle.h"
+#include "materials.h"
 #include "game_manager.h"
 
 constexpr auto BODY_COLOR_RED = 20, BODY_COLOR_GREEN = 50, BODY_COLOR_BLUE = 20,
@@ -25,6 +26,7 @@ turtle::turtle() {
 
 void turtle::draw() {
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
+    materials::skin_green.use();
 
     // Body
     glPushMatrix();

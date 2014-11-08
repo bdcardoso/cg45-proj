@@ -1,5 +1,7 @@
 #include "frog.h"
 
+
+
 void frog::leg::draw() {
     glPushMatrix();
     glTranslatef(-0.15, 0.35, 0.2);

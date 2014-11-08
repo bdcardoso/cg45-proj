@@ -2,7 +2,7 @@
 #include "game_manager.h"
 #include "materials.h"
 
-constexpr auto BODY_COLOR_RED = 50, BODY_COLOR_GREEN = 50, BODY_COLOR_BLUE = 50,
+constexpr auto BODY_COLOR_RED = 254, BODY_COLOR_GREEN = 254, BODY_COLOR_BLUE = 254,
                WHEEL_COLOR_RED = 10, WHEEL_COLOR_GREEN = 10,
                WHEEL_COLOR_BLUE = 10, WHEEL_SIZE_N_SIDES = 15,
                WHEEL_SIZE_RINGS = 15;
@@ -31,8 +31,10 @@ car::car() {
 }
 
 void car::draw() {
+    
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
-    materials::metal_gold.use();
+    
+    materials::road_white.use();
 
     // Lower Body
     glPushMatrix();
@@ -40,6 +42,9 @@ void car::draw() {
     glScalef(BODY_SIZE_LOWER_X, BODY_SIZE_LOWER_Y, BODY_SIZE_LOWER_Z);
     gluxSlicedCube(3, 3, 3);
     glPopMatrix();
+
+    glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
+    materials::metal_gold.use();  
 
     // Upper Body
     glPushMatrix();

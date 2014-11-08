@@ -27,7 +27,7 @@ bus::bus() {
 
 void bus::draw() {
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
-    materials::metal_gold.use();
+    materials::yellow_plastic.use();
 
     // Body
     glPushMatrix();
@@ -71,6 +71,9 @@ void bus::draw() {
     glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS,
                    WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
     glPopMatrix();
+    
+        
+    materials::perfect_reflector.use();
 }
 
 void bus::update(glut_time_t dt) {

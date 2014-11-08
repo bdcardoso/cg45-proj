@@ -5,10 +5,15 @@
 #include "river.h"
 #include "timberlog.h"
 #include "turtle.h"
+#include "materials.h"
 #include <cassert>
 #include <cmath>
 #include <cstdio>
 
+constexpr auto FROG_COLOR_RED   = 5,
+               FROG_COLOR_GREEN = 55,
+               FROG_COLOR_BLUE  = 55;
+               
 frog::frog() {
     camera_ = std::make_shared<perspective_camera>(90, 1, 0.01, 10);
     bounding_box() = ::bounding_box(-1.3, -1.3, -1.3, 1.3, 1.3, 1.3);
@@ -19,8 +24,9 @@ std::shared_ptr<camera> frog::cam() { return camera_; }
 void frog::draw() {
     glPushMatrix();
     glRotatef(90, 0.0, 1.0, 0.0);
-
-    glColor3ub(5, 55, 5);
+    
+    glColor3ub(FROG_COLOR_RED, FROG_COLOR_GREEN, FROG_COLOR_BLUE);
+    materials::skin_green.use();
 
     // Body
     glPushMatrix();
@@ -49,6 +55,8 @@ void frog::draw() {
     glScalef(1.0, 1.0, -1.0);
     rightleg_.draw();
     glPopMatrix();
+    
+    materials::perfect_reflector.use();
 }
 
 void frog::update(glut_time_t dt) {

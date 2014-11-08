@@ -1,4 +1,5 @@
 #include "timberlog.h"
+#include "materials.h"
 #include "game_manager.h"
 
 constexpr auto COLOR_RED = 255, COLOR_GREEN = 100, COLOR_BLUE = 20, SLICES = 20,
@@ -13,7 +14,8 @@ timberlog::timberlog() {
 
 void timberlog::draw() {
     glColor3ub(COLOR_RED, COLOR_GREEN, COLOR_BLUE);
-
+    materials::river_margin.use();
+    
     // Timberlog
     glPushMatrix();
     glTranslatef(COORD_X, COORD_Y, COORD_Z);
