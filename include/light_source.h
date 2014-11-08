@@ -32,7 +32,6 @@ public:
     GLdouble exponent() const;
     GLenum &num();
     GLenum num() const;
-    bool &on();
     bool on() const;
     unsigned char &toggle_key();
     unsigned char toggle_key() const;
@@ -42,5 +41,7 @@ public:
     void keyup(unsigned char key);
     void specialdown(int key);
     void specialup(int key);
+    void turn_on();
+    void turn_off();
     void update(glut_time_t dt);
 };

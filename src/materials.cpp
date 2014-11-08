@@ -30,58 +30,47 @@ yellow rubber   0.05    0.05    0.0     0.5     0.5     0.4     0.7     0.7     
 const material materials::rubber_black(vector4(0.02, 0.02, 0.02),
                                        vector3(0.01, 0.01, 0.01),
                                        vector3(0.4, 0.4, 0.4), 0.078125),
-                                       
+
     materials::rubber_red(vector4(0.05, 0, 0), vector3(0.5, 0.4, 0.4),
                           vector3(0.7, 0.04, 0.04), 0.078125),
-                          
+
     materials::metal_gold(vector4(0.24725, 0.1995, 0.0745),
                           vector3(0.75164, 0.60648, 0.22648),
                           vector3(0.628281, 0.555802, 0.366065), 0.4),
-                          
-    materials::perfect_reflector(vector4(1.0, 1.0, 1.0), 
-                                 vector3(1.0, 1.0, 1.0),
-                                 vector3(1.0, 1.0, 1.0), 0.2),
-                                 
-    materials::skin_green(vector4(0.0, 0.05, 0.0), 
-                          vector3(0.4, 0.5, 0.4), 
-                          vector3(0.04, 0.7, 0.04), 0.078125),
-                          
-    materials::road_black(vector4(0.0, 0.0, 0.0), 
-                             vector3(0.01, 0.01, 0.01), 
-                             vector3(0.50, 0.50, 0.50), 0.25),
-                             
-    materials::road_white(vector4(0.05, 0.05, 0.05),
-                          vector3(0.5, 0.5, 0.5),
-                          vector3(0.7, 0.7, 0.7), 0.078125),
-                          
-    materials::road_margin(vector4(0.19225, 0.19225, 0.19225), 
-                           vector3(0.50754, 0.50754, 0.50754), 
-                           vector3(0.508273, 0.508273, 0.508273), 0.4),
-                           
-    materials::river_margin(vector4(0.2125,  0.1275,  0.054), 
-                            vector3(0.714, 0.4284, 0.18144), 
-                            vector3(0.393548, 0.271906, 0.166721),0.2),
-                            
-    materials::water(vector4(0.10, 0.19, 0.8), 
-                     vector3(0.40, 0.74, 0.69), 
-                     vector3(0.8, 0.3,0.31), 0.128),
-                    
-    materials::copper(vector4(0.19125, 0.0735, 0.0225), 
-                      vector3(0.7038, 0.27048, 0.0828), 
-                      vector3(0.256777, 0.137622, 0.086014), 0.1),
-    
-    materials::yellow_plastic(vector4(0.0, 0.0, 0.0),
-                              vector3(0.5, 0.5, 0.0), 
-                              vector3(0.60, 0.60, 0.50), 0.25),
-                              
-    materials::road_material(vector4(0.05, 0.05, 0.07), 
-                     vector3(0.18, 0.17, 0.23),
-                     vector3(0.33, 0.33, 0.35), 0.3),
-                     
-    materials::pearl(vector4(0.25, 0.20725, 0.20725), 
-                     vector3(1, 0.829, 0.829),
-                     vector3(0.296648, 0.296648, 0.296648), 0.088);                     
-                              
 
-                             
-                             
+    materials::perfect_reflector(vector4(1.0, 1.0, 1.0), vector3(1.0, 1.0, 1.0),
+                                 vector3(1.0, 1.0, 1.0), 0.2),
+
+    materials::skin_green(vector4(0.0, 0.05, 0.0), vector3(0.4, 0.5, 0.4),
+                          vector3(0.04, 0.7, 0.04), 0.078125),
+
+    materials::road_black(vector4(0.0, 0.0, 0.0), vector3(0.01, 0.01, 0.01),
+                          vector3(0.50, 0.50, 0.50), 0.25),
+
+    materials::road_white(vector4(0.05, 0.05, 0.05), vector3(0.5, 0.5, 0.5),
+                          vector3(0.7, 0.7, 0.7), 0.078125),
+
+    materials::road_margin(vector4(0.19225, 0.19225, 0.19225),
+                           vector3(0.50754, 0.50754, 0.50754),
+                           vector3(0.508273, 0.508273, 0.508273), 0.4),
+
+    materials::river_margin(vector4(0.2125, 0.1275, 0.054),
+                            vector3(0.714, 0.4284, 0.18144),
+                            vector3(0.393548, 0.271906, 0.166721), 0.2),
+
+    materials::water(vector4(0.10, 0.19, 0.8), vector3(0.40, 0.74, 0.69),
+                     vector3(0.8, 0.3, 0.31), 0.128),
+
+    materials::copper(vector4(0.19125, 0.0735, 0.0225),
+                      vector3(0.7038, 0.27048, 0.0828),
+                      vector3(0.256777, 0.137622, 0.086014), 0.1),
+
+    materials::yellow_plastic(vector4(0.0, 0.0, 0.0), vector3(0.5, 0.5, 0.0),
+                              vector3(0.60, 0.60, 0.50), 0.25),
+
+    materials::road_material(vector4(0.05, 0.05, 0.07),
+                             vector3(0.18, 0.17, 0.23),
+                             vector3(0.33, 0.33, 0.35), 0.3),
+
+    materials::pearl(vector4(0.25, 0.20725, 0.20725), vector3(1, 0.829, 0.829),
+                     vector3(0.296648, 0.296648, 0.296648), 0.088);

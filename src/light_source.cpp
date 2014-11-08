@@ -2,18 +2,27 @@
 
 light_source::light_source(GLenum number) {
     num_ = number;
-    state_ = true;
-
-    glEnable(num_);
+    state_ = false;
+    glDisable(num_);
+    cutoff_ = 180;
+    exponent_ = 0.0;
 }
 
 void light_source::draw() {
     if (on()) {
-        glLightfv(num_, GL_AMBIENT, ambient_.get());
-        glLightfv(num_, GL_DIFFUSE, diffuse_.get());
-        glLightfv(num_, GL_SPECULAR, specular_.get());
-        glLightfv(num_, GL_POSITION, position_.get());
-        glLightfv(num_, GL_SPOT_DIRECTION, direction_.get());
+        glLightfv(num_, GL_AMBIENT, ambient().get());
+        glLightfv(num_, GL_DIFFUSE, diffuse().get());
+        glLightfv(num_, GL_SPECULAR, specular().get());
+        glLightfv(num_, GL_POSITION, position().get());
+        glLightfv(num_, GL_SPOT_DIRECTION, direction().get());
+        glLightf(num_, GL_SPOT_CUTOFF, cutoff());
+        glLightf(num_, GL_SPOT_EXPONENT, exponent());
+
+        glPushMatrix();
+        glTranslatef(position().x(), position().y(), position().z());
+        glutSolidSphere(0.1, 20, 20);
+        glTranslatef(-position().x(), -position().y(), -position().z());
+        glPopMatrix();
     }
 }
 
@@ -26,6 +35,16 @@ void light_source::keyup(unsigned char key) {
             glEnable(num_);
         state_ = !state_;
     }
+}
+
+void light_source::turn_on() {
+    state_ = true;
+    glEnable(num_);
+}
+
+void light_source::turn_off() {
+    state_ = false;
+    glDisable(num_);
 }
 
 void light_source::specialdown(int key) { (void)key; }
@@ -49,7 +68,6 @@ GLdouble &light_source::exponent() { return exponent_; }
 GLdouble light_source::exponent() const { return exponent_; }
 GLenum &light_source::num() { return num_; }
 GLenum light_source::num() const { return num_; }
-bool &light_source::on() { return state_; }
 bool light_source::on() const { return state_; }
 unsigned char &light_source::toggle_key() { return toggle_key_; }
 unsigned char light_source::toggle_key() const { return toggle_key_; }

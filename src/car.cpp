@@ -2,10 +2,10 @@
 #include "game_manager.h"
 #include "materials.h"
 
-constexpr auto BODY_COLOR_RED = 254, BODY_COLOR_GREEN = 254, BODY_COLOR_BLUE = 254,
-               WHEEL_COLOR_RED = 10, WHEEL_COLOR_GREEN = 10,
-               WHEEL_COLOR_BLUE = 10, WHEEL_SIZE_N_SIDES = 15,
-               WHEEL_SIZE_RINGS = 15;
+constexpr auto BODY_COLOR_RED = 254, BODY_COLOR_GREEN = 254,
+               BODY_COLOR_BLUE = 254, WHEEL_COLOR_RED = 10,
+               WHEEL_COLOR_GREEN = 10, WHEEL_COLOR_BLUE = 10,
+               WHEEL_SIZE_N_SIDES = 15, WHEEL_SIZE_RINGS = 15;
 
 constexpr auto BODY_SIZE_LOWER_X = 6.0f, BODY_SIZE_LOWER_Y = 1.0f,
                BODY_SIZE_LOWER_Z = 3.0f, BODY_SIZE_UPPER_X = 3.0f,
@@ -31,9 +31,9 @@ car::car() {
 }
 
 void car::draw() {
-    
+
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
-    
+
     materials::road_white.use();
 
     // Lower Body
@@ -44,7 +44,7 @@ void car::draw() {
     glPopMatrix();
 
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
-    materials::metal_gold.use();  
+    materials::metal_gold.use();
 
     // Upper Body
     glPushMatrix();
@@ -103,8 +103,6 @@ void car::draw() {
     glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS,
                    WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
     glPopMatrix();
-
-    materials::perfect_reflector.use();
 }
 
 void car::update(glut_time_t dt) {

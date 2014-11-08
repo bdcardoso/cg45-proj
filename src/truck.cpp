@@ -44,10 +44,10 @@ truck::truck() {
 }
 
 void truck::draw() {
-    
+
     glColor3ub(BACK_COLOR_RED, BACK_COLOR_GREEN, BACK_COLOR_BLUE);
     materials::skin_green.use();
-    
+
     // Back
     glPushMatrix();
     glTranslatef(BACK_COORD_X, BACK_COORD_Y, BACK_COORD_Z);
@@ -57,7 +57,7 @@ void truck::draw() {
 
     // body
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
-    
+
     glPushMatrix();
     glTranslatef(BODY_COORD_X, BODY_COORD_Y, BODY_COORD_Z);
     glScalef(BODY_SIZE_X, BODY_SIZE_Y, BODY_SIZE_Z);

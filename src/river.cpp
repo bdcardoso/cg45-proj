@@ -4,8 +4,9 @@
 
 constexpr auto RIVER_LENGTH = 5.0, RIVER_WIDTH = 2.0, RIVER_HEIGHT = 1.0,
                RIVER_BOTTOM = 0.1, RIVER_MARGIN = 0.2, WATER_DEPTH = 0.8,
-               RIVER_MARGIN_RED = 165.0, RIVER_MARGIN_GREEN = 42.0, RIVER_MARGIN_BLUE= 42.0,
-               RIVER_WATER_RED=65.0, RIVER_WATER_GREEN=65.0, RIVER_WATER_BLUE=225.0;
+               RIVER_MARGIN_RED = 165.0, RIVER_MARGIN_GREEN = 42.0,
+               RIVER_MARGIN_BLUE = 42.0, RIVER_WATER_RED = 65.0,
+               RIVER_WATER_GREEN = 65.0, RIVER_WATER_BLUE = 225.0;
 
 // ----
 
@@ -27,7 +28,7 @@ river::river() {
 }
 
 void river::draw() {
-    
+
     glColor3ub(RIVER_MARGIN_RED, RIVER_MARGIN_GREEN, RIVER_MARGIN_BLUE);
     materials::river_margin.use();
 
@@ -49,15 +50,12 @@ void river::draw() {
 
     glColor3ub(RIVER_WATER_RED, RIVER_WATER_GREEN, RIVER_WATER_BLUE);
     materials::water.use();
-    
+
     glPushMatrix();
     glTranslatef(0.0, WATER_RAISE, 0.0);
     glScalef(RIVER_LENGTH, WATER_DEPTH, WATER_WIDTH);
     gluxSlicedCube(20, 1, 8);
     glPopMatrix();
-            
-    materials::perfect_reflector.use();
-    
 }
 
 void river::update(glut_time_t dt) { (void)dt; }

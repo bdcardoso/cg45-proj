@@ -15,7 +15,7 @@ timberlog::timberlog() {
 void timberlog::draw() {
     glColor3ub(COLOR_RED, COLOR_GREEN, COLOR_BLUE);
     materials::river_margin.use();
-    
+
     // Timberlog
     glPushMatrix();
     glTranslatef(COORD_X, COORD_Y, COORD_Z);

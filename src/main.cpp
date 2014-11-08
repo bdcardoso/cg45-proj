@@ -4,11 +4,12 @@
 constexpr int FPS = 60, GAME_WIDTH = 500, GAME_HEIGHT = 400;
 
 void init(void) {
-    glEnable(GL_CULL_FACE);
+    // glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_NORMALIZE);
-    glEnable(GL_SMOOTH);
+    glShadeModel(GL_SMOOTH);
+
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHT1);
     glDisable(GL_LIGHT2);

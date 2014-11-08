@@ -71,9 +71,6 @@ void bus::draw() {
     glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS,
                    WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
     glPopMatrix();
-    
-        
-    materials::perfect_reflector.use();
 }
 
 void bus::update(glut_time_t dt) {
