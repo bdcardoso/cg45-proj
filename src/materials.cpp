@@ -72,8 +72,16 @@ const material materials::rubber_black(vector4(0.02, 0.02, 0.02),
     
     materials::yellow_plastic(vector4(0.0, 0.0, 0.0),
                               vector3(0.5, 0.5, 0.0), 
-                              vector3(0.60, 0.60, 0.50), 0.25);
+                              vector3(0.60, 0.60, 0.50), 0.25),
+                              
+    materials::road_material(vector4(0.05, 0.05, 0.07), 
+                     vector3(0.18, 0.17, 0.23),
+                     vector3(0.33, 0.33, 0.35), 0.3),
+                     
+    materials::pearl(vector4(0.25, 0.20725, 0.20725), 
+                     vector3(1, 0.829, 0.829),
+                     vector3(0.296648, 0.296648, 0.296648), 0.088);                     
+                              
 
-                             
                              
                              

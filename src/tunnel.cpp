@@ -13,7 +13,7 @@ void tunnel::draw() {
 
 
     glColor3ub(TUNNEL_RED, TUNNEL_GREEN, TUNNEL_BLUE);
-    materials::road_margin.use();
+    materials::pearl.use();
     
     glPushMatrix();
     glTranslatef(COORD_X, COORD_Y, COORD_Z);

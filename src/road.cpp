@@ -9,7 +9,6 @@ constexpr auto ROAD_LENGTH = 5.0, ROAD_WIDTH = 2.0, ROAD_HEIGHT = 1.0,
                ROAD_MARGIN_RED=139.0, ROAD_MARGIN_GREEN=69.0, ROAD_MARGIN_BLUE=19.0,
                WHITE=255.0,
                // ----
-               BOTTOM_RAISE = -ROAD_HEIGHT / 2,
                MARGIN_DELTA = (ROAD_WIDTH - ROAD_MARGIN) / 2,
                MARGIN_HEIGHT = ROAD_HEIGHT - ROAD_BOTTOM,
                TAR_RAISE = -(MARGIN_HEIGHT - TAR_DEPTH) / 2,
@@ -42,8 +41,10 @@ void road::draw() {
     gluxSlicedCube(20, 1, 2);
     glPopMatrix();
 
+
+
     glColor3ub(ROAD_COLOR_RED, ROAD_COLOR_GREEN, ROAD_COLOR_BLUE);
-    materials::road_black.use();
+    materials::road_material.use();
 
     // road
     glColor3ub(30, 30, 30);
@@ -71,8 +72,6 @@ void road::draw() {
     glutSolidCube(1.0);
     glPopMatrix();
     
-        
-    materials::perfect_reflector.use();
 }
 
 void road::update(glut_time_t dt) { (void)dt; }

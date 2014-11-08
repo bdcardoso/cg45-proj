@@ -69,7 +69,7 @@ void game_manager::init(int w, int h) {
         auto log1_ = std::make_shared<timberlog>();
         log1_->position() = vector3(-1.1 + i * 1.9, RIVER_LEVEL, LINE_2);
         log1_->scale(0.1);
-        log1_->speed().x() = 0.5;
+        log1_->speed().x() = 0.75;
         game_objects_.push_back(log1_);
         collision_manager::instance().register_object(log1_);
     }
@@ -79,7 +79,7 @@ void game_manager::init(int w, int h) {
         turtle_->position() =
             vector3(-2.5 + i * 1.3, RIVER_LEVEL + 0.05, LINE_6);
         turtle_->scale(0.1);
-        turtle_->speed().x() = 0.5;
+        turtle_->speed().x() = 0.75;
         game_objects_.push_back(turtle_);
         collision_manager::instance().register_object(turtle_);
     }

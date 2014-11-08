@@ -9,8 +9,7 @@ constexpr auto RIVER_LENGTH = 5.0, RIVER_WIDTH = 2.0, RIVER_HEIGHT = 1.0,
 
 // ----
 
-constexpr auto BOTTOM_RAISE = -RIVER_HEIGHT / 2,
-               MARGIN_DELTA = (RIVER_WIDTH - RIVER_MARGIN) / 2,
+constexpr auto MARGIN_DELTA = (RIVER_WIDTH - RIVER_MARGIN) / 2,
                MARGIN_HEIGHT = RIVER_HEIGHT - RIVER_BOTTOM,
                WATER_RAISE = -(MARGIN_HEIGHT - WATER_DEPTH) / 2,
                WATER_WIDTH = RIVER_WIDTH - 2 * RIVER_MARGIN;
