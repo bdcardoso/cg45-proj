@@ -1,11 +1,12 @@
 #pragma once
-
 #include "opengl.h"
+#include "vector3.h"
 
 class vector4 {
 public:
     typedef GLfloat scalar_t;
 
+    vector4(const vector3 &v);
     vector4(scalar_t x = 0, scalar_t y = 0, scalar_t z = 0, scalar_t w = 0);
 
     scalar_t &x();

@@ -10,11 +10,32 @@ class light_source {
     GLdouble cutoff_, exponent_;
     GLenum num_;
     bool state_;
+    unsigned char toggle_key_;
 
 public:
     light_source(GLenum number);
 
-    vector4 position();
+    vector4 &ambient();
+    const vector4 &ambient() const;
+    vector4 &diffuse();
+    const vector4 &diffuse() const;
+    vector3 &direction();
+    const vector3 &direction() const;
+    vector4 &position();
+    const vector4 &position() const;
+    vector4 &specular();
+    const vector4 &specular() const;
+
+    GLdouble &cutoff();
+    GLdouble cutoff() const;
+    GLdouble &exponent();
+    GLdouble exponent() const;
+    GLenum &num();
+    GLenum num() const;
+    bool &on();
+    bool on() const;
+    unsigned char &toggle_key();
+    unsigned char toggle_key() const;
 
     void draw();
     void keydown(unsigned char key);

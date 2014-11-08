@@ -1,5 +1,6 @@
 #include "car.h"
 #include "game_manager.h"
+#include "materials.h"
 
 constexpr auto BODY_COLOR_RED = 50, BODY_COLOR_GREEN = 50, BODY_COLOR_BLUE = 50,
                WHEEL_COLOR_RED = 10, WHEEL_COLOR_GREEN = 10,
@@ -30,21 +31,21 @@ car::car() {
 }
 
 void car::draw() {
-
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
+    materials::metal_gold.use();
 
     // Lower Body
     glPushMatrix();
     glTranslatef(BODY_COORD_LOWER_X, BODY_COORD_LOWER_Y, BODY_COORD_LOWER_Z);
     glScalef(BODY_SIZE_LOWER_X, BODY_SIZE_LOWER_Y, BODY_SIZE_LOWER_Z);
-    glutSolidCube(1);
+    gluxSlicedCube(3, 3, 3);
     glPopMatrix();
 
     // Upper Body
     glPushMatrix();
     glTranslatef(BODY_COORD_UPPER_X, BODY_COORD_UPPER_Y, BODY_COORD_UPPER_Z);
     glScalef(BODY_SIZE_UPPER_X, BODY_SIZE_UPPER_Y, BODY_SIZE_UPPER_Z);
-    glutSolidCube(1);
+    gluxSlicedCube(3, 3, 3);
     glPopMatrix();
 
     // Front Triangle
@@ -52,7 +53,7 @@ void car::draw() {
     glTranslatef(1.62f, 1.72f, 0.0f);
     glRotatef(-45.0f, 0.0f, 0.0f, 1.0f);
     glScalef(1.5f, 0.75f, 3.0f);
-    glutSolidCube(1);
+    gluxSlicedCube(3, 3, 3);
     glPopMatrix();
 
     // Back Triangle
@@ -60,10 +61,11 @@ void car::draw() {
     glTranslatef(-1.85f, 1.72f, 0.0f);
     glRotatef(60.0f, 0.0f, 0.0f, 1.0f);
     glScalef(1.5f, 0.55f, 3.0f);
-    glutSolidCube(1);
+    gluxSlicedCube(3, 3, 3);
     glPopMatrix();
 
     glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
+    materials::rubber_black.use();
 
     // Front-Left Wheel
     glPushMatrix();
@@ -96,6 +98,8 @@ void car::draw() {
     glutSolidTorus(WHEEL_SIZE_INNER_RADIUS, WHEEL_SIZE_OUTER_RADIUS,
                    WHEEL_SIZE_N_SIDES, WHEEL_SIZE_RINGS);
     glPopMatrix();
+
+    materials::perfect_reflector.use();
 }
 
 void car::update(glut_time_t dt) {

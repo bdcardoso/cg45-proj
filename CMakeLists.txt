@@ -18,6 +18,8 @@ set(HEADER_FILES
   include/game_manager.h
   include/game_object.h
   include/light_source.h
+  include/material.h
+  include/materials.h
   include/opengl.h
   include/orthogonal_camera.h
   include/perspective_camera.h
@@ -44,6 +46,8 @@ set(SOURCE_FILES
   src/game_object.cpp
   src/light_source.cpp
   src/main.cpp
+  src/material.cpp
+  src/materials.cpp
   src/opengl.cpp
   src/orthogonal_camera.cpp
   src/perspective_camera.cpp

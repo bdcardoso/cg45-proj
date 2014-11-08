@@ -1,5 +1,6 @@
 #include "bus.h"
 #include "game_manager.h"
+#include "materials.h"
 
 constexpr auto BODY_COLOR_RED = 255, BODY_COLOR_GREEN = 50,
                BODY_COLOR_BLUE = 50, WHEEL_COLOR_RED = 10,
@@ -26,15 +27,18 @@ bus::bus() {
 
 void bus::draw() {
     glColor3ub(BODY_COLOR_RED, BODY_COLOR_GREEN, BODY_COLOR_BLUE);
+    materials::metal_gold.use();
 
     // Body
     glPushMatrix();
     glTranslatef(BODY_COORD_X, BODY_COORD_Y, BODY_COORD_Z);
     glScalef(BODY_SIZE_X, BODY_SIZE_Y, BODY_SIZE_Z);
-    glutSolidCube(1);
+    gluxSlicedCube(9, 3, 3);
     glPopMatrix();
 
     glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
+
+    materials::rubber_black.use();
 
     // Front-Left Wheel
     glPushMatrix();

@@ -1,5 +1,6 @@
 #include "truck.h"
 #include "game_manager.h"
+#include "materials.h"
 
 constexpr auto BODY_COLOR_RED = 196, BODY_COLOR_GREEN = 8, BODY_COLOR_BLUE = 49,
                BACK_COLOR_RED = 130, BACK_COLOR_GREEN = 108,
@@ -49,7 +50,7 @@ void truck::draw() {
     glPushMatrix();
     glTranslatef(BACK_COORD_X, BACK_COORD_Y, BACK_COORD_Z);
     glScalef(BACK_SIZE_X, BACK_SIZE_Y, BACK_SIZE_Z);
-    glutSolidCube(1);
+    gluxSlicedCube(3, 3, 3);
     glPopMatrix();
 
     // body
@@ -58,18 +59,22 @@ void truck::draw() {
     glPushMatrix();
     glTranslatef(BODY_COORD_X, BODY_COORD_Y, BODY_COORD_Z);
     glScalef(BODY_SIZE_X, BODY_SIZE_Y, BODY_SIZE_Z);
-    glutSolidCube(1);
+    gluxSlicedCube(3, 3, 3);
     glPopMatrix();
 
     glColor3ub(CONTAINER_COLOR_RED, CONTAINER_COLOR_GREEN,
                CONTAINER_COLOR_BLUE);
 
+    materials::rubber_red.use();
+
     // Container
     glPushMatrix();
     glTranslatef(CONTAINER_COORD_X, CONTAINER_COORD_Y, CONTAINER_COORD_Z);
     glScalef(CONTAINER_SIZE_X, CONTAINER_SIZE_Y, CONTAINER_SIZE_Z);
-    glutSolidCube(1);
+    gluxSlicedCube(3, 3, 3);
     glPopMatrix();
+
+    materials::rubber_black.use();
 
     glColor3ub(WHEEL_COLOR_RED, WHEEL_COLOR_GREEN, WHEEL_COLOR_BLUE);
 

@@ -27,22 +27,21 @@ void game_manager::init(int w, int h) {
     frog_->scale(0.1);
     game_objects_.push_back(frog_);
     collision_manager::instance().register_object(frog_);
-    
+
     auto car1_ = std::make_shared<car>();
     car1_->position() = vector3(-1.2, ROAD_LEVEL, LINE_4);
     car1_->scale(0.1);
     car1_->speed().x() = 1.0;
-    game_objects_.push_back(car1_);   
+    game_objects_.push_back(car1_);
     collision_manager::instance().register_object(car1_);
-        
-    for(int i=0;i<3;i++){    
+
+    for (int i = 0; i < 3; i++) {
         auto truck_ = std::make_shared<truck>();
-        truck_->position() = vector3(-1.5 + i*1.5, ROAD_LEVEL, LINE_3);
+        truck_->position() = vector3(-1.5 + i * 1.5, ROAD_LEVEL, LINE_3);
         truck_->scale(0.1);
         truck_->speed().x() = 0.5;
         game_objects_.push_back(truck_);
         collision_manager::instance().register_object(truck_);
-        
     }
 
     auto bus1_ = std::make_shared<bus>();
@@ -50,7 +49,7 @@ void game_manager::init(int w, int h) {
     bus1_->scale(0.1);
     bus1_->speed().x() = 1.5;
     game_objects_.push_back(bus1_);
-    collision_manager::instance().register_object(bus1_);    
+    collision_manager::instance().register_object(bus1_);
 
     auto bus2_ = std::make_shared<bus>();
     bus2_->position() = vector3(-0.1, ROAD_LEVEL, LINE_4);
@@ -58,49 +57,45 @@ void game_manager::init(int w, int h) {
     bus2_->speed().x() = 1.0;
     game_objects_.push_back(bus2_);
     collision_manager::instance().register_object(bus2_);
-    
-    for(int i=0;i<2;i++){
+
+    for (int i = 0; i < 2; i++) {
         auto log_ = std::make_shared<timberlog>();
-        log_->position() = vector3(-0.6 + i*2.0, RIVER_LEVEL, LINE_1);
+        log_->position() = vector3(-0.6 + i * 2.0, RIVER_LEVEL, LINE_1);
         log_->scale(0.1);
         log_->speed().x() = 0.5;
-        game_objects_.push_back(log_);    
+        game_objects_.push_back(log_);
         collision_manager::instance().register_object(log_);
-        
+
         auto log1_ = std::make_shared<timberlog>();
-        log1_->position() = vector3(-1.1 +i*1.9, RIVER_LEVEL, LINE_2);
+        log1_->position() = vector3(-1.1 + i * 1.9, RIVER_LEVEL, LINE_2);
         log1_->scale(0.1);
         log1_->speed().x() = 0.5;
         game_objects_.push_back(log1_);
         collision_manager::instance().register_object(log1_);
-
     }
 
-    for(int i=0;i<4;i++){
+    for (int i = 0; i < 4; i++) {
         auto turtle_ = std::make_shared<turtle>();
-        turtle_->position() = vector3(-2.5 + i*1.3, RIVER_LEVEL + 0.05, LINE_6);
+        turtle_->position() =
+            vector3(-2.5 + i * 1.3, RIVER_LEVEL + 0.05, LINE_6);
         turtle_->scale(0.1);
         turtle_->speed().x() = 0.5;
-        game_objects_.push_back(turtle_); 
+        game_objects_.push_back(turtle_);
         collision_manager::instance().register_object(turtle_);
-
     }
-
-
 
     auto river_ = std::make_shared<river>();
     river_->position() = vector3(0.0, 0.0, LINE_1);
     game_objects_.push_back(river_);
-    collision_manager::instance().register_object(river_);    
-    
+    collision_manager::instance().register_object(river_);
+
     auto tunnel_ = std::make_shared<tunnel>();
     tunnel_->position() = vector3(0.0, 0.0, LINE_1);
     game_objects_.push_back(tunnel_);
-    
+
     auto road_ = std::make_shared<road>();
     road_->position() = vector3(0.0, 0.0, LINE_4);
     game_objects_.push_back(road_);
-
 
     // INVALID CAMERAS: they will be set correctly on reshape
     // Camera 0: top view orthogonal camera
@@ -119,6 +114,35 @@ void game_manager::init(int w, int h) {
     cameras_.push_back(frog_->cam());
 
     light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT0));
+    light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT1));
+    light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT2));
+    light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT3));
+    light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT4));
+    light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT5));
+    light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT6));
+
+    auto light = light_sources_[0];
+    light->ambient().set(0.2, 0.2, 0.2, 1.0);
+    light->diffuse().set(0.6, 0.6, 0.6, 1.0);
+    light->specular().set(0.0, 0.0, 0.0, 1.0);
+    light->position().set(0.0, 50000.0, 0.0, 0.0);
+    light->direction().set(0.0, 0.0, -1.0);
+    light->toggle_key() = 'n';
+
+    for (size_t i : {1, 2, 3, 4, 5, 6}) {
+        static vector4 colors[]{vector3(0.23, 0, 0),    vector3(0, 0.23, 0),
+                                vector3(0.23, 0.23, 0), vector3(0, 0, 0.23),
+                                vector3(0.23, 0, 0.23), vector3(0, 0.23, 0.23)};
+
+        light = light_sources_[i];
+        light->toggle_key() = 'c';
+        light->position().y() = 2 * ROAD_LEVEL;
+        light->diffuse() = colors[i - 1];
+        light->on() = false;
+
+        light->position().x() = i % 2 == 0 ? 2.5 : -2.5;
+        light->position().z() = -2.0 + (i - 1) / 2.0;
+    }
 }
 
 game_manager::game_manager()
@@ -147,7 +171,6 @@ void game_manager::display() {
     for (auto light : light_sources_) {
         light->draw();
     }
-
 
     for (auto obj : game_objects_) {
         glPushMatrix();

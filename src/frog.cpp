@@ -27,14 +27,14 @@ void frog::draw() {
     glTranslatef(0.0, 0.55, 0.0);
     glRotatef(10, 0.0, 0.0, 1.0);
     glScalef(2.0, 0.75, 1.5);
-    glutSolidCube(1.0);
+    gluxSlicedCube(8, 3, 6);
     glPopMatrix();
 
     // Head
     glPushMatrix();
     glTranslatef(1.1, 0.75, 0);
     glScalef(0.75, 0.70, 1.25);
-    glutSolidCube(1.0);
+    gluxSlicedCube(3, 3, 5);
     glPopMatrix();
 
     // Left leg
