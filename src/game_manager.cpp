@@ -126,17 +126,13 @@ void game_manager::init(int w, int h) {
     light->diffuse().set(0.3, 0.3, 0.3, 1.0);
     light->specular().set(0.0, 0.0, 0.0, 1.0);
     light->position().set(0.0, 5.0, 0.0, 1.0);
-    // light->turn_on();
+    light->turn_on();
     light->toggle_key() = 'n';
 
     for (size_t i : {1, 2, 3, 4, 5, 6}) {
-        static vector4 colors[]{vector4(0.37, 0, 0, 1), vector4(0.37, 0, 0, 1),
-                                vector4(0, 0.37, 0, 1), vector4(0, 0.37, 0, 1),
-                                vector4(0, 0, 0.37, 1), vector4(0, 0, 0.37, 1)};
-
         light = light_sources_[i];
         light->toggle_key() = 'c';
-        light->diffuse() = colors[i - 1]; // .set(0.1, 0.1, 0.1, 1.0);
+        light->diffuse().set(0.23, 0.23, 0.23, 1.0); 
         light->turn_on();
 
         light->position().x() = i % 2 == 0 ? 2.0 : -2.0;
@@ -145,13 +141,14 @@ void game_manager::init(int w, int h) {
         light->position().y() = 0.5;
         light->direction().y() = -light->position().y();
 
-        light->position().z() = -2.0 + 2.0 * ((i - 1) / 2);
+        light->position().z() = -2.0 + 2.0*((i - 1)/2);
         light->direction().z() = -light->position().z();
 
         // make positional light
         light->position().w() = 1;
         light->cutoff() = 15;
         light->exponent() = 3;
+
     }
 }
 
@@ -182,6 +179,7 @@ void game_manager::display() {
 
     glRotatef(tilt_, 1.0, 0.0, 0.0);
     glRotatef(spin_, 0.0, 1.0, 0.0);
+
 
     for (auto obj : game_objects_) {
         glPushMatrix();

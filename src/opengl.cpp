@@ -3,15 +3,9 @@
 #include <cstdlib>
 #include <ctime>
 
-void gluxInit() {}
-
-/* TODO: calculate proper normals */
 void gluxSlicedCube(int sx, int sy, int sz) {
     // srand(time(NULL));
     assert(sx > 0 && sx > 0 && sz > 0);
-    sx *= 5;
-    sy *= 5;
-    sz *= 5;
 
     GLdouble dx = 1.0 / sx, dy = 1.0 / sy, dz = 1.0 / sz;
 
