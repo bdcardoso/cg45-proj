@@ -1,7 +1,7 @@
 #include "game_manager.h"
 #include "opengl.h"
 
-constexpr int FPS = 60, GAME_WIDTH = 500, GAME_HEIGHT = 400;
+constexpr int FPS = 60, GAME_WIDTH = 1920, GAME_HEIGHT = 1080;
 
 void init(void) {
     // glEnable(GL_CULL_FACE);
@@ -61,7 +61,8 @@ void specialUp(int key, int x, int y) {
 int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowPosition(-1, -1);
+    // glutInitWindowPosition(-1, -1);
+    glutInitWindowPosition(0, 0);
     glutInitWindowSize(GAME_WIDTH, GAME_HEIGHT);
     glutCreateWindow("Projeto CGra45 grupo 42");
 
@@ -75,6 +76,8 @@ int main(int argc, char *argv[]) {
     glutReshapeFunc(reshape);
 
     glutTimerFunc(1000 / FPS, timer, 0);
+
+    glutFullScreen();
 
     glutMainLoop();
 
