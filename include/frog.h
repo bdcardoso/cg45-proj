@@ -15,6 +15,7 @@ class frog : public dynamic_object {
 private:
     leg leftleg_, rightleg_;
     std::shared_ptr<camera> camera_;
+    GLfloat orientation_;
 
 public:
     frog();
