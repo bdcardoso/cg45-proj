@@ -120,11 +120,11 @@ void game_manager::init(int w, int h) {
     light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT4));
     light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT5));
     light_sources_.push_back(std::make_shared<light_source>(GL_LIGHT6));
+    light_sources_.push_back(frog_->headlight());
 
     auto light = light_sources_[0];
     light->ambient().set(0.2, 0.2, 0.2, 1.0);
     light->diffuse().set(0.3, 0.3, 0.3, 1.0);
-    light->specular().set(0.0, 0.0, 0.0, 1.0);
     light->position().set(0.0, 5.0, 0.0, 1.0);
     light->turn_on();
     light->toggle_key() = 'n';
@@ -132,23 +132,22 @@ void game_manager::init(int w, int h) {
     for (size_t i : {1, 2, 3, 4, 5, 6}) {
         light = light_sources_[i];
         light->toggle_key() = 'c';
-        light->diffuse().set(0.23, 0.23, 0.23, 1.0); 
-        light->turn_on();
+        light->diffuse().set(0.23, 0.23, 0.23, 1.0);
+        light->turn_off();
 
         light->position().x() = i % 2 == 0 ? 2.0 : -2.0;
-        light->direction().x() = -light->position().x();
+        light->direction().x() = -light->position().x() / 2;
 
-        light->position().y() = 0.5;
+        light->position().y() = 1.5;
         light->direction().y() = -light->position().y();
 
-        light->position().z() = -2.0 + 2.0*((i - 1)/2);
-        light->direction().z() = -light->position().z();
+        light->position().z() = -2.0 + 2.0 * ((i - 1) / 2);
+        light->direction().z() = -light->position().z() / 2;
 
         // make positional light
         light->position().w() = 1;
-        light->cutoff() = 15;
-        light->exponent() = 3;
-
+        light->cutoff() = 30;
+        light->exponent() = 15;
     }
 }
 
@@ -160,12 +159,13 @@ game_manager::game_manager()
           tilt_speed_(0.0),
           GAME_WIDTH(2.5),
           GAME_HEIGHT(2),
-          GAME_DEPTH(5) {}
+          GAME_DEPTH(5),
+          lighting_enabled_(true),
+          paused_(false) {}
 
 void game_manager::timer() { update(); }
 
 void game_manager::display() {
-
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -173,13 +173,12 @@ void game_manager::display() {
 
     glPushMatrix();
 
-    for (auto light : light_sources_) {
-        light->draw();
-    }
-
     glRotatef(tilt_, 1.0, 0.0, 0.0);
     glRotatef(spin_, 0.0, 1.0, 0.0);
 
+    for (auto light : light_sources_) {
+        light->draw();
+    }
 
     for (auto obj : game_objects_) {
         glPushMatrix();
@@ -200,21 +199,23 @@ void game_manager::display() {
 void game_manager::update() {
     auto currentTime = glutGet(GLUT_ELAPSED_TIME);
     auto dt = (currentTime - last_time_) / glut_time_t(1000);
-
-    for (auto obj : game_objects_) {
-        obj->update(dt);
-    }
-
     last_time_ = currentTime;
+
     spin_ += spin_speed_ * dt;
     tilt_ += tilt_speed_ * dt;
 
-    for (auto cam : cameras_) {
-        cam->update(dt);
-    }
+    if (!paused_) {
+        for (auto obj : game_objects_) {
+            obj->update(dt);
+        }
 
-    for (auto light : light_sources_) {
-        light->update(dt);
+        for (auto cam : cameras_) {
+            cam->update(dt);
+        }
+
+        for (auto light : light_sources_) {
+            light->update(dt);
+        }
     }
 
     glutPostRedisplay();
@@ -266,6 +267,9 @@ void game_manager::keyboardUp(unsigned char key, int x, int y) {
         else
             glEnable(GL_LIGHTING);
         lighting_enabled_ = !lighting_enabled_;
+        break;
+    case 's':
+        paused_ = !paused_;
         break;
     default:
         break;

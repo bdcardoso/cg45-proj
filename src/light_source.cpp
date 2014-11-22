@@ -17,12 +17,6 @@ void light_source::draw() {
         glLightfv(num_, GL_SPOT_DIRECTION, direction().get());
         glLightf(num_, GL_SPOT_CUTOFF, cutoff());
         glLightf(num_, GL_SPOT_EXPONENT, exponent());
-
-        glPushMatrix();
-        glTranslatef(position().x(), position().y(), position().z());
-        glutSolidSphere(0.1, 20, 20);
-        glTranslatef(-position().x(), -position().y(), -position().z());
-        glPopMatrix();
     }
 }
 

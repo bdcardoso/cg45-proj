@@ -14,10 +14,16 @@ constexpr auto FROG_COLOR_RED = 5, FROG_COLOR_GREEN = 55, FROG_COLOR_BLUE = 55;
 
 frog::frog() {
     camera_ = std::make_shared<perspective_camera>(90, 1, 0.01, 10);
+    headlight_ = std::make_shared<light_source>(GL_LIGHT7);
     bounding_box() = ::bounding_box(-1.3, -1.3, -1.3, 1.3, 1.3, 1.3);
+
+    headlight()->exponent() = 15;
+    headlight()->cutoff() = 30;
+    headlight()->toggle_key() = 'h';
 }
 
 std::shared_ptr<camera> frog::cam() { return camera_; }
+std::shared_ptr<light_source> frog::headlight() { return headlight_; }
 
 void frog::draw() {
     glPushMatrix();
@@ -108,9 +114,14 @@ void frog::update(glut_time_t dt) {
     position().z() =
         std::fmin(position().z(), game_manager::instance().frog_bounds().z2());
 
-    camera_->eye() = position() + vector3(0, 1.5, 0.5);
-    camera_->at() = position() + vector3(0.0, 0.0, -0.5);
-    camera_->up() = vector3(0.0, 1.0, 0.0);
+    headlight()->position() = position() + vector3(0.0, 1.1, 0.0);
+    headlight()->position().w() = 1;
+    headlight()->direction() = vector3(0.0, -3.0, -2.0).norm();
+    headlight()->diffuse().set(0.7, 0.7, 0.7, 1.0);
+
+    cam()->eye() = position() + vector3(0, 1.5, 0.5);
+    cam()->at() = position() + vector3(0.0, 0.0, -0.5);
+    cam()->up() = vector3(0.0, 1.0, 0.0);
 }
 
 void frog::keydown(unsigned char key) {

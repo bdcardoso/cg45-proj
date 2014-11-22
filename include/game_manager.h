@@ -20,7 +20,8 @@ private:
     GLdouble spin_ = 0, tilt_ = 0, spin_speed_ = 0, tilt_speed_ = 0;
     GLdouble WINDOW_WIDTH, WINDOW_HEIGHT, GAME_WIDTH, GAME_HEIGHT, GAME_DEPTH;
 
-    bool lighting_enabled_ = true;
+    bool lighting_enabled_ : 1;
+    bool paused_ : 1;
 
     friend class singleton;
     game_manager();

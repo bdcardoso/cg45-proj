@@ -1,6 +1,7 @@
 #pragma once
 #include "camera.h"
 #include "dynamic_object.h"
+#include "light_source.h"
 #include <memory>
 
 class frog : public dynamic_object {
@@ -15,11 +16,13 @@ class frog : public dynamic_object {
 private:
     leg leftleg_, rightleg_;
     std::shared_ptr<camera> camera_;
+    std::shared_ptr<light_source> headlight_;
 
 public:
     frog();
 
     std::shared_ptr<camera> cam();
+    std::shared_ptr<light_source> headlight();
 
     void draw() override;
     void keydown(unsigned char key) override;

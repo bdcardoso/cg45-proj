@@ -1,4 +1,5 @@
 #include "vector3.h"
+#include <cmath>
 
 typedef vector3::scalar_t scalar_t;
 
@@ -21,6 +22,10 @@ void vector3::set(scalar_t x, scalar_t y, scalar_t z) {
     coords_[0] = x;
     coords_[1] = y;
     coords_[2] = z;
+}
+
+vector3 vector3::norm() const {
+    return *this * 1.0 / std::sqrt(x() * x() + y() * y() + z() * z());
 }
 
 vector3 operator+(const vector3 &lhs, const vector3 &rhs) {

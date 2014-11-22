@@ -18,6 +18,8 @@ public:
     const scalar_t *get() const;
     void set(scalar_t x, scalar_t y, scalar_t z = 0);
 
+    vector3 norm() const;
+
 private:
     // [0] -> x, [1] -> y, [2] -> z
     scalar_t coords_[3];
