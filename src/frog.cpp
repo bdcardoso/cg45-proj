@@ -25,9 +25,11 @@ frog::frog() {
 std::shared_ptr<camera> frog::cam() { return camera_; }
 std::shared_ptr<light_source> frog::headlight() { return headlight_; }
 
+
+
 void frog::draw() {
     glPushMatrix();
-    glRotatef(90, 0.0, 1.0, 0.0);
+    glRotatef(90+orientation_, 0.0, 1.0, 0.0);
 
     glColor3ub(FROG_COLOR_RED, FROG_COLOR_GREEN, FROG_COLOR_BLUE);
     materials::skin_green.use();
@@ -128,9 +130,11 @@ void frog::keydown(unsigned char key) {
     switch (key) {
     case 'o':
         speed().x() -= SPEED_X;
+        orientation_ += 45;
         break;
     case 'p':
         speed().x() += SPEED_X;
+        orientation_ -= 45;
         break;
     case 'q':
         speed().z() -= SPEED_Z;
@@ -147,9 +151,11 @@ void frog::keyup(unsigned char key) {
     switch (key) {
     case 'o':
         speed().x() += SPEED_X;
+        orientation_ -= 45;
         break;
     case 'p':
         speed().x() -= SPEED_X;
+        orientation_ += 45;
         break;
     case 'q':
         speed().z() += SPEED_Z;
